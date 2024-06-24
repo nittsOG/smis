@@ -4,16 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.manage.admin.service.AdminService;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private final AdminService adminService;
+
     @Autowired
-    private AdminService adminService;
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -26,7 +29,7 @@ public class AdminController {
             session.setAttribute("adminUsername", username);
             return new ModelAndView("redirect:/admin/dashboard");
         } else {
-            ModelAndView mav = new ModelAndView("admin-login");
+            ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-login");
             mav.addObject("error", "Invalid username or password");
             return mav;
         }
@@ -49,4 +52,3 @@ public class AdminController {
         return "redirect:/admin/login";
     }
 }
-
