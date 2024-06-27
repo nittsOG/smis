@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Manager Dashboard</title>
 </head>
 <body>
-<h1>${admin}</h1>
-<hr>
+    <h1>${manager}</h1>
+    <hr>
 <a href="${pageContext.request.contextPath}/admin/logout">Logout</a>
 </body>
 </html>

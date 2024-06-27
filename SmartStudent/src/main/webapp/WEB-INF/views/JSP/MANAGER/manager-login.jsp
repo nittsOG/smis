@@ -8,8 +8,8 @@
 <body>
     <h2>Manager Login</h2>
     <form action="${pageContext.request.contextPath}/manager/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="Id">Id:</label>
+        <input type="text" id="id" name="id" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Login">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.manage.faculty.entities.Faculty;
 import com.manage.faculty.service.FacultyService;
 
 @Controller
@@ -24,9 +25,9 @@ public class FacultyController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        if (facultyService.validateFaculty(username, password)) {
-            session.setAttribute("facultyUsername", username);
+    public ModelAndView login(@RequestParam Long id, @RequestParam String password, HttpSession session) {
+        if (facultyService.validateFaculty(id, password)) {
+            session.setAttribute("facultyId", id);
             return new ModelAndView("redirect:/faculty/dashboard");
         } else {
             ModelAndView mav = new ModelAndView("JSP/FACULTY/faculty-login");
@@ -37,12 +38,14 @@ public class FacultyController {
 
     @GetMapping("/dashboard")
     public ModelAndView showDashboard(HttpSession session) {
-        String facultyUsername = (String) session.getAttribute("facultyUsername");
-        if (facultyUsername == null) {
+        Long id = (Long) session.getAttribute("facultyId");
+        if (id == null) {
             return new ModelAndView("redirect:/faculty/login");
         }
         ModelAndView mav = new ModelAndView("JSP/FACULTY/faculty-dashboard");
-        mav.addObject("facultyUsername", facultyUsername);
+//        mav.addObject("facultyUsername", facultyUsername);
+        Faculty faculty = facultyService.getFacultyById(id);
+        mav.addObject("faculty", faculty);
         return mav;
     }
 

@@ -20,6 +20,15 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public Admin getAdminByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Admin.class, username);
+        return session.createQuery("FROM Admin WHERE username = :username", Admin.class)
+                      .setParameter("username", username)
+                      .uniqueResult();
     }
+
+    @Override
+    public Admin getAdminById(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Admin.class, id);
+    }
+
 }

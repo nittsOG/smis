@@ -12,8 +12,8 @@
         <p style="color: red;">${error}</p>
     </c:if>
     <form action="${pageContext.request.contextPath}/student/login" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="Id">Id:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Login">

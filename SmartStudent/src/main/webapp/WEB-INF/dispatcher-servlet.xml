@@ -36,24 +36,24 @@
      <bean id="facultyDataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> 
-        <property name="username" value="faculty" />
-        <property name="password" value="password_for_faculty" />
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
     </bean>
 
     <!-- Manager DataSource -->
     <bean id="managerDataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> 
-        <property name="username" value="manager" />
-        <property name="password" value="password_for_manager" />
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
     </bean>
 
     <!-- Student DataSource --> 
     <bean id="studentDataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> <!-- Replace with appropriate DB name -->
-        <property name="username" value="student" />
-        <property name="password" value="password_for_student" />
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
     </bean> 
 
     <!-- Admin SessionFactory -->
