@@ -24,18 +24,42 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- DataSource -->
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+    <!-- Admin DataSource -->
+    <bean id="adminDataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> 
         <property name="username" value="root" />
         <property name="password" value="12345" />
     </bean>
 
-    <!-- SessionFactory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.manage" />
+    <!-- Faculty DataSource -->
+    <bean id="facultyDataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> 
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
+    </bean>
+
+    <!-- Manager DataSource -->
+    <bean id="managerDataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> 
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
+    </bean>
+
+    <!-- Student DataSource --> 
+    <bean id="studentDataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/smis" /> <!-- Replace with appropriate DB name -->
+        <property name="username" value="root" />
+        <property name="password" value="12345" />
+    </bean> 
+
+    <!-- Admin SessionFactory -->
+    <bean id="adminSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="adminDataSource" />
+        <property name="packagesToScan" value="com.manage.admin.entities , com.manage.manager.entities , com.manage.faculty.entities , com.manage.home.entities , com.manage.student.entities " />
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
@@ -45,9 +69,66 @@
         </property>
     </bean>
 
-    <!-- Transaction Manager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
+    <!-- Faculty SessionFactory -->
+    <bean id="facultySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="facultyDataSource" />
+        <property name="packagesToScan" value="com.manage.faculty.entities , com.manage.home.entities , com.manage.student.entities, com.manage.manager.entities" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
+
+    <!-- Manager SessionFactory -->
+    <bean id="managerSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="managerDataSource" />
+        <property name="packagesToScan" value="com.manage.manager.entities , com.manage.faculty.entities , com.manage.home.entities , com.manage.student.entities " />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean> 
+
+    <!-- Student SessionFactory -->
+    <bean id="studentSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="studentDataSource" />
+        <property name="packagesToScan" value="com.manage.student.entities , com.manage.home.entities , com.manage.faculty.entities, com.manage.manager.entities" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean> 
+
+    <!-- Admin Transaction Manager -->
+    <bean id="adminTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="adminSessionFactory" />
+    </bean>
+
+    <!-- Faculty Transaction Manager -->
+    <bean id="facultyTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="facultySessionFactory" />
+    </bean>
+
+    <!-- Manager Transaction Manager -->
+    <bean id="managerTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="managerSessionFactory" />
+    </bean>
+
+    <!-- Student Transaction Manager -->
+    <bean id="studentTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="studentSessionFactory" />
+    </bean> 
+
+    <!-- Enable annotation-driven transactions -->
     <tx:annotation-driven />
+
 </beans>

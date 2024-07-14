@@ -7,8 +7,8 @@
 <body>
 <h2>Admin Login</h2>
 <form action="${pageContext.request.contextPath}/admin/login" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <label for="Id">Id:</label>
+    <input type="text" id="id" name="id" required>
     <br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>

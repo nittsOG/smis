@@ -5,8 +5,8 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
-<h2>Admin Dashboard</h2>
-<p>Welcome, ${adminUsername}!</p>
+<h1>${admin}</h1>
+<hr>
 <a href="${pageContext.request.contextPath}/admin/logout">Logout</a>
 </body>
 </html>
