@@ -1,50 +1,45 @@
 package com.manage.student.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import com.manage.home.entities.Address;
+import javax.persistence.*;
+import com.manage.home.entities.Division;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
 public class Student {
-    @Override
-	public String toString() {
-		return "Student [id=" + id + ", username=" + username + ", email=" + email + ", mobileNo=" + mobileNo
-				+ ", address=" + address + "]";
-	}
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "student_id")
+    private Long studentId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "mobile_no")
-    private String mobileNo;
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private StudentAddress address;
 
-    @Embedded
-    private Address address;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "division_id")
+    private Division division;
 
-    // Getters and setters
-    public Long getId() {
-        return id;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Fee> fees;
+
+    // Getters and Setters
+
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getUsername() {
@@ -71,19 +66,27 @@ public class Student {
         this.email = email;
     }
 
-    public String getMobileNo() {
-        return mobileNo;
-    }
-
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
-    }
-
-    public Address getAddress() {
+    public StudentAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(StudentAddress address) {
         this.address = address;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
+    public Set<Fee> getFees() {
+        return fees;
+    }
+
+    public void setFees(Set<Fee> fees) {
+        this.fees = fees;
     }
 }

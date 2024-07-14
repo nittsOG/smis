@@ -1,89 +1,69 @@
 package com.manage.manager.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import com.manage.home.entities.Address;
+import javax.persistence.*;
+import com.manage.home.entities.Department;
 
 @Entity
 @Table(name = "manager")
 public class Manager {
-    @Override
-	public String toString() {
-		return "Manager [id=" + id + ", username=" + username + ", email=" + email + ", mobileNo=" + mobileNo
-				+ ", address=" + address + "]";
-	}
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "manager_id")
+    private Long managerId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "mobile_no")
-    private String mobileNo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    @Embedded
-    private Address address;
+	public Long getManagerId() {
+		return managerId;
+	}
 
-    // Getters and setters
-    public Long getId() {
-        return id;
-    }
+	public void setManagerId(Long managerId) {
+		this.managerId = managerId;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Department getDepartment() {
+		return department;
+	}
 
-    public String getMobileNo() {
-        return mobileNo;
-    }
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    // Getters and Setters
 }
