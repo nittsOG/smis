@@ -2,8 +2,8 @@ package com.manage.home.entities;
 
 import javax.persistence.*;
 
+import com.manage.faculty.entities.FacultyDivision;
 import com.manage.student.entities.Student;
-
 import java.util.List;
 
 @Entity
@@ -24,8 +24,11 @@ public class Division {
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Student> students;
 
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<FacultyDivision> facultyDivisions;
+
     // Getters and Setters
-    
+
     public Long getDivisionId() {
         return divisionId;
     }
@@ -56,5 +59,13 @@ public class Division {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<FacultyDivision> getFacultyDivisions() {
+        return facultyDivisions;
+    }
+
+    public void setFacultyDivisions(List<FacultyDivision> facultyDivisions) {
+        this.facultyDivisions = facultyDivisions;
     }
 }
