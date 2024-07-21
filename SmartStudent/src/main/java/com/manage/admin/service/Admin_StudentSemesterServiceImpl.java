@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Qualifier("adminStudentSemesterServiceImpl")
 public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterService {
@@ -40,6 +42,14 @@ public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterSe
     @Transactional(transactionManager = "adminTransactionManager")
     public void deleteStudentSemester(Long studentSemesterId) {
         StudentSemester studentSemester = getStudentSemesterById(studentSemesterId);
-        adminStudentSemesterDAO.deleteStudentSemester(studentSemester);
+        if (studentSemester != null) {
+            adminStudentSemesterDAO.deleteStudentSemester(studentSemester);
+        }
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<StudentSemester> getAllStudentSemesters() {
+        return adminStudentSemesterDAO.getAllStudentSemesters();
     }
 }

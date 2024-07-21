@@ -1,19 +1,20 @@
 package com.manage.admin.dao;
 
+import com.manage.student.entities.StudentSemester;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.manage.student.entities.StudentSemester;
+import java.util.List;
 
 @Repository
 @Qualifier("adminStudentSemesterDAOImpl")
 @Transactional("adminTransactionManager")
 public class Admin_StudentSemesterDAOImpl implements Admin_StudentSemesterDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Admin_StudentSemesterDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
@@ -38,5 +39,13 @@ public class Admin_StudentSemesterDAOImpl implements Admin_StudentSemesterDAO {
     @Override
     public void deleteStudentSemester(StudentSemester studentSemester) {
         sessionFactory.getCurrentSession().delete(studentSemester);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<StudentSemester> getAllStudentSemesters() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM StudentSemester")
+                .list();
     }
 }

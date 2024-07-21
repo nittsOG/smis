@@ -22,6 +22,10 @@ public class Student {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private StudentAddress address;
 
@@ -31,6 +35,9 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Fee> fees;
+
+    @Transient // This annotation indicates that the field is not persistent
+    private String photoBase64;
 
     // Getters and Setters
 
@@ -66,6 +73,14 @@ public class Student {
         this.email = email;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
     public StudentAddress getAddress() {
         return address;
     }
@@ -88,5 +103,13 @@ public class Student {
 
     public void setFees(Set<Fee> fees) {
         this.fees = fees;
+    }
+
+    public String getPhotoBase64() {
+        return photoBase64;
+    }
+
+    public void setPhotoBase64(String photoBase64) {
+        this.photoBase64 = photoBase64;
     }
 }

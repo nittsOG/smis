@@ -28,53 +28,62 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Subject> subjects;
 
-	public Long getCourseId() {
-		return courseId;
-	}
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Semester> semesters; // Added relationship with Semester
 
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
-	}
+    public Long getCourseId() {
+        return courseId;
+    }
 
-	public Department getDepartment() {
-		return department;
-	}
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
+    public Department getDepartment() {
+        return department;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getSpecialization() {
-		return specialization;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setSpecialization(String specialization) {
-		this.specialization = specialization;
-	}
+    public String getSpecialization() {
+        return specialization;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Set<Subject> getSubjects() {
-		return subjects;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setSubjects(Set<Subject> subjects) {
-		this.subjects = subjects;
-	}
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
 
-    // Getters and Setters
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Set<Semester> getSemesters() {
+        return semesters;
+    }
+
+    public void setSemesters(Set<Semester> semesters) {
+        this.semesters = semesters;
+    }
 }

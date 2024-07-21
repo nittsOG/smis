@@ -48,4 +48,12 @@ public class Admin_DivisionServiceImpl implements Admin_DivisionService {
         return divisionDao.findAll();
     }
 
+	@Override
+	public void deletebyId(Long id) {
+		// TODO Auto-generated method stub
+		
+		this.deleteDivision(this.getDivisionById(id));
+		
+	}
+
 }

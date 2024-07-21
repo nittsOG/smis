@@ -1,5 +1,7 @@
 package com.manage.admin.service;
 
+import java.util.List;
+
 import com.manage.faculty.entities.Faculty;
 
 public interface Admin_FacultyService {
@@ -10,4 +12,6 @@ public interface Admin_FacultyService {
     void updateFaculty(Faculty faculty);
 
     void deleteFaculty(Faculty faculty);
+
+	List<Faculty> getAllFaculties();
 }

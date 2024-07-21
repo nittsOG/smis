@@ -1,5 +1,7 @@
 package com.manage.admin.service;
 
+import java.util.List;
+
 import com.manage.student.entities.Student;
 
 public interface Admin_StudentService {
@@ -10,4 +12,6 @@ public interface Admin_StudentService {
     void updateStudent(Student student);
 
     void deleteStudent(Long studentId);
+
+	List<Student> getAllStudents();
 }

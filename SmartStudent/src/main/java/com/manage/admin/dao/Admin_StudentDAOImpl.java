@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.manage.student.entities.Student;
 
+import java.util.List;
+
 @Repository
 @Qualifier("adminStudentDAOImpl")
 @Transactional("adminTransactionManager")
@@ -38,5 +40,10 @@ public class Admin_StudentDAOImpl implements Admin_StudentDAO {
     @Override
     public void deleteStudent(Student student) {
         sessionFactory.getCurrentSession().delete(student);
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Student", Student.class).getResultList();
     }
 }

@@ -12,5 +12,6 @@ public interface Admin_DivisionService {
     public void updateDivision(Division division);
     public void deleteDivision(Division division);
     public List<Division> getAllDivisions();
+	public void deletebyId(Long id);
    
 }

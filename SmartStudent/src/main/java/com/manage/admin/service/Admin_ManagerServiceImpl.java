@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Qualifier("adminManagerServiceImpl")
 public class Admin_ManagerServiceImpl implements Admin_ManagerService {
@@ -40,5 +42,11 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Transactional(transactionManager = "adminTransactionManager")
     public void deleteManager(Manager manager) {
         adminManagerDAO.deleteManager(manager);
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Manager> getAllManagers() {
+        return adminManagerDAO.getAllManagers();
     }
 }
