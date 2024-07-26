@@ -9,17 +9,18 @@
     <form action="${pageContext.request.contextPath}/admin/attendances/new" method="post">
         <p>
             <label for="session">Session ID:</label>
-            <input type="text" id="session" name="session.id" />
+            <input type="text" id="session" name="session.sessionId" />
         </p>
         <p>
             <label for="student">Student ID:</label>
-            <input type="text" id="student" name="student.id" />
+            <input type="text" id="student" name="student.studentId" />
         </p>
         <p>
             <label for="status">Status:</label>
             <select id="status" name="status">
                 <option value="PRESENT">Present</option>
                 <option value="ABSENT">Absent</option>
+                <option value="EXCUSED">EXCUSED</option>
             </select>
         </p>
         <p><input type="submit" value="Save" /></p>

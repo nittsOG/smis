@@ -10,17 +10,18 @@
         <input type="hidden" name="attendanceId" value="${attendance.attendanceId}" />
         <p>
             <label for="session">Session ID:</label>
-            <input type="text" id="session" name="session.id" value="${attendance.session.id}" />
+            <input type="text" id="session" name="session.id" value="${attendance.session.sessionId}" />
         </p>
         <p>
             <label for="student">Student ID:</label>
-            <input type="text" id="student" name="student.id" value="${attendance.student.id}" />
+            <input type="text" id="student" name="student.id" value="${attendance.student.studentId}" />
         </p>
         <p>
             <label for="status">Status:</label>
             <select id="status" name="status">
                 <option value="PRESENT" ${attendance.status == 'PRESENT' ? 'selected' : ''}>Present</option>
                 <option value="ABSENT" ${attendance.status == 'ABSENT' ? 'selected' : ''}>Absent</option>
+                 <option value="EXCUSED" ${attendance.status == 'EXCUSED' ? 'selected' : ''}>Absent</option>
             </select>
         </p>
         <p><input type="submit" value="Save" /></p>

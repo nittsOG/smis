@@ -21,8 +21,12 @@ public class Department {
 
     @Column(name = "description")
     private String description;
+    
+    @Column(name="field")
+    private String field;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Faculty> faculties;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -36,6 +40,14 @@ public class Department {
 
     // Getters and Setters
     
+    public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+	
     public Long getDepartmentId() {
 		return departmentId;
 	}

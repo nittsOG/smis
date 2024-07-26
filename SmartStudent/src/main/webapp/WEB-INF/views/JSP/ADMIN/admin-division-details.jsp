@@ -6,9 +6,9 @@
 </head>
 <body>
     <h1>Division Details</h1>
-    <p>ID: ${division.id}</p>
+    <p>ID: ${division.divisionId}</p>
     <p>Name: ${division.name}</p>
-    <a href="${pageContext.request.contextPath}/admin/divisions/${division.id}/edit">Edit</a>
+    <a href="${pageContext.request.contextPath}/admin/divisions/${division.divisionId}/edit">Edit</a>
     <a href="${pageContext.request.contextPath}/admin/divisions">Back to List</a>
 </body>
 </html>

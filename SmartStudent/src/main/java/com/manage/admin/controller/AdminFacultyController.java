@@ -34,7 +34,7 @@ public class AdminFacultyController {
         return mav;
     }
 
-    @GetMapping("/showFormForAdd")
+    @GetMapping("/new")
     public ModelAndView showFormForAdd(HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
@@ -56,7 +56,7 @@ public class AdminFacultyController {
         return new ModelAndView("redirect:/admin/faculty/list");
     }
 
-    @GetMapping("/showFormForUpdate")
+    @GetMapping("/edit")
     public ModelAndView showFormForUpdate(@RequestParam("facultyId") Long facultyId, HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {

@@ -21,7 +21,7 @@
             <c:forEach var="attendance" items="${attendances}">
                 <tr>
                     <td>${attendance.attendanceId}</td>
-                    <td>${attendance.session.id}</td>
+                    <td>${attendance.session.sessionId}</td>
                     <td>${attendance.student.name}</td>
                     <td>${attendance.status}</td>
                     <td>

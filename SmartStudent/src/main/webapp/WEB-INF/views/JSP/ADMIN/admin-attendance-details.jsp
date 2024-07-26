@@ -7,7 +7,7 @@
 <body>
     <h1>Attendance Details</h1>
     <p>ID: ${attendance.attendanceId}</p>
-    <p>Session: ${attendance.session.id}</p>
+    <p>Session: ${attendance.session.sessionId}</p>
     <p>Student: ${attendance.student.name}</p>
     <p>Status: ${attendance.status}</p>
     <a href="${pageContext.request.contextPath}/admin/attendances/${attendance.attendanceId}/edit">Edit</a>

@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Edit Division</h1>
-    <form action="${pageContext.request.contextPath}/admin/divisions/${division.id}/edit" method="post">
+    <form action="${pageContext.request.contextPath}/admin/divisions/${division.divisionId}/edit" method="post">
         <input type="hidden" name="_method" value="POST"/>
         <p>
             <label for="name">Name:</label>

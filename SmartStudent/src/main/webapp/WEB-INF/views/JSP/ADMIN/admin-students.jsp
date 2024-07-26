@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Students List</h1>
+    <a href="${pageContext.request.contextPath}/admin/students/add">Add New Student</a>
     <table border="1">
         <tr>
             <th>Username</th>

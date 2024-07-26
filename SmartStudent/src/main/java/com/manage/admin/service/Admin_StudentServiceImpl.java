@@ -23,7 +23,12 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public Student getStudentById(Long studentId) {
-        return adminStudentDAO.getStudentById(studentId);
+        Student student = adminStudentDAO.getStudentById(studentId);
+        if (student.getDivision() != null) {
+            // Initialize division to avoid LazyInitializationException
+            student.getDivision().getName();
+        }
+        return student;
     }
 
     @Override
@@ -48,6 +53,13 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public List<Student> getAllStudents() {
-        return adminStudentDAO.getAllStudents();
+        List<Student> students = adminStudentDAO.getAllStudents();
+        students.forEach(student -> {
+            if (student.getDivision() != null) {
+                // Initialize division to avoid LazyInitializationException
+                student.getDivision().getName();
+            }
+        });
+        return students;
     }
 }

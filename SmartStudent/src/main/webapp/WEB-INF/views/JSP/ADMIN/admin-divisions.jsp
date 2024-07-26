@@ -18,12 +18,12 @@
         <tbody>
             <c:forEach var="division" items="${divisions}">
                 <tr>
-                    <td>${division.id}</td>
+                    <td>${division.divisionId}</td>
                     <td>${division.name}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.id}">View</a>
-                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.id}/edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.id}/delete"
+                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.divisionId}">View</a>
+                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.divisionId}/edit">Edit</a>
+                        <a href="${pageContext.request.contextPath}/admin/divisions/${division.divisionId}/delete"
                            onclick="return confirm('Are you sure you want to delete this division?');">Delete</a>
                     </td>
                 </tr>
