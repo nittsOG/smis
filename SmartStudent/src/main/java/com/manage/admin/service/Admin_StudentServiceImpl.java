@@ -24,10 +24,7 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     @Transactional(transactionManager = "adminTransactionManager")
     public Student getStudentById(Long studentId) {
         Student student = adminStudentDAO.getStudentById(studentId);
-        if (student.getDivision() != null) {
-            // Initialize division to avoid LazyInitializationException
-            student.getDivision().getName();
-        }
+        initializeStudent(student);
         return student;
     }
 
@@ -54,12 +51,32 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     @Transactional(transactionManager = "adminTransactionManager")
     public List<Student> getAllStudents() {
         List<Student> students = adminStudentDAO.getAllStudents();
-        students.forEach(student -> {
-            if (student.getDivision() != null) {
-                // Initialize division to avoid LazyInitializationException
-                student.getDivision().getName();
-            }
-        });
+        students.forEach(this::initializeStudent);
         return students;
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Student> getStudentsByDivision(String divisionName) {
+        List<Student> students = adminStudentDAO.getStudentsByDivision(divisionName);
+        students.forEach(this::initializeStudent);
+        return students;
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Student> getStudentsByDepartment(String departmentName) {
+        List<Student> students = adminStudentDAO.getStudentsByDepartment(departmentName);
+        students.forEach(this::initializeStudent);
+        return students;
+    }
+
+    private void initializeStudent(Student student) {
+        if (student != null && student.getDivision() != null) {
+            student.getDivision().getName();
+            if (student.getDivision().getDepartment() != null) {
+                student.getDivision().getDepartment().getName();
+            }
+        }
     }
 }

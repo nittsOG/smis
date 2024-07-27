@@ -1,12 +1,11 @@
 package com.manage.admin.dao;
 
+import com.manage.student.entities.Student;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.manage.student.entities.Student;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @Transactional("adminTransactionManager")
 public class Admin_StudentDAOImpl implements Admin_StudentDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Admin_StudentDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
@@ -45,5 +44,21 @@ public class Admin_StudentDAOImpl implements Admin_StudentDAO {
     @Override
     public List<Student> getAllStudents() {
         return sessionFactory.getCurrentSession().createQuery("FROM Student", Student.class).getResultList();
+    }
+
+    @Override
+    public List<Student> getStudentsByDivision(String divisionName) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Student WHERE division.name = :divisionName", Student.class)
+                .setParameter("divisionName", divisionName)
+                .getResultList();
+    }
+
+    @Override
+    public List<Student> getStudentsByDepartment(String departmentName) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Student WHERE division.department.name = :departmentName", Student.class)
+                .setParameter("departmentName", departmentName)
+                .getResultList();
     }
 }
