@@ -11,38 +11,55 @@ import java.util.List;
 
 @Service
 @Qualifier("adminFeeServiceImpl")
-@Transactional(transactionManager = "adminTransactionManager")
 public class Admin_FeeServiceImpl implements Admin_FeeService {
 
-    private final Admin_FeeDAO feeDao;
+    private final Admin_FeeDAO adminFeeDAO;
 
     @Autowired
-    public Admin_FeeServiceImpl(@Qualifier("adminFeeDAOImpl") Admin_FeeDAO feeDao) {
-        this.feeDao = feeDao;
+    public Admin_FeeServiceImpl(@Qualifier("adminFeeDAOImpl") Admin_FeeDAO adminFeeDAO) {
+        this.adminFeeDAO = adminFeeDAO;
     }
 
     @Override
+    @Transactional(transactionManager = "adminTransactionManager")
     public Fee getFeeById(Long feeId) {
-        return feeDao.getFeeById(feeId);
+        Fee fee = adminFeeDAO.getFeeById(feeId);
+        initializeFee(fee);
+        return fee;
     }
 
     @Override
+    @Transactional(transactionManager = "adminTransactionManager")
     public void saveFee(Fee fee) {
-        feeDao.saveFee(fee);
+        adminFeeDAO.saveFee(fee);
     }
 
     @Override
+    @Transactional(transactionManager = "adminTransactionManager")
     public void updateFee(Fee fee) {
-        feeDao.updateFee(fee);
+        adminFeeDAO.updateFee(fee);
     }
 
     @Override
+    @Transactional(transactionManager = "adminTransactionManager")
     public void deleteFee(Long feeId) {
-        feeDao.deleteFee(feeId);
+        Fee fee = getFeeById(feeId);
+        if (fee != null) {
+            adminFeeDAO.deleteFee(feeId);;
+        }
     }
 
     @Override
+    @Transactional(transactionManager = "adminTransactionManager")
     public List<Fee> getAllFees() {
-        return feeDao.getAllFees();
+        List<Fee> fees = adminFeeDAO.getAllFees();
+        fees.forEach(this::initializeFee);
+        return fees;
+    }
+
+    private void initializeFee(Fee fee) {
+        if (fee != null && fee.getStudent() != null) {
+            fee.getStudent().getUsername();
+        }
     }
 }

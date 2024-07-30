@@ -14,7 +14,7 @@ public class Subject {
 	private Long subjectId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "course_id", nullable = false)
+	@JoinColumn(name = "course_id")
 	private Course course;
 
 	@Column(name = "name", nullable = false)

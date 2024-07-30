@@ -21,10 +21,10 @@ public class Division {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private List<Student> students;
 
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private List<FacultyDivision> facultyDivisions;
 
     // Getters and Setters

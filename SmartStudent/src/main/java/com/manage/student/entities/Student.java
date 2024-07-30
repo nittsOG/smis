@@ -2,6 +2,8 @@ package com.manage.student.entities;
 
 import javax.persistence.*;
 import com.manage.home.entities.Division;
+
+import java.util.Arrays;
 import java.util.Set;
 
 @Entity
@@ -26,14 +28,14 @@ public class Student {
     @Column(name = "photo")
     private byte[] photo;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false,orphanRemoval = true)
     private StudentAddress address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "division_id")
     private Division division;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<Fee> fees;
 
     @Transient // This annotation indicates that the field is not persistent
@@ -112,4 +114,13 @@ public class Student {
     public void setPhotoBase64(String photoBase64) {
         this.photoBase64 = photoBase64;
     }
+
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", username=" + username + ", password=" + password + ", email="
+				+ email + ", photo=" + Arrays.toString(photo) + ", address=" + address + ", division=" + division
+				+ ", fees=" + fees + "]";
+	}
+    
+    
 }

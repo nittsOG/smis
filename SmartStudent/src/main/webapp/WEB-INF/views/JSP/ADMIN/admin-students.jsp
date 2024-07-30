@@ -11,6 +11,10 @@
         th, td {
             padding: 8px 12px;
         }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
     </style>
 </head>
 <body>
@@ -55,10 +59,19 @@
                         <td>${student.email}</td>
                         <td>${student.division.name}</td>
                         <td>${student.division.department.name}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/admin/students/${student.studentId}">Details</a>
-                            <a href="${pageContext.request.contextPath}/admin/students/${student.studentId}/edit">Edit</a>
-                            <a href="${pageContext.request.contextPath}/admin/students/${student.studentId}/delete" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                        <td class="action-buttons">
+                            <!-- View Button -->
+                            <form action="${pageContext.request.contextPath}/admin/students/${student.studentId}" method="GET" style="display:inline;">
+                                <button type="submit">View</button>
+                            </form>
+                            <!-- Edit Button -->
+                            <form action="${pageContext.request.contextPath}/admin/students/${student.studentId}/edit" method="GET" style="display:inline;">
+                                <button type="submit">Edit</button>
+                            </form>
+                            <!-- Delete Button -->
+                            <form action="${pageContext.request.contextPath}/admin/students/delete/${student.studentId}" method="POST" style="display:inline;">
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

@@ -23,7 +23,9 @@ public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterSe
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public StudentSemester getStudentSemesterById(Long studentSemesterId) {
-        return adminStudentSemesterDAO.getStudentSemesterById(studentSemesterId);
+        StudentSemester studentSemester = adminStudentSemesterDAO.getStudentSemesterById(studentSemesterId);
+        initializeStudentSemester(studentSemester);
+        return studentSemester;
     }
 
     @Override
@@ -50,6 +52,14 @@ public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterSe
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public List<StudentSemester> getAllStudentSemesters() {
-        return adminStudentSemesterDAO.getAllStudentSemesters();
+        List<StudentSemester> studentSemesters = adminStudentSemesterDAO.getAllStudentSemesters();
+        studentSemesters.forEach(this::initializeStudentSemester);
+        return studentSemesters;
+    }
+
+    private void initializeStudentSemester(StudentSemester studentSemester) {
+        if (studentSemester != null && studentSemester.getSemester() != null) {
+            studentSemester.getSemester().getName();
+        }
     }
 }

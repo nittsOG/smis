@@ -39,7 +39,6 @@ public class Admin_StudentAddressServiceImpl implements Admin_StudentAddressServ
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public void deleteStudentAddress(Long studentAddressId) {
-        StudentAddress studentAddress = getStudentAddressById(studentAddressId);
-        adminStudentAddressDAO.deleteStudentAddress(studentAddress);
+        adminStudentAddressDAO.deleteStudentAddressById(studentAddressId);
     }
 }

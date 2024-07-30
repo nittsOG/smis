@@ -38,11 +38,21 @@ public class Admin_SubjectServiceImpl implements Admin_SubjectService {
 
     @Override
     public Subject getSubjectById(Long subjectId) {
-        return adminSubjectDAO.getSubjectById(subjectId);
+        Subject subject = adminSubjectDAO.getSubjectById(subjectId);
+        initializeSubject(subject);
+        return subject;
     }
 
     @Override
     public List<Subject> getAllSubjects() {
-        return adminSubjectDAO.getAllSubjects();
+        List<Subject> subjects = adminSubjectDAO.getAllSubjects();
+        subjects.forEach(this::initializeSubject);
+        return subjects;
+    }
+
+    private void initializeSubject(Subject subject) {
+        if (subject != null && subject.getCourse() != null) {
+            subject.getCourse().getName();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.manage.admin.service;
 
 import com.manage.admin.dao.Admin_PaymentDAO;
 import com.manage.student.entities.Payment;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,12 @@ public class Admin_PaymentServiceImpl implements Admin_PaymentService {
 
     @Override
     public Payment getPaymentById(Long paymentId) {
-        return paymentDao.getPaymentById(paymentId);
+        Payment payment = paymentDao.getPaymentById(paymentId);
+        // Initialize lazy property
+        if (payment != null && payment.getFee() != null) {
+            Hibernate.initialize(payment.getFee()); // Ensure fee is initialized
+        }
+        return payment;
     }
 
     @Override
@@ -43,6 +49,13 @@ public class Admin_PaymentServiceImpl implements Admin_PaymentService {
 
     @Override
     public List<Payment> getAllPayments() {
-        return paymentDao.getAllPayments();
+        List<Payment> payments = paymentDao.getAllPayments();
+        for (Payment payment : payments) {
+            // Initialize lazy property
+            if (payment.getFee() != null) {
+                Hibernate.initialize(payment.getFee()); // Ensure fee is initialized
+            }
+        }
+        return payments;
     }
 }

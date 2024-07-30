@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 @Qualifier("adminSemesterSummaryServiceImpl")
+@Transactional(transactionManager = "adminTransactionManager")
 public class Admin_SemesterSummaryServiceImpl implements Admin_SemesterSummaryService {
 
     private final Admin_SemesterSummaryDAO adminSemesterSummaryDAO;
@@ -21,32 +22,31 @@ public class Admin_SemesterSummaryServiceImpl implements Admin_SemesterSummarySe
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void saveSemesterSummary(SemesterSummary semesterSummary) {
         adminSemesterSummaryDAO.saveSemesterSummary(semesterSummary);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void updateSemesterSummary(SemesterSummary semesterSummary) {
         adminSemesterSummaryDAO.updateSemesterSummary(semesterSummary);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void deleteSemesterSummary(Integer studentId, Integer semester) {
         adminSemesterSummaryDAO.deleteSemesterSummary(studentId, semester);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester) {
-        return adminSemesterSummaryDAO.getSemesterSummaryById(studentId, semester);
+        SemesterSummary semesterSummary = adminSemesterSummaryDAO.getSemesterSummaryById(studentId, semester);
+        // If there are any lazy-loaded properties, initialize them here
+        return semesterSummary;
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public List<SemesterSummary> getAllSemesterSummaries() {
-        return adminSemesterSummaryDAO.getAllSemesterSummaries();
+        List<SemesterSummary> semesterSummaries = adminSemesterSummaryDAO.getAllSemesterSummaries();
+        // If there are any lazy-loaded properties, initialize them here
+        return semesterSummaries;
     }
 }

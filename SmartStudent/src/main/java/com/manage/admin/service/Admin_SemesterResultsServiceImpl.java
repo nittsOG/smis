@@ -2,6 +2,7 @@ package com.manage.admin.service;
 
 import com.manage.admin.dao.Admin_SemesterResultsDAO;
 import com.manage.student.entities.SemesterResults;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @Qualifier("adminSemesterResultsServiceImpl")
+@Transactional(transactionManager = "adminTransactionManager")
 public class Admin_SemesterResultsServiceImpl implements Admin_SemesterResultsService {
 
     private final Admin_SemesterResultsDAO adminSemesterResultsDAO;
@@ -21,32 +23,39 @@ public class Admin_SemesterResultsServiceImpl implements Admin_SemesterResultsSe
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void saveSemesterResults(SemesterResults semesterResults) {
         adminSemesterResultsDAO.saveSemesterResults(semesterResults);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void updateSemesterResults(SemesterResults semesterResults) {
         adminSemesterResultsDAO.updateSemesterResults(semesterResults);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public void deleteSemesterResults(SemesterResults.IdClass id) {
         adminSemesterResultsDAO.deleteSemesterResults(id);
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public SemesterResults getSemesterResultsById(SemesterResults.IdClass id) {
-        return adminSemesterResultsDAO.getSemesterResultsById(id);
+        SemesterResults semesterResults = adminSemesterResultsDAO.getSemesterResultsById(id);
+        // Initialize lazy property
+        if (semesterResults != null && semesterResults.getStudentId() != null) {
+            Hibernate.initialize(semesterResults.getStudentId()); // Ensure student is initialized
+        }
+        return semesterResults;
     }
 
     @Override
-    @Transactional("adminTransactionManager")
     public List<SemesterResults> getAllSemesterResults() {
-        return adminSemesterResultsDAO.getAllSemesterResults();
+        List<SemesterResults> semesterResultsList = adminSemesterResultsDAO.getAllSemesterResults();
+        for (SemesterResults semesterResults : semesterResultsList) {
+            // Initialize lazy property
+            if (semesterResults.getStudentId() != null) {
+                Hibernate.initialize(semesterResults.getStudentId()); // Ensure student is initialized
+            }
+        }
+        return semesterResultsList;
     }
 }

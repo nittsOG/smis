@@ -105,25 +105,82 @@ public class AdminStudentController {
         }
 
         Student student = adminStudentService.getStudentById(studentId);
+        StudentAddress studentAddress = adminStudentAddressService.getStudentAddressById(studentId);  // Fetch student address
+        List<Division> divisions = adminDivisionService.getAllDivisions();
+        List<Department> departments = adminDepartmentService.getAllDepartments();
+
         ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-student-edit");
         mav.addObject("student", student);
+        mav.addObject("address", studentAddress);  // Add address to the model
+        mav.addObject("divisions", divisions);
+        mav.addObject("departments", departments);
         return mav;
     }
 
     @PostMapping("/students/{studentId}/edit")
-    public String updateStudent(@PathVariable Long studentId, @ModelAttribute("student") Student student,
-                                @RequestParam(value = "photo", required = false) MultipartFile photo, HttpSession session) throws IOException {
+    public String updateStudent(@PathVariable Long studentId,
+                                @RequestParam(value = "username") String username,
+                                @RequestParam(value = "password") String password,
+                                @RequestParam(value = "email") String email,
+                                @RequestParam(value = "address.street") String street,
+                                @RequestParam(value = "address.city") String city,
+                                @RequestParam(value = "address.state") String state,
+                                @RequestParam(value = "address.country") String country,
+                                @RequestParam(value = "address.zipCode") String zipcode,
+                                @RequestParam(value = "division.divisionId") long divisionId,
+                                @RequestParam(value = "photo", required = false) MultipartFile photo,
+                                HttpSession session) throws IOException {
+
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return "redirect:/admin/login";
         }
 
+        Student student = adminStudentService.getStudentById(studentId);
+        StudentAddress address = adminStudentAddressService.getStudentAddressById(studentId);
+
+        if (!username.equals(student.getUsername())) {
+            student.setUsername(username);
+        }
+        if (!password.equals(student.getPassword())) {
+            student.setPassword(password);
+        }
+        if (!email.equals(student.getEmail())) {
+            student.setEmail(email);
+        }
+
+        if (!street.equals(address.getStreet())) {
+            address.setStreet(street);
+        }
+        if (!city.equals(address.getCity())) {
+            address.setCity(city);
+        }
+        if (!state.equals(address.getState())) {
+            address.setState(state);
+        }
+        if (!country.equals(address.getCountry())) {
+            address.setCountry(country);
+        }
+        if (!zipcode.equals(address.getZipCode())) {
+            address.setZipCode(zipcode);
+        }
+
         if (photo != null && !photo.isEmpty()) {
             student.setPhoto(photo.getBytes());
         }
+
+        // Fetch and set the new division
+        Division division = adminDivisionService.getDivisionById(divisionId);
+        student.setDivision(division);
+
         adminStudentService.updateStudent(student);
-        return "redirect:/admin/students/{studentId}";
+        adminStudentAddressService.updateStudentAddress(address); // Update address in a separate service call
+
+        return "redirect:/admin/students/" + studentId;
     }
+
+
+
 
     @GetMapping("/students/{studentId}/address")
     public ModelAndView showStudentAddress(@PathVariable Long studentId, HttpSession session) {
@@ -149,7 +206,7 @@ public class AdminStudentController {
         }
 
         adminStudentAddressService.updateStudentAddress(studentAddress);
-        return "redirect:/admin/students/{studentId}";
+        return "redirect:/admin/students/" + studentId;
     }
 
     @PostMapping("/students/delete/{studentId}")
@@ -161,5 +218,39 @@ public class AdminStudentController {
 
         adminStudentService.deleteStudent(studentId);
         return "redirect:/admin/students";
+    }
+    
+    void Student_CheckAndUpdate( Student student ,String name , String password , String email  ) {
+    	
+    	if(student.getUsername()!=name) {
+    		student.setUsername(name);
+    	}
+    	else if(student.getPassword()!=password) {
+    		student.setPassword(password);
+    	}
+    	else if(student.getEmail()!=email) {
+    		student.setEmail(email);
+    	}
+    	
+    	
+    }
+    
+    void Address_CheckeAndUpdate(StudentAddress address ,String city,String state , String street,String country, String zipcode) {
+    	
+    	if(address.getStreet()!=state) {
+    		address.setStreet(street);
+    	}
+    	else if(address.getCity()!=city) {
+    		address.setCity(city);
+    	}
+    	else if(address.getState()!=state) {
+    		address.setState(state);
+    	}
+    	else if(address.getCountry()!=country) {
+    		address.setCountry(country);
+    	}
+    	else if(address.getZipCode()!=zipcode) {
+    		address.setZipCode(zipcode);
+    	}
     }
 }

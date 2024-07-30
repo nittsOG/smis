@@ -23,7 +23,12 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public Manager getManagerById(Long managerId) {
-        return adminManagerDAO.getManagerById(managerId);
+        Manager manager = adminManagerDAO.getManagerById(managerId);
+        // Initialize lazy property
+        if (manager != null && manager.getDepartment() != null) {
+            manager.getDepartment().getName(); // Access to initialize
+        }
+        return manager;
     }
 
     @Override
@@ -47,6 +52,13 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public List<Manager> getAllManagers() {
-        return adminManagerDAO.getAllManagers();
+        List<Manager> managers = adminManagerDAO.getAllManagers();
+        for (Manager manager : managers) {
+            // Initialize lazy property
+            if (manager.getDepartment() != null) {
+                manager.getDepartment().getName(); // Access to initialize
+            }
+        }
+        return managers;
     }
 }
