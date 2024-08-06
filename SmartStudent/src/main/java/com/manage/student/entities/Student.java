@@ -10,36 +10,36 @@ import java.util.Set;
 @Table(name = "student")
 public class Student {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
-    private Long studentId;
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "student_id")
+	    private Long studentId;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+	    @Column(name = "username", nullable = false, unique = true)
+	    private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+	    @Column(name = "password", nullable = false)
+	    private String password;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+	    @Column(name = "email", nullable = false, unique = true)
+	    private String email;
 
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
+	    @Lob
+	    @Column(name = "photo")
+	    private byte[] photo;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false,orphanRemoval = true)
-    private StudentAddress address;
+	    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false, orphanRemoval = true)
+	    private StudentAddress address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id")
-    private Division division;
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "division_id")
+	    private Division division;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
-    private Set<Fee> fees;
+	    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Fee> fees;
 
-    @Transient // This annotation indicates that the field is not persistent
-    private String photoBase64;
+	    @Transient
+	    private String photoBase64;
 
     // Getters and Setters
 

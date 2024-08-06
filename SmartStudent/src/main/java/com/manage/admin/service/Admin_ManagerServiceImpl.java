@@ -24,9 +24,14 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Transactional(transactionManager = "adminTransactionManager")
     public Manager getManagerById(Long managerId) {
         Manager manager = adminManagerDAO.getManagerById(managerId);
-        // Initialize lazy property
-        if (manager != null && manager.getDepartment() != null) {
-            manager.getDepartment().getName(); // Access to initialize
+        if (manager != null) {
+            // Access to initialize lazy properties
+            if (manager.getDepartment() != null) {
+                manager.getDepartment().getName();
+            }
+            if (manager.getAddress() != null) {
+                manager.getAddress(); // Forces initialization
+            }
         }
         return manager;
     }
@@ -46,7 +51,13 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public void deleteManager(Manager manager) {
-        adminManagerDAO.deleteManager(manager);
+        if (manager != null) {
+            // Access department to avoid LazyInitializationException
+            if (manager.getDepartment() != null) {
+                manager.getDepartment().getName();
+            }
+            adminManagerDAO.deleteManager(manager);
+        }
     }
 
     @Override
@@ -54,11 +65,21 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     public List<Manager> getAllManagers() {
         List<Manager> managers = adminManagerDAO.getAllManagers();
         for (Manager manager : managers) {
-            // Initialize lazy property
+            // Initialize lazy properties
             if (manager.getDepartment() != null) {
-                manager.getDepartment().getName(); // Access to initialize
+                manager.getDepartment().getName(); // Initialize department
             }
+            manager.getAddress(); // Initialize addresses collection
         }
         return managers;
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public void deleteManager(Long managerId) {
+        Manager manager = getManagerById(managerId);
+        if (manager != null) {
+            deleteManager(manager);
+        }
     }
 }

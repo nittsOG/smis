@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "payment")
 public class Payment {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
     private Long paymentId;

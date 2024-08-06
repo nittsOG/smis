@@ -12,6 +12,8 @@ public interface Admin_ManagerService {
     void updateManager(Manager manager);
 
     void deleteManager(Manager manager);
+    
+    void deleteManager(Long managerId);
 
 	List<Manager> getAllManagers();
 }

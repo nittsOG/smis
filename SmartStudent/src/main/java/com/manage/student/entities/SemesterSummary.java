@@ -9,68 +9,68 @@ import java.util.Objects;
 @Table(name = "SemesterSummary")
 public class SemesterSummary {
 
-    @Embeddable
-    public static class IdClass implements Serializable {
-        private Integer studentId;
-        private Integer semester;
+	 @Embeddable
+	    public static class IdClass implements Serializable {
+	        private Integer studentId;
+	        private Integer semester;
 
-        // Default constructor
-        public IdClass() {
-        }
+	        // Default constructor
+	        public IdClass() {
+	        }
 
-        // Parameterized constructor
-        public IdClass(Integer studentId, Integer semester) {
-            this.studentId = studentId;
-            this.semester = semester;
-        }
+	        // Parameterized constructor
+	        public IdClass(Integer studentId, Integer semester) {
+	            this.studentId = studentId;
+	            this.semester = semester;
+	        }
 
-        // Getters and Setters
-        public Integer getStudentId() {
-            return studentId;
-        }
+	        // Getters and Setters
+	        public Integer getStudentId() {
+	            return studentId;
+	        }
 
-        public void setStudentId(Integer studentId) {
-            this.studentId = studentId;
-        }
+	        public void setStudentId(Integer studentId) {
+	            this.studentId = studentId;
+	        }
 
-        public Integer getSemester() {
-            return semester;
-        }
+	        public Integer getSemester() {
+	            return semester;
+	        }
 
-        public void setSemester(Integer semester) {
-            this.semester = semester;
-        }
+	        public void setSemester(Integer semester) {
+	            this.semester = semester;
+	        }
 
-        // hashCode and equals methods
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            IdClass idClass = (IdClass) o;
-            return Objects.equals(studentId, idClass.studentId) &&
-                    Objects.equals(semester, idClass.semester);
-        }
+	        // hashCode and equals methods
+	        @Override
+	        public boolean equals(Object o) {
+	            if (this == o) return true;
+	            if (o == null || getClass() != o.getClass()) return false;
+	            IdClass idClass = (IdClass) o;
+	            return Objects.equals(studentId, idClass.studentId) &&
+	                    Objects.equals(semester, idClass.semester);
+	        }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(studentId, semester);
-        }
-    }
+	        @Override
+	        public int hashCode() {
+	            return Objects.hash(studentId, semester);
+	        }
+	    }
 
-    @EmbeddedId
-    private IdClass id;
+	    @EmbeddedId
+	    private IdClass id;
 
-    @Column(name = "total_credits")
-    private BigDecimal totalCredits;
+	    @Column(name = "total_credits")
+	    private BigDecimal totalCredits;
 
-    @Column(name = "total_credit_points")
-    private BigDecimal totalCreditPoints;
+	    @Column(name = "total_credit_points")
+	    private BigDecimal totalCreditPoints;
 
-    @Column(name = "sgpa")
-    private BigDecimal sgpa;
+	    @Column(name = "sgpa")
+	    private BigDecimal sgpa;
 
-    @Column(name = "cgpa")
-    private BigDecimal cgpa;
+	    @Column(name = "cgpa")
+	    private BigDecimal cgpa;
 
     // Getters and Setters
     public IdClass getId() {

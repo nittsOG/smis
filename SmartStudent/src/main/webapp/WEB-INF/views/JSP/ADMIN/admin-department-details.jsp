@@ -1,19 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Department Details</title>
-    <script>
-        <c:if test="${not empty alert}">
-            alert("${alert}");
-        </c:if>
-    </script>
 </head>
 <body>
-    <h1>Department Details</h1>
-    <p>ID: ${department.getDepartmentId()}</p>
+    <h2>Department Details</h2>
+    <p>ID: ${department.departmentId}</p>
     <p>Name: ${department.name}</p>
     <p>Description: ${department.description}</p>
-    <a href="${pageContext.request.contextPath}/admin/departments">Back to List</a>
+    <p>Field: ${department.field}</p>
+    <a href="<c:url value='/admin/departments'/>">Back to List</a>
 </body>
 </html>

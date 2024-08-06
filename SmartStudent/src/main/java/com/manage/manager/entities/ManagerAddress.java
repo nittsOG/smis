@@ -26,65 +26,71 @@ public class ManagerAddress {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-	public Long getManagerAddressId() {
-		return managerAddressId;
-	}
-
-	public void setManagerAddressId(Long managerAddressId) {
-		this.managerAddressId = managerAddressId;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
-
     // Getters and Setters
+
+    public Long getManagerAddressId() {
+        return managerAddressId;
+    }
+
+    public void setManagerAddressId(Long managerAddressId) {
+        this.managerAddressId = managerAddressId;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+	@Override
+	public String toString() {
+		return "ManagerAddress [managerAddressId=" + managerAddressId + ", street=" + street + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + ", manager=" + manager + "]";
+	}
 }

@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,16 +6,25 @@
 </head>
 <body>
     <h1>Edit Student Semester</h1>
-    <form action="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.id}/edit" method="post">
-        <input type="hidden" name="id" value="${studentSemester.id}" />
-        <label for="studentId">Student ID:</label>
-        <input type="text" id="studentId" name="studentId" value="${studentSemester.studentId}" required /><br>
-        <label for="semester">Semester:</label>
-        <input type="text" id="semester" name="semester" value="${studentSemester.semester}" required /><br>
-        <label for="year">Year:</label>
-        <input type="text" id="year" name="year" value="${studentSemester.year}" required /><br>
-        <button type="submit">Update Semester</button>
-    </form>
-    <a href="${pageContext.request.contextPath}/admin/student-semesters">Back to List</a>
+    <form:form method="post" modelAttribute="studentSemester">
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td><form:input path="studentSemesterId" readonly="true" /></td>
+            </tr>
+            <tr>
+                <td>Student:</td>
+                <td><form:input path="student.username" /></td>
+            </tr>
+            <tr>
+                <td>Semester:</td>
+                <td><form:input path="semester.name" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Update" /></td>
+            </tr>
+        </table>
+    </form:form>
+    <a href="<c:url value='/admin/student-semesters' />">Back to List</a>
 </body>
 </html>

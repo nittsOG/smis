@@ -56,10 +56,17 @@ public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterSe
         studentSemesters.forEach(this::initializeStudentSemester);
         return studentSemesters;
     }
+    
+    
 
     private void initializeStudentSemester(StudentSemester studentSemester) {
-        if (studentSemester != null && studentSemester.getSemester() != null) {
-            studentSemester.getSemester().getName();
+        if (studentSemester != null) {
+            if (studentSemester.getStudent() != null) {
+                studentSemester.getStudent().getUsername(); // Force initialization of the Student entity
+            }
+            if (studentSemester.getSemester() != null) {
+                studentSemester.getSemester().getName(); // Force initialization of the Semester entity
+            }
         }
     }
 }

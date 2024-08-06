@@ -27,7 +27,7 @@ public class Attendance {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private AttendanceStatus status;
-    
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Attendance> attendances = new HashSet<>();
 

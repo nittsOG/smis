@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "student_address")
 public class StudentAddress {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_address_id")
     private Long studentAddressId;
@@ -29,6 +29,7 @@ public class StudentAddress {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student student;
+
 
 	public Long getStudentAddressId() {
 		return studentAddressId;

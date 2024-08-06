@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/departments")
@@ -23,15 +25,38 @@ public class AdminDepartmentController {
     }
 
     @GetMapping
-    public ModelAndView listDepartments(HttpSession session) {
+    public ModelAndView listDepartments(@RequestParam(value = "search", required = false) String search,
+                                        @RequestParam(value = "field", required = false) String field,
+                                        HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return new ModelAndView("redirect:/admin/login");
         }
 
         List<Department> departments = adminDepartmentService.getAllDepartments();
+
+        // Apply search and filter logic
+        if (search != null && !search.isEmpty()) {
+            departments = departments.stream()
+                    .filter(d -> d.getName().equals(search))
+                    .collect(Collectors.toList());
+        }
+
+        if (field != null && !field.isEmpty()) {
+            departments = departments.stream()
+                    .filter(d -> field.equals(d.getField()))
+                    .collect(Collectors.toList());
+        }
+
         ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-departments");
         mav.addObject("departments", departments);
+
+        // Pass the unique fields for the dropdown filter
+        Set<String> fields = adminDepartmentService.getAllDepartments().stream()
+                .map(Department::getField)
+                .collect(Collectors.toSet());
+        mav.addObject("fields", fields);
+
         return mav;
     }
 

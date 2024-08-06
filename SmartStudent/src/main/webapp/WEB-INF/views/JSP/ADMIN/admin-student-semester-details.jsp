@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +6,10 @@
 </head>
 <body>
     <h1>Student Semester Details</h1>
-    <p>ID: ${studentSemester.id}</p>
-    <p>Student ID: ${studentSemester.studentId}</p>
-    <p>Semester: ${studentSemester.semester}</p>
-    <p>Year: ${studentSemester.year}</p>
-    <a href="${pageContext.request.contextPath}/admin/student-semesters">Back to List</a>
-    <a href="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.id}/edit">Edit</a>
-    <a href="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.id}/delete">Delete</a>
+    <p>ID: ${studentSemester.studentSemesterId}</p>
+    <p>Student: ${studentSemester.student.username}</p>
+    <p>Semester: ${studentSemester.semester.name}</p>
+    <a href="<c:url value='/admin/student-semesters' />">Back to List</a>
+    <a href="<c:url value='/admin/student-semesters/${studentSemester.studentSemesterId}/edit' />">Edit</a>
 </body>
 </html>

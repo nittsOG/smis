@@ -4,6 +4,7 @@ import com.manage.admin.service.Admin_DivisionService;
 import com.manage.home.entities.Division;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,7 +80,14 @@ public class AdminDivisionController {
             return "redirect:/admin/login";
         }
 
-        adminDivisionService.deletebyId(id);
+        try {
+            adminDivisionService.deletebyId(id);
+            session.setAttribute("successMessage", "Division deleted successfully.");
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("errorMessage", "Cannot delete division :  ( id = "+ id +" ) because it has associated records.");
+        } catch (Exception e) {
+            session.setAttribute("errorMessage", "An error occurred while trying to delete the division.");
+        }
         return "redirect:/admin/divisions";
     }
 

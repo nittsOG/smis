@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "faculty_address")
 public class FacultyAddress {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "faculty_address_id")
     private Long facultyAddressId;
@@ -26,7 +26,7 @@ public class FacultyAddress {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 

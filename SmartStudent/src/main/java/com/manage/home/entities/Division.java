@@ -1,15 +1,15 @@
 package com.manage.home.entities;
 
 import javax.persistence.*;
-
 import com.manage.faculty.entities.FacultyDivision;
 import com.manage.student.entities.Student;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "division")
 public class Division {
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "division_id")
     private Long divisionId;
@@ -21,11 +21,14 @@ public class Division {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Student> students;
 
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<FacultyDivision> facultyDivisions;
+
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Timetable> timetables;
 
     // Getters and Setters
 
@@ -67,5 +70,13 @@ public class Division {
 
     public void setFacultyDivisions(List<FacultyDivision> facultyDivisions) {
         this.facultyDivisions = facultyDivisions;
+    }
+
+    public Set<Timetable> getTimetables() {
+        return timetables;
+    }
+
+    public void setTimetables(Set<Timetable> timetables) {
+        this.timetables = timetables;
     }
 }

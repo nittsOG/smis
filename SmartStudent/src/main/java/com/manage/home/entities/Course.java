@@ -7,30 +7,32 @@ import java.util.Set;
 @Table(name = "course")
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
-    private Long courseId;
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "course_id")
+	    private Long courseId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
-    private Department department;
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "department_id")
+	    private Department department;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+	    @Column(name = "name", nullable = false)
+	    private String name;
 
-    @Column(name = "specialization")
-    private String specialization;
+	    @Column(name = "specialization")
+	    private String specialization;
 
-    @Column(name = "description")
-    private String description;
+	    @Column(name = "description")
+	    private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
-    private Set<Subject> subjects;
+	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Subject> subjects;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
-    private Set<Semester> semesters; // Added relationship with Semester
+	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Semester> semesters;
 
+	    // Getters and Setters
+	    
     public Long getCourseId() {
         return courseId;
     }
