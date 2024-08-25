@@ -1,12 +1,14 @@
 package com.manage.student.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.manage.student.dao.StudentDAO;
 import com.manage.student.entities.Student;
 
 @Service
+@Qualifier("studentServiceImpl")
 public class StudentServiceImpl implements StudentService {
     
     private final StudentDAO studentDAO;
@@ -25,14 +27,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(transactionManager = "studentTransactionManager")
-    public Student getStudentByUsername(String username) {
-        return studentDAO.getStudentByUsername(username);
+    public Student getStudentById(Long id) {
+//        return studentDAO.getStudentById(id);
+        Student student = studentDAO.getStudentById(id);
+        initializeStudent(student);
+        return student;
+        
     }
 
-    @Override
-    @Transactional(transactionManager = "studentTransactionManager")
-    public Student getStudentById(Long id) {
-        return studentDAO.getStudentById(id);
+    private void initializeStudent(Student student) {
+        if (student != null && student.getDivision() != null) {
+            student.getDivision().getName();
+            if (student.getDivision().getDepartment() != null) {
+                student.getDivision().getDepartment().getName();
+            }
+        }
     }
 
 //    @Override

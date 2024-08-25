@@ -114,13 +114,6 @@ public class Student {
     public void setPhotoBase64(String photoBase64) {
         this.photoBase64 = photoBase64;
     }
-
-	@Override
-	public String toString() {
-		return "Student [studentId=" + studentId + ", username=" + username + ", password=" + password + ", email="
-				+ email + ", photo=" + Arrays.toString(photo) + ", address=" + address + ", division=" + division
-				+ ", fees=" + fees + "]";
-	}
     
     
 }

@@ -36,7 +36,7 @@ public class StudentController {
             session.setAttribute("studentId", id);
             return new ModelAndView("redirect:/student/dashboard");
         } else {
-            ModelAndView mav = new ModelAndView("student-login");
+            ModelAndView mav = new ModelAndView("JSP/STUDENT/student-login");
             mav.addObject("error", "Invalid id or password");
             return mav;
         }

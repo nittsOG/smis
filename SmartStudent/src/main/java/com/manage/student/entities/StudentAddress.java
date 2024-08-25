@@ -87,11 +87,5 @@ public class StudentAddress {
 		this.student = student;
 	}
 
-	@Override
-	public String toString() {
-		return "StudentAddress [studentAddressId=" + studentAddressId + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + ", student=" + student + "]";
-	}
-
     
 }
