@@ -39,4 +39,17 @@ public class Admin_StudentAddressDAOImpl implements Admin_StudentAddressDAO {
     public void deleteStudentAddress(StudentAddress studentAddress) {
         sessionFactory.getCurrentSession().delete(studentAddress);
     }
+
+	@Override
+	public void deleteStudentAddressById(long studentAddressId) {
+		// TODO Auto-generated method stub
+		try {
+			StudentAddress studentAddress= this.getStudentAddressById(studentAddressId);
+			this.deleteStudentAddress(studentAddress);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return ;
+		}
+	}
+    
 }

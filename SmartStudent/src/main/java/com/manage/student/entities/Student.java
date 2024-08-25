@@ -2,35 +2,44 @@ package com.manage.student.entities;
 
 import javax.persistence.*;
 import com.manage.home.entities.Division;
+
+import java.util.Arrays;
 import java.util.Set;
 
 @Entity
 @Table(name = "student")
 public class Student {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
-    private Long studentId;
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "student_id")
+	    private Long studentId;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+	    @Column(name = "username", nullable = false, unique = true)
+	    private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+	    @Column(name = "password", nullable = false)
+	    private String password;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+	    @Column(name = "email", nullable = false, unique = true)
+	    private String email;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private StudentAddress address;
+	    @Lob
+	    @Column(name = "photo")
+	    private byte[] photo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id")
-    private Division division;
+	    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false, orphanRemoval = true)
+	    private StudentAddress address;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Fee> fees;
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "division_id")
+	    private Division division;
+
+	    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Fee> fees;
+
+	    @Transient
+	    private String photoBase64;
 
     // Getters and Setters
 
@@ -66,6 +75,14 @@ public class Student {
         this.email = email;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
     public StudentAddress getAddress() {
         return address;
     }
@@ -89,4 +106,14 @@ public class Student {
     public void setFees(Set<Fee> fees) {
         this.fees = fees;
     }
+
+    public String getPhotoBase64() {
+        return photoBase64;
+    }
+
+    public void setPhotoBase64(String photoBase64) {
+        this.photoBase64 = photoBase64;
+    }
+    
+    
 }

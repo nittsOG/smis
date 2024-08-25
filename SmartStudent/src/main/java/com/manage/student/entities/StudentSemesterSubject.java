@@ -17,9 +17,10 @@ public class StudentSemesterSubject {
     private StudentSemester studentSemester;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false)
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    // Getters and Setters
 	public Long getStudentSemesterSubjectId() {
 		return studentSemesterSubjectId;
 	}
@@ -44,5 +45,4 @@ public class StudentSemesterSubject {
 		this.subject = subject;
 	}
 
-    // Getters and Setters
 }

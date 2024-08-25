@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.manage.admin.entities.Admin;
 import com.manage.admin.service.AdminService;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -26,42 +27,40 @@ public class AdminController {
         return "JSP/ADMIN/admin-login";
     }
 
-//    @PostMapping("/login")
-//    public ModelAndView login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-//        if (adminService.validateAdmin(username, password)) {
-//            session.setAttribute("adminUsername", username);
-//            return new ModelAndView("redirect:/admin/dashboard");
-//        } else {
-//            ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-login");
-//            mav.addObject("error", "Invalid username or password");
-//            return mav;
-//        }
-//    }
-    
     @PostMapping("/login")
     public ModelAndView login(@RequestParam Long id, @RequestParam String password, HttpSession session) {
-        if (adminService.validateAdmin(id, password)) {
-            session.setAttribute("adminId", id);
-            return new ModelAndView("redirect:/admin/dashboard");
-        } else {
+        try {
+            if (adminService.validateAdmin(id, password)) {
+                session.setAttribute("adminId", id);
+                return new ModelAndView("redirect:/admin/dashboard");
+            } else {
+                ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-login");
+                mav.addObject("error", "Invalid ID or password");
+                return mav;
+            }
+        } catch (Exception e) {
             ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-login");
-            mav.addObject("error", "Invalid ID or password");
+            mav.addObject("error", "An error occurred while processing your request. Please try again later.");
             return mav;
         }
     }
 
     @GetMapping("/dashboard")
     public ModelAndView showDashboard(HttpSession session) {
-        Long adminId = (Long) session.getAttribute("adminId");
-        if (adminId == null) {
-            return new ModelAndView("redirect:/admin/login");
+        try {
+            Long adminId = (Long) session.getAttribute("adminId");
+            if (adminId == null) {
+                return new ModelAndView("redirect:/admin/login");
+            }
+            ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-dashboard");
+            Admin admin = adminService.getAdminById(adminId);
+            mav.addObject("admin", admin);
+            return mav;
+        } catch (Exception e) {
+            ModelAndView mav = new ModelAndView("redirect:/admin/login");
+            mav.addObject("error", "An error occurred while loading the dashboard. Please try again later.");
+            return mav;
         }
-        ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-dashboard");
-//        mav.addObject("adminUsername", adminUsername);
-//        Admin admin = adminService.getAdminByUsername(adminUsername);
-        Admin admin=adminService.getAdminById(adminId);
-        mav.addObject("admin", admin);
-        return mav;
     }
 
     @GetMapping("/logout")

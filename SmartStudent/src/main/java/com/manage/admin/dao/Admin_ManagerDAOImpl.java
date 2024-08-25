@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.manage.manager.entities.Manager;
 
+import java.util.List;
+
 @Repository
 @Qualifier("adminManagerDAOImpl")
 @Transactional("adminTransactionManager")
 public class Admin_ManagerDAOImpl implements Admin_ManagerDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Admin_ManagerDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
@@ -38,5 +40,11 @@ public class Admin_ManagerDAOImpl implements Admin_ManagerDAO {
     @Override
     public void deleteManager(Manager manager) {
         sessionFactory.getCurrentSession().delete(manager);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Manager> getAllManagers() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Manager").list();
     }
 }

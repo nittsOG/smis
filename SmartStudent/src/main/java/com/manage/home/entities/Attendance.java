@@ -17,7 +17,7 @@ public class Attendance {
     private Long attendanceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "session_id", nullable = false)
+    @JoinColumn(name = "session_id")
     private Session session;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,7 +27,7 @@ public class Attendance {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private AttendanceStatus status;
-    
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Attendance> attendances = new HashSet<>();
 

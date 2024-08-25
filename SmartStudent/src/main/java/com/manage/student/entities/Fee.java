@@ -9,13 +9,13 @@ import java.util.Set;
 @Table(name = "fee")
 public class Fee {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fee_id")
     private Long feeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @Column(name = "semester", nullable = false)
@@ -30,7 +30,7 @@ public class Fee {
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
-    @OneToMany(mappedBy = "fee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Payment> payments;
 
     // Getters and Setters

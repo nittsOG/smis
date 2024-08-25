@@ -19,7 +19,7 @@ public class FacultyDivision {
     private Faculty faculty;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id", nullable = false)
+    @JoinColumn(name = "division_id")
     private Division division;
 
     // Getters and Setters

@@ -19,12 +19,6 @@ public class AdminServiceImpl implements AdminService {
 		this.adminDAO = adminDAO;
 	}
 
-//	@Override
-//	@Transactional(transactionManager = "adminTransactionManager")
-//	public boolean validateAdmin(String username, String password) {
-//		Admin admin = adminDAO.getAdminByUsername(username);
-//		return admin != null && admin.getPassword().equals(password);
-//	}
 
 	@Override
 	@Transactional(transactionManager = "adminTransactionManager")

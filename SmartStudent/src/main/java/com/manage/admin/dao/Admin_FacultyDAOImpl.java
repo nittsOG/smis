@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.manage.faculty.entities.Faculty;
 
+import java.util.List;
+
 @Repository
 @Qualifier("adminFacultyDAOImpl")
 @Transactional("adminTransactionManager")
 public class Admin_FacultyDAOImpl implements Admin_FacultyDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Admin_FacultyDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
@@ -38,5 +40,11 @@ public class Admin_FacultyDAOImpl implements Admin_FacultyDAO {
     @Override
     public void deleteFaculty(Faculty faculty) {
         sessionFactory.getCurrentSession().delete(faculty);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Faculty> getAllFaculties() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Faculty").list();
     }
 }

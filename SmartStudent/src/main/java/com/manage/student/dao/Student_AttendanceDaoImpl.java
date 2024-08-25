@@ -1,11 +1,14 @@
 package com.manage.student.dao;
 
 import com.manage.home.entities.Attendance;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 @Qualifier("studentAttendanceDAOImpl")
@@ -21,7 +24,27 @@ public class Student_AttendanceDaoImpl implements Student_AttendanceDao {
 
     @Override
     public Attendance findById(Long id) {
-        return sessionFactory.getCurrentSession().get(Attendance.class, id);
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Attendance.class, id);
+    }
+
+    @Override
+    public List<Attendance> findAttendanceByStudentAndSemester(Long studentId, Long semesterId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String query = "SELECT a FROM Attendance a " +
+                       "JOIN a.session s " +
+                       "JOIN s.subject sub " +
+                       "JOIN sub.semesterSubjects ss " +
+                       "JOIN ss.semester sem " +
+                       "WHERE a.student.studentId = :studentId AND sem.semesterId = :semesterId";
+
+        List<Attendance> attendanceList = session.createQuery(query, Attendance.class)
+                .setParameter("studentId", studentId)
+                .setParameter("semesterId", semesterId)
+                .getResultList();
+
+        return attendanceList;
     }
 
     // Implement more read-only methods as needed

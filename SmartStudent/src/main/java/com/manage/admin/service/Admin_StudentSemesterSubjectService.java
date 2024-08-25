@@ -1,5 +1,7 @@
 package com.manage.admin.service;
 
+import java.util.List;
+
 import com.manage.student.entities.StudentSemesterSubject;
 
 public interface Admin_StudentSemesterSubjectService {
@@ -10,4 +12,6 @@ public interface Admin_StudentSemesterSubjectService {
     void updateStudentSemesterSubject(StudentSemesterSubject studentSemesterSubject);
 
     void deleteStudentSemesterSubject(Long studentSemesterSubjectId);
+
+	List<StudentSemesterSubject> getAllStudentSemesterSubjects();
 }

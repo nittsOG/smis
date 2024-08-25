@@ -8,52 +8,52 @@ import java.util.List;
 @Table(name = "session")
 public class Session {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
-    private Long sessionId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "session_id")
+	private Long sessionId;
 
-    @Column(name = "session_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date sessionDate;
+	@Column(name = "session_date", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date sessionDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false)
-    private Subject subject;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subject_id")
+	private Subject subject;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Attendance> attendances;
+	@OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Attendance> attendances;
 
-    // Getters and Setters
-    public Long getSessionId() {
-        return sessionId;
-    }
+	// Getters and Setters
+	public Long getSessionId() {
+		return sessionId;
+	}
 
-    public void setSessionId(Long sessionId) {
-        this.sessionId = sessionId;
-    }
+	public void setSessionId(Long sessionId) {
+		this.sessionId = sessionId;
+	}
 
-    public Date getSessionDate() {
-        return sessionDate;
-    }
+	public Date getSessionDate() {
+		return sessionDate;
+	}
 
-    public void setSessionDate(Date sessionDate) {
-        this.sessionDate = sessionDate;
-    }
+	public void setSessionDate(Date sessionDate) {
+		this.sessionDate = sessionDate;
+	}
 
-    public Subject getSubject() {
-        return subject;
-    }
+	public Subject getSubject() {
+		return subject;
+	}
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
 
-    public List<Attendance> getAttendances() {
-        return attendances;
-    }
+	public List<Attendance> getAttendances() {
+		return attendances;
+	}
 
-    public void setAttendances(List<Attendance> attendances) {
-        this.attendances = attendances;
-    }
+	public void setAttendances(List<Attendance> attendances) {
+		this.attendances = attendances;
+	}
 }

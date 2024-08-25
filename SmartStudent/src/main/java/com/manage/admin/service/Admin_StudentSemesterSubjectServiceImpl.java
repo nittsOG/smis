@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Qualifier("adminStudentSemesterSubjectServiceImpl")
 public class Admin_StudentSemesterSubjectServiceImpl implements Admin_StudentSemesterSubjectService {
@@ -21,7 +23,9 @@ public class Admin_StudentSemesterSubjectServiceImpl implements Admin_StudentSem
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public StudentSemesterSubject getStudentSemesterSubjectById(Long studentSemesterSubjectId) {
-        return adminStudentSemesterSubjectDAO.getStudentSemesterSubjectById(studentSemesterSubjectId);
+        StudentSemesterSubject studentSemesterSubject = adminStudentSemesterSubjectDAO.getStudentSemesterSubjectById(studentSemesterSubjectId);
+        initializeStudentSemesterSubject(studentSemesterSubject);
+        return studentSemesterSubject;
     }
 
     @Override
@@ -41,5 +45,19 @@ public class Admin_StudentSemesterSubjectServiceImpl implements Admin_StudentSem
     public void deleteStudentSemesterSubject(Long studentSemesterSubjectId) {
         StudentSemesterSubject studentSemesterSubject = getStudentSemesterSubjectById(studentSemesterSubjectId);
         adminStudentSemesterSubjectDAO.deleteStudentSemesterSubject(studentSemesterSubject);
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<StudentSemesterSubject> getAllStudentSemesterSubjects() {
+        List<StudentSemesterSubject> studentSemesterSubjects = adminStudentSemesterSubjectDAO.getAllStudentSemesterSubjects();
+        studentSemesterSubjects.forEach(this::initializeStudentSemesterSubject);
+        return studentSemesterSubjects;
+    }
+
+    private void initializeStudentSemesterSubject(StudentSemesterSubject studentSemesterSubject) {
+        if (studentSemesterSubject != null && studentSemesterSubject.getSubject() != null) {
+            studentSemesterSubject.getSubject().getName();
+        }
     }
 }

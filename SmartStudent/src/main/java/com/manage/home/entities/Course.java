@@ -7,74 +7,85 @@ import java.util.Set;
 @Table(name = "course")
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
-    private Long courseId;
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "course_id")
+	    private Long courseId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "department_id")
+	    private Department department;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+	    @Column(name = "name", nullable = false)
+	    private String name;
 
-    @Column(name = "specialization")
-    private String specialization;
+	    @Column(name = "specialization")
+	    private String specialization;
 
-    @Column(name = "description")
-    private String description;
+	    @Column(name = "description")
+	    private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Subject> subjects;
+	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Subject> subjects;
 
-	public Long getCourseId() {
-		return courseId;
-	}
+	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	    private Set<Semester> semesters;
 
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
-	}
+	    // Getters and Setters
+	    
+    public Long getCourseId() {
+        return courseId;
+    }
 
-	public Department getDepartment() {
-		return department;
-	}
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
+    public Department getDepartment() {
+        return department;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getSpecialization() {
-		return specialization;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setSpecialization(String specialization) {
-		this.specialization = specialization;
-	}
+    public String getSpecialization() {
+        return specialization;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Set<Subject> getSubjects() {
-		return subjects;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setSubjects(Set<Subject> subjects) {
-		this.subjects = subjects;
-	}
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
 
-    // Getters and Setters
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Set<Semester> getSemesters() {
+        return semesters;
+    }
+
+    public void setSemesters(Set<Semester> semesters) {
+        this.semesters = semesters;
+    }
 }

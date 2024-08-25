@@ -41,12 +41,24 @@ public class Admin_FacultyDivisionServiceImpl implements Admin_FacultyDivisionSe
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public FacultyDivision getFacultyDivisionById(Long facultyDivisionId) {
-        return adminFacultyDivisionDAO.getFacultyDivisionById(facultyDivisionId);
+        FacultyDivision facultyDivision = adminFacultyDivisionDAO.getFacultyDivisionById(facultyDivisionId);
+        // Initialize lazy property
+        if (facultyDivision != null && facultyDivision.getFaculty() != null) {
+            facultyDivision.getFaculty().getUsername(); // Access to initialize
+        }
+        return facultyDivision;
     }
 
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public List<FacultyDivision> getAllFacultyDivisions() {
-        return adminFacultyDivisionDAO.getAllFacultyDivisions();
+        List<FacultyDivision> facultyDivisions = adminFacultyDivisionDAO.getAllFacultyDivisions();
+        for (FacultyDivision facultyDivision : facultyDivisions) {
+            // Initialize lazy property
+            if (facultyDivision.getFaculty() != null) {
+                facultyDivision.getFaculty().getUsername(); // Access to initialize
+            }
+        }
+        return facultyDivisions;
     }
 }

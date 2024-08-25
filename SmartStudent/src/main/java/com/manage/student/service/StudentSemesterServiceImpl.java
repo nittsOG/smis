@@ -2,6 +2,10 @@ package com.manage.student.service;
 
 import com.manage.home.entities.Semester;
 import com.manage.student.dao.Student_SemesterDao;
+import com.manage.student.entities.StudentSemester;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,11 @@ public class StudentSemesterServiceImpl implements StudentSemesterService {
     @Transactional(transactionManager = "studentTransactionManager")
     public Semester findById(Long id) {
         return semesterDao.findById(id);
+    }
+
+    @Override
+    public List<StudentSemester> getSemestersByStudentId(Long studentId) {
+        return semesterDao.findSemestersByStudentId(studentId);
     }
 
     // Implement more service methods if needed

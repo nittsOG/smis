@@ -19,51 +19,83 @@ public class Semester {
     @Column(name = "duration")
     private int duration;
 
+    @Column(name = "start_date") // Added startDate
+    private java.sql.Date startDate;
+
+    @Column(name = "end_date") // Added endDate
+    private java.sql.Date endDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
+
     @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentSemester> studentSemesters;
 
     @OneToMany(mappedBy = "semester", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SemesterSubject> semesterSubjects;
 
-	public Long getSemesterId() {
-		return semesterId;
-	}
+    public Long getSemesterId() {
+        return semesterId;
+    }
 
-	public void setSemesterId(Long semesterId) {
-		this.semesterId = semesterId;
-	}
+    public void setSemesterId(Long semesterId) {
+        this.semesterId = semesterId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
-	public List<StudentSemester> getStudentSemesters() {
-		return studentSemesters;
-	}
+    public java.sql.Date getStartDate() {
+        return startDate;
+    }
 
-	public void setStudentSemesters(List<StudentSemester> studentSemesters) {
-		this.studentSemesters = studentSemesters;
-	}
+    public void setStartDate(java.sql.Date startDate) {
+        this.startDate = startDate;
+    }
 
-	public List<SemesterSubject> getSemesterSubjects() {
-		return semesterSubjects;
-	}
+    public java.sql.Date getEndDate() {
+        return endDate;
+    }
 
-	public void setSemesterSubjects(List<SemesterSubject> semesterSubjects) {
-		this.semesterSubjects = semesterSubjects;
-	}
+    public void setEndDate(java.sql.Date endDate) {
+        this.endDate = endDate;
+    }
 
-    // Getters and Setters
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public List<StudentSemester> getStudentSemesters() {
+        return studentSemesters;
+    }
+
+    public void setStudentSemesters(List<StudentSemester> studentSemesters) {
+        this.studentSemesters = studentSemesters;
+    }
+
+    public List<SemesterSubject> getSemesterSubjects() {
+        return semesterSubjects;
+    }
+
+    public void setSemesterSubjects(List<SemesterSubject> semesterSubjects) {
+        this.semesterSubjects = semesterSubjects;
+    }
 }

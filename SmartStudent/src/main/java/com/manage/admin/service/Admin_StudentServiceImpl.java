@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Qualifier("adminStudentServiceImpl")
 public class Admin_StudentServiceImpl implements Admin_StudentService {
@@ -21,7 +23,9 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public Student getStudentById(Long studentId) {
-        return adminStudentDAO.getStudentById(studentId);
+        Student student = adminStudentDAO.getStudentById(studentId);
+        initializeStudent(student);
+        return student;
     }
 
     @Override
@@ -41,5 +45,38 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     public void deleteStudent(Long studentId) {
         Student student = getStudentById(studentId);
         adminStudentDAO.deleteStudent(student);
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Student> getAllStudents() {
+        List<Student> students = adminStudentDAO.getAllStudents();
+        students.forEach(this::initializeStudent);
+        return students;
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Student> getStudentsByDivision(String divisionName) {
+        List<Student> students = adminStudentDAO.getStudentsByDivision(divisionName);
+        students.forEach(this::initializeStudent);
+        return students;
+    }
+
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Student> getStudentsByDepartment(String departmentName) {
+        List<Student> students = adminStudentDAO.getStudentsByDepartment(departmentName);
+        students.forEach(this::initializeStudent);
+        return students;
+    }
+
+    private void initializeStudent(Student student) {
+        if (student != null && student.getDivision() != null) {
+            student.getDivision().getName();
+            if (student.getDivision().getDepartment() != null) {
+                student.getDivision().getDepartment().getName();
+            }
+        }
     }
 }

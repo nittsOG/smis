@@ -9,31 +9,31 @@ import com.manage.student.entities.StudentSemesterSubject;
 public class Subject {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "subject_id")
-	private Long subjectId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subject_id")
+    private Long subjectId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "course_id", nullable = false)
-	private Course course;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-	@Column(name = "code", nullable = false, unique = true)
-	private String code;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
 
-	@Column(name = "description")
-	private String description;
+    @Column(name = "description")
+    private String description;
 
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<SemesterSubject> semesterSubjects;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SemesterSubject> semesterSubjects;
 
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<StudentSemesterSubject> studentSemesterSubjects;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentSemesterSubject> studentSemesterSubjects;
 
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Session> sessions;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Session> sessions;
 
 	// Getters and Setters
 
