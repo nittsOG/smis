@@ -36,7 +36,7 @@ public class Admin_SemesterResultsController {
     }
 
     @GetMapping("/{studentId}/{semester}/{subjectCode}")
-    public ModelAndView showSemesterResultsDetails(@PathVariable Integer studentId, 
+    public ModelAndView showSemesterResultsDetails(@PathVariable Long studentId, 
                                                    @PathVariable Integer semester, 
                                                    @PathVariable String subjectCode, 
                                                    HttpSession session) {
@@ -53,7 +53,7 @@ public class Admin_SemesterResultsController {
     }
 
     @GetMapping("/{studentId}/{semester}/{subjectCode}/edit")
-    public ModelAndView showEditSemesterResultsForm(@PathVariable Integer studentId, 
+    public ModelAndView showEditSemesterResultsForm(@PathVariable Long studentId, 
                                                     @PathVariable Integer semester, 
                                                     @PathVariable String subjectCode, 
                                                     HttpSession session) {
@@ -70,7 +70,7 @@ public class Admin_SemesterResultsController {
     }
 
     @PostMapping("/{studentId}/{semester}/{subjectCode}/edit")
-    public String updateSemesterResults(@PathVariable Integer studentId, 
+    public String updateSemesterResults(@PathVariable Long studentId, 
                                          @PathVariable Integer semester, 
                                          @PathVariable String subjectCode, 
                                          @ModelAttribute("semesterResults") SemesterResults semesterResults, 
@@ -89,7 +89,7 @@ public class Admin_SemesterResultsController {
     }
 
     @GetMapping("/{studentId}/{semester}/{subjectCode}/delete")
-    public String deleteSemesterResults(@PathVariable Integer studentId, 
+    public String deleteSemesterResults(@PathVariable Long studentId, 
                                          @PathVariable Integer semester, 
                                          @PathVariable String subjectCode, 
                                          HttpSession session) {

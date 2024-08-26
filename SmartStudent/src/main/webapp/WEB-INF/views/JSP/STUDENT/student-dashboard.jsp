@@ -9,6 +9,7 @@
     <hr>
     <p> <a href="${pageContext.request.contextPath}/student/profile"> Go to profile</a> </p>
     <p> <a href="${pageContext.request.contextPath}/student/attendance"> Attendance</a> </p>
+    <p> <a href="${pageContext.request.contextPath}/student/results"> results</a> </p>
     
 <a href="${pageContext.request.contextPath}/student/logout">Logout</a>
 </body>

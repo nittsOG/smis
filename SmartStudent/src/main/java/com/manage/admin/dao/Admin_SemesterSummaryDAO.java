@@ -10,9 +10,9 @@ public interface Admin_SemesterSummaryDAO {
 
 	void updateSemesterSummary(SemesterSummary semesterSummary);
 
-	void deleteSemesterSummary(Integer studentId, Integer semester);
+	void deleteSemesterSummary(Long studentId, Integer semester);
 
-	SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester);
+	SemesterSummary getSemesterSummaryById(Long studentId, Integer semester);
 
 	List<SemesterSummary> getAllSemesterSummaries();
 

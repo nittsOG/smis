@@ -36,4 +36,13 @@ public class Student_SemesterResultsDAOImpl implements Student_SemesterResultsDA
         return sessionFactory.getCurrentSession().createQuery("from SemesterResults where studentId = :studentId", SemesterResults.class)
                 .setParameter("studentId", studentId).list();
     }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<SemesterResults> findResultsByStudentId(Long studentId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from SemesterResults where studentId = :studentId")
+                .setParameter("studentId", studentId)
+                .list();
+    }
 }

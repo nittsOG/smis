@@ -11,25 +11,25 @@ public class SemesterSummary {
 
 	 @Embeddable
 	    public static class IdClass implements Serializable {
-	        private Integer studentId;
-	        private Integer semester;
+		    private Long studentId;
+		    private Integer semester;
 
 	        // Default constructor
 	        public IdClass() {
 	        }
 
 	        // Parameterized constructor
-	        public IdClass(Integer studentId, Integer semester) {
+	        public IdClass(Long studentId, Integer semester) {
 	            this.studentId = studentId;
 	            this.semester = semester;
 	        }
 
 	        // Getters and Setters
-	        public Integer getStudentId() {
+	        public Long getStudentId() {
 	            return studentId;
 	        }
 
-	        public void setStudentId(Integer studentId) {
+	        public void setStudentId(Long studentId) {
 	            this.studentId = studentId;
 	        }
 

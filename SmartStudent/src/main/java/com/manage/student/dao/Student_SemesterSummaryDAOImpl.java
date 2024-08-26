@@ -22,7 +22,7 @@ public class Student_SemesterSummaryDAOImpl implements Student_SemesterSummaryDA
     }
 
     @Override
-    public SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester) {
+    public SemesterSummary getSemesterSummaryById(Long studentId, Integer semester) {
         SemesterSummary.IdClass id = new SemesterSummary.IdClass(studentId, semester);
         return sessionFactory.getCurrentSession().get(SemesterSummary.class, id);
     }
@@ -36,5 +36,14 @@ public class Student_SemesterSummaryDAOImpl implements Student_SemesterSummaryDA
     public List<SemesterSummary> getSemesterSummariesByStudentId(Integer studentId) {
         return sessionFactory.getCurrentSession().createQuery("from SemesterSummary where studentId = :studentId", SemesterSummary.class)
                 .setParameter("studentId", studentId).list();
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<SemesterSummary> findSummariesByStudentId(Long studentId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from SemesterSummary where id.studentId = :studentId")
+                .setParameter("studentId", studentId)
+                .list();
     }
 }

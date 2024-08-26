@@ -32,7 +32,7 @@ public class Admin_SemesterSummaryDAOImpl implements Admin_SemesterSummaryDAO {
     }
 
     @Override
-    public void deleteSemesterSummary(Integer studentId, Integer semester) {
+    public void deleteSemesterSummary(Long studentId, Integer semester) {
         SemesterSummary.IdClass id = new SemesterSummary.IdClass(studentId, semester);
         SemesterSummary semesterSummary = sessionFactory.getCurrentSession().get(SemesterSummary.class, id);
         if (semesterSummary != null) {
@@ -41,7 +41,7 @@ public class Admin_SemesterSummaryDAOImpl implements Admin_SemesterSummaryDAO {
     }
 
     @Override
-    public SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester) {
+    public SemesterSummary getSemesterSummaryById(Long studentId, Integer semester) {
         SemesterSummary.IdClass id = new SemesterSummary.IdClass(studentId, semester);
         return sessionFactory.getCurrentSession().get(SemesterSummary.class, id);
     }
