@@ -1,5 +1,6 @@
 package com.manage.student.dao;
 
+import com.manage.home.entities.Division;
 import com.manage.home.entities.Timetable;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,14 @@ public class Student_TimetableDAOImpl implements Student_TimetableDAO {
     @Override
     public List<Timetable> findAll() {
         return sessionFactory.getCurrentSession().createQuery("from Timetable", Timetable.class).list();
+    }
+
+    @Override
+    public List<Timetable> getTimetableByDivision(Division division) {
+        String hql = "FROM Timetable WHERE division = :division ORDER BY dayOfWeek, startTime";
+        return sessionFactory.getCurrentSession()
+            .createQuery(hql, Timetable.class)
+            .setParameter("division", division)
+            .getResultList();
     }
 }
