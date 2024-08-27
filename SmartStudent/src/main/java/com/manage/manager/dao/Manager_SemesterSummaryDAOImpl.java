@@ -32,14 +32,14 @@ public class Manager_SemesterSummaryDAOImpl implements Manager_SemesterSummaryDA
     }
 
     @Override
-    public void deleteSemesterSummary(Integer studentId, Integer semester) {
+    public void deleteSemesterSummary(Long studentId, Integer semester) {
         SemesterSummary.IdClass id = new SemesterSummary.IdClass(studentId, semester);
         SemesterSummary semesterSummary = sessionFactory.getCurrentSession().get(SemesterSummary.class, id);
         sessionFactory.getCurrentSession().delete(semesterSummary);
     }
 
     @Override
-    public SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester) {
+    public SemesterSummary getSemesterSummaryById(Long studentId, Integer semester) {
         SemesterSummary.IdClass id = new SemesterSummary.IdClass(studentId, semester);
         return sessionFactory.getCurrentSession().get(SemesterSummary.class, id);
     }

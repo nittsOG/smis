@@ -10,9 +10,9 @@ import java.util.Objects;
 @IdClass(SemesterResults.IdClass.class)
 public class SemesterResults {
 
-    @Id
-    @Column(name = "student_id")
-    private Integer studentId;
+	@Id
+	@Column(name = "student_id")
+	private Long studentId;
 
     @Id
     @Column(name = "semester")
@@ -38,11 +38,11 @@ public class SemesterResults {
     private BigDecimal creditPoint;
 
     // Getters and Setters
-    public Integer getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
@@ -104,7 +104,7 @@ public class SemesterResults {
 
     @Embeddable
     public static class IdClass implements Serializable {
-        private Integer studentId;
+        private Long studentId;
         private Integer semester;
         private String subjectCode;
 
@@ -113,18 +113,18 @@ public class SemesterResults {
         }
 
         // Parameterized constructor
-        public IdClass(Integer studentId, Integer semester, String subjectCode) {
-            this.studentId = studentId;
+        public IdClass(Long studentId2, Integer semester, String subjectCode) {
+            this.studentId = studentId2;
             this.semester = semester;
             this.subjectCode = subjectCode;
         }
 
         // Getters and Setters
-        public Integer getStudentId() {
+        public Long getStudentId() {
             return studentId;
         }
 
-        public void setStudentId(Integer studentId) {
+        public void setStudentId(Long studentId) {
             this.studentId = studentId;
         }
 

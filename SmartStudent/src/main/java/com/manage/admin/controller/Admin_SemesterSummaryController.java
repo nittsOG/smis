@@ -36,7 +36,7 @@ public class Admin_SemesterSummaryController {
     }
 
     @GetMapping("/{studentId}/{semester}")
-    public ModelAndView showSemesterSummaryDetails(@PathVariable Integer studentId, @PathVariable Integer semester, HttpSession session) {
+    public ModelAndView showSemesterSummaryDetails(@PathVariable Long studentId, @PathVariable Integer semester, HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return new ModelAndView("redirect:/admin/login");
@@ -49,7 +49,7 @@ public class Admin_SemesterSummaryController {
     }
 
     @GetMapping("/{studentId}/{semester}/edit")
-    public ModelAndView showEditSemesterSummaryForm(@PathVariable Integer studentId, @PathVariable Integer semester, HttpSession session) {
+    public ModelAndView showEditSemesterSummaryForm(@PathVariable Long studentId, @PathVariable Integer semester, HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return new ModelAndView("redirect:/admin/login");
@@ -73,7 +73,7 @@ public class Admin_SemesterSummaryController {
     }
 
     @GetMapping("/{studentId}/{semester}/delete")
-    public String deleteSemesterSummary(@PathVariable Integer studentId, @PathVariable Integer semester, HttpSession session) {
+    public String deleteSemesterSummary(@PathVariable Long studentId, @PathVariable Integer semester, HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return "redirect:/admin/login";

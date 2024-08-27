@@ -32,12 +32,12 @@ public class Admin_SemesterSummaryServiceImpl implements Admin_SemesterSummarySe
     }
 
     @Override
-    public void deleteSemesterSummary(Integer studentId, Integer semester) {
+    public void deleteSemesterSummary(Long studentId, Integer semester) {
         adminSemesterSummaryDAO.deleteSemesterSummary(studentId, semester);
     }
 
     @Override
-    public SemesterSummary getSemesterSummaryById(Integer studentId, Integer semester) {
+    public SemesterSummary getSemesterSummaryById(Long studentId, Integer semester) {
         SemesterSummary semesterSummary = adminSemesterSummaryDAO.getSemesterSummaryById(studentId, semester);
         // If there are any lazy-loaded properties, initialize them here
         return semesterSummary;

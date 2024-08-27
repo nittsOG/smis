@@ -13,4 +13,6 @@ public interface Student_SemesterResultsDAO {
 
 	List<SemesterResults> getSemesterResultsByStudentId(Integer studentId);
 
+	List<SemesterResults> findResultsByStudentId(Long studentId);
+
 }
