@@ -35,7 +35,7 @@ public class StudentAttendanceController {
 
         Long studentId = (Long) session.getAttribute("studentId");
         if (studentId == null) {
-            return new ModelAndView("redirect:/student/login");
+            return new ModelAndView("redirect:/login");
         }
         
         // Get the list of semesters for the student

@@ -19,22 +19,22 @@ public class FacultyController {
     @Autowired
     private FacultyService facultyService;
 
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "JSP/FACULTY/faculty-login";
-    }
-
-    @PostMapping("/login")
-    public ModelAndView login(@RequestParam Long id, @RequestParam String password, HttpSession session) {
-        if (facultyService.validateFaculty(id, password)) {
-            session.setAttribute("facultyId", id);
-            return new ModelAndView("redirect:/faculty/dashboard");
-        } else {
-            ModelAndView mav = new ModelAndView("JSP/FACULTY/faculty-login");
-            mav.addObject("error", "Invalid username or password");
-            return mav;
-        }
-    }
+//    @GetMapping("/login")
+//    public String showLoginForm() {
+//        return "JSP/FACULTY/faculty-login";
+//    }
+//
+//    @PostMapping("/login")
+//    public ModelAndView login(@RequestParam Long id, @RequestParam String password, HttpSession session) {
+//        if (facultyService.validateFaculty(id, password)) {
+//            session.setAttribute("facultyId", id);
+//            return new ModelAndView("redirect:/faculty/dashboard");
+//        } else {
+//            ModelAndView mav = new ModelAndView("JSP/FACULTY/faculty-login");
+//            mav.addObject("error", "Invalid username or password");
+//            return mav;
+//        }
+//    }
 
     @GetMapping("/dashboard")
     public ModelAndView showDashboard(HttpSession session) {
