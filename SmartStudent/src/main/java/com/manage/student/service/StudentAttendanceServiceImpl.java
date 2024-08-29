@@ -30,20 +30,33 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
         return attendanceDao.findById(id);
     }
 
-    // Additional methods can be added as needed
-    
-    
-    public Map<String, Object> getAttendanceSummary(Long studentId, Long semesterId) {
+    // Corrected method for attendance summary
+    public Map<String, Map<String, Object>> getAttendanceSummary(Long studentId, Long semesterId) {
         List<Attendance> attendanceList = attendanceDao.findAttendanceByStudentAndSemester(studentId, semesterId);
 
-        Map<String, Object> summary = new HashMap<>();
+        // Map to store attendance data for each subject
+        Map<String, Map<String, Object>> summary = new HashMap<>();
 
+        // Iterate over each attendance record
         for (Attendance attendance : attendanceList) {
             String subjectName = attendance.getSession().getSubject().getName();
             String subjectCode = attendance.getSession().getSubject().getCode();
 
-            int totalPresent = 0;
-            int totalAbsent = 0;
+            // Check if the subject is already in the summary map
+            Map<String, Object> subjectSummary = summary.get(subjectCode);
+            if (subjectSummary == null) {
+                // If not, initialize it
+                subjectSummary = new HashMap<>();
+                subjectSummary.put("subjectName", subjectName);
+                subjectSummary.put("subjectCode", subjectCode);
+                subjectSummary.put("totalPresent", 0);
+                subjectSummary.put("totalAbsent", 0);
+                summary.put(subjectCode, subjectSummary);
+            }
+
+            // Update the present/absent counts for the subject
+            int totalPresent = (int) subjectSummary.get("totalPresent");
+            int totalAbsent = (int) subjectSummary.get("totalAbsent");
 
             if (attendance.getStatus() == AttendanceStatus.PRESENT) {
                 totalPresent++;
@@ -51,18 +64,21 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
                 totalAbsent++;
             }
 
-            // Calculate the percentage
-            int totalClasses = totalPresent + totalAbsent;
-            double attendancePercentage = (totalClasses == 0) ? 0 : ((double) totalPresent / totalClasses) * 100;
-
-            Map<String, Object> subjectSummary = new HashMap<>();
-            subjectSummary.put("subjectName", subjectName);
-            subjectSummary.put("subjectCode", subjectCode);
+            // Store the updated counts back into the map
             subjectSummary.put("totalPresent", totalPresent);
             subjectSummary.put("totalAbsent", totalAbsent);
-            subjectSummary.put("attendancePercentage", attendancePercentage);
+        }
 
-            summary.put(subjectCode, subjectSummary);
+        // After counting, calculate the percentage for each subject
+        for (Map.Entry<String, Map<String, Object>> entry : summary.entrySet()) {
+            Map<String, Object> subjectSummary = entry.getValue();
+            int totalPresent = (int) subjectSummary.get("totalPresent");
+            int totalAbsent = (int) subjectSummary.get("totalAbsent");
+
+            // Calculate the attendance percentage
+            int totalClasses = totalPresent + totalAbsent;
+            double attendancePercentage = (totalClasses == 0) ? 0 : ((double) totalPresent / totalClasses) * 100;
+            subjectSummary.put("attendancePercentage", attendancePercentage);
         }
 
         return summary;
