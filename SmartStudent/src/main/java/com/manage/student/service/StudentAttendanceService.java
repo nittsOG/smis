@@ -8,5 +8,5 @@ public interface StudentAttendanceService {
     Attendance findById(Long id);
     // Add more service methods if needed
 
-	Map<String, Object> getAttendanceSummary(Long studentId, Long semesterId);
+	Map<String, Map<String, Object>> getAttendanceSummary(Long studentId, Long semesterId);
 }

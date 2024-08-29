@@ -29,7 +29,7 @@ public class TimetableController {
 
         Long studentId = (Long) session.getAttribute("studentId");
         if (studentId == null) {
-            return new ModelAndView("redirect:/student/login");
+            return new ModelAndView("redirect:/login");
         }
 
         Student student = studentService.getStudentById(studentId);

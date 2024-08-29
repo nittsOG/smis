@@ -25,28 +25,28 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 
-	@GetMapping("/login")
-    public String showLoginForm() {
-        return "JSP/STUDENT/student-login";
-    }
-
-    @PostMapping("/login")
-    public ModelAndView login( @RequestParam Long id, @RequestParam String password, HttpSession session) {
-        if (studentService.validateStudent(id, password)) {
-            session.setAttribute("studentId", id);
-            return new ModelAndView("redirect:/student/dashboard");
-        } else {
-            ModelAndView mav = new ModelAndView("JSP/STUDENT/student-login");
-            mav.addObject("error", "Invalid id or password");
-            return mav;
-        }
-    }
+//	@GetMapping("/login")
+//    public String showLoginForm() {
+//        return "JSP/STUDENT/student-login";
+//    }
+//
+//    @PostMapping("/login")
+//    public ModelAndView login( @RequestParam Long id, @RequestParam String password, HttpSession session) {
+//        if (studentService.validateStudent(id, password)) {
+//            session.setAttribute("studentId", id);
+//            return new ModelAndView("redirect:/student/dashboard");
+//        } else {
+//            ModelAndView mav = new ModelAndView("JSP/STUDENT/student-login");
+//            mav.addObject("error", "Invalid id or password");
+//            return mav;
+//        }
+//    }
 
     @GetMapping("/dashboard")
     public ModelAndView showDashboard(HttpSession session) {
         Long id = (Long) session.getAttribute("studentId");
         if (id == null) {
-            return new ModelAndView("redirect:/student/login");
+            return new ModelAndView("redirect:/login");
         }
         ModelAndView mav = new ModelAndView("JSP/STUDENT/student-dashboard");
 //        mav.addObject("studentUsername", studentUsername);
@@ -58,6 +58,6 @@ public class StudentController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/student/login";
+        return "redirect:/login";
     }
 }

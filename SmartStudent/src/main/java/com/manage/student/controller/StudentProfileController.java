@@ -26,7 +26,7 @@ public class StudentProfileController {
     public ModelAndView viewProfile(HttpSession session) {
         Long studentId = (Long) session.getAttribute("studentId");
         if (studentId == null) {
-            return new ModelAndView("redirect:/student/login");
+            return new ModelAndView("redirect:/login");
         }
         Student student = studentService.getStudentById(studentId);
         ModelAndView mav = new ModelAndView("JSP/STUDENT/student-profile");

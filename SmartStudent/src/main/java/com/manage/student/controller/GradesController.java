@@ -25,7 +25,7 @@ public class GradesController {
     	
     	Long studentId = (Long) session.getAttribute("studentId");
          if (studentId == null) {
-             return new ModelAndView("redirect:/student/login");
+             return new ModelAndView("redirect:/login");
          }
     	
     	ModelAndView mav=new ModelAndView("JSP/STUDENT/grades-results");

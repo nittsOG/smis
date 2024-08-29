@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>This is Index page</h1>
-<h2><a href="login">Login</a></h2>
+
 </body>
 </html>

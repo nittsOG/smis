@@ -35,7 +35,7 @@ public class StudentAttendanceController {
 
         Long studentId = (Long) session.getAttribute("studentId");
         if (studentId == null) {
-            return new ModelAndView("redirect:/student/login");
+            return new ModelAndView("redirect:/login");
         }
         
         // Get the list of semesters for the student
@@ -44,7 +44,7 @@ public class StudentAttendanceController {
 
         // Get the attendance summary for the selected semester  
         if (semesterId != null) {
-            Map<String, Object> attendanceSummary = attendanceService.getAttendanceSummary(studentId, semesterId);
+            Map<String, Map<String, Object>> attendanceSummary = attendanceService.getAttendanceSummary(studentId, semesterId);
             mav.addObject("attendanceSummary", attendanceSummary);
             mav.addObject("selectedSemesterId", semesterId);
             
