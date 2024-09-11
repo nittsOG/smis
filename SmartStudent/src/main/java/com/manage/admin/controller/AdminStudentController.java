@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -128,7 +129,7 @@ public class AdminStudentController {
                                 @RequestParam(value = "address.country") String country,
                                 @RequestParam(value = "address.zipCode") String zipcode,
                                 @RequestParam(value = "division.divisionId") long divisionId,
-                                @RequestParam(value = "photo", required = false) MultipartFile photo,
+                                @RequestParam(value = "photoBase64", required = false) String photoBase64,
                                 HttpSession session) throws IOException {
 
         Long adminId = (Long) session.getAttribute("adminId");
@@ -136,48 +137,39 @@ public class AdminStudentController {
             return "redirect:/admin/login";
         }
 
+        // Fetch the existing student and address to ensure no data loss
         Student student = adminStudentService.getStudentById(studentId);
         StudentAddress address = adminStudentAddressService.getStudentAddressById(studentId);
 
-        if (!username.equals(student.getUsername())) {
-            student.setUsername(username);
-        }
-        if (!password.equals(student.getPassword())) {
-            student.setPassword(password);
-        }
-        if (!email.equals(student.getEmail())) {
-            student.setEmail(email);
+        // Update student details
+        student.setUsername(username);
+        student.setPassword(password);
+        student.setEmail(email);
+
+        // Update student address
+        address.setStreet(street);
+        address.setCity(city);
+        address.setState(state);
+        address.setCountry(country);
+        address.setZipCode(zipcode);
+
+        // If a Base64-encoded photo is provided, decode it and set it to the student
+        if (photoBase64 != null && !photoBase64.isEmpty()) {
+            byte[] photoBytes = Base64.getDecoder().decode(photoBase64.split(",")[1]);  // Skip the "data:image/..." part
+            student.setPhoto(photoBytes);
         }
 
-        if (!street.equals(address.getStreet())) {
-            address.setStreet(street);
-        }
-        if (!city.equals(address.getCity())) {
-            address.setCity(city);
-        }
-        if (!state.equals(address.getState())) {
-            address.setState(state);
-        }
-        if (!country.equals(address.getCountry())) {
-            address.setCountry(country);
-        }
-        if (!zipcode.equals(address.getZipCode())) {
-            address.setZipCode(zipcode);
-        }
-
-        if (photo != null && !photo.isEmpty()) {
-            student.setPhoto(photo.getBytes());
-        }
-
-        // Fetch and set the new division
+        // Update division
         Division division = adminDivisionService.getDivisionById(divisionId);
         student.setDivision(division);
 
+        // Save the updated student and address
         adminStudentService.updateStudent(student);
-        adminStudentAddressService.updateStudentAddress(address); // Update address in a separate service call
+        adminStudentAddressService.updateStudentAddress(address);
 
         return "redirect:/admin/students/" + studentId;
     }
+
 
 
 
