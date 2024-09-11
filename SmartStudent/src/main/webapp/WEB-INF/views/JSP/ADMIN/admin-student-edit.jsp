@@ -4,6 +4,31 @@
 <html>
 <head>
     <title>Admin - Edit Student</title>
+    <style>
+        /* Styling for the image preview */
+        .photo-preview {
+            width: 150px;  /* Set the width of the image */
+            height: auto;  /* Maintain aspect ratio */
+            display: block;  /* Make the image a block element */
+            margin: 10px auto;  /* Center the image */
+        }
+    </style>
+    <script type="text/javascript">
+        function encodeImageFileAsBase64() {
+            var file = document.getElementById("photo").files[0];
+            var reader = new FileReader();
+            
+            reader.onloadend = function() {
+                document.getElementById("photoBase64").value = reader.result;
+                // Display the preview image
+                document.getElementById("photoPreview").src = reader.result;
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>Edit Student</h1>
@@ -27,6 +52,13 @@
                 </c:forEach>
             </select>
         </p>
+
+        <!-- File input for image, not using multipart -->
+        <h2>Photo</h2>
+        <p>Photo: <input type="file" id="photo" onchange="encodeImageFileAsBase64()" accept="image/*" /></p>
+        <input type="hidden" id="photoBase64" name="photoBase64" />
+        <!-- Preview Image -->
+        <img id="photoPreview" src="#" alt="Photo Preview" class="photo-preview" />
 
         <button type="submit">Update</button>
     </form>
