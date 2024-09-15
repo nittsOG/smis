@@ -7,6 +7,7 @@
 <body>
 <h1>${faculty}</h1>
 <hr>
-<a href="${pageContext.request.contextPath}/admin/logout">Logout</a>
+<a href="${pageContext.request.contextPath}/faculty/logout">Logout</a>
+<a href="${pageContext.request.contextPath}/faculty/profile">Profile</a>
 </body>
 </html>

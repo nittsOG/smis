@@ -7,4 +7,5 @@ public interface FacultyService {
     Faculty getFacultyByUsername(String username);
     Faculty getFacultyById(Long id);
 //    Faculty getFacultyByEmail(String email);
+	void updateFaculty(Faculty faculty);
 }

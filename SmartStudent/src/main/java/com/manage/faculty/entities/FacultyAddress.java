@@ -26,7 +26,7 @@ public class FacultyAddress {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
