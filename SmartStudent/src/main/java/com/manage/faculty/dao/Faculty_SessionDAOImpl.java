@@ -1,5 +1,7 @@
 package com.manage.faculty.dao;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,4 +41,19 @@ public class Faculty_SessionDAOImpl implements Faculty_SessionDAO {
     public void deleteSession(Session session) {
         sessionFactory.getCurrentSession().delete(session);
     }
+    
+    /////////////////////////
+    
+    @Override
+    public List<Session> getSessionsByFacultySubjectDivision(Long facultyId, Long subjectId, Long divisionId) {
+        String hql = "FROM Session s WHERE s.Faculty_Id = :facultyId AND s.subject.subjectId = :subjectId AND s.Division_Id = :divisionId";
+        return sessionFactory.getCurrentSession()
+            .createQuery(hql, Session.class)
+            .setParameter("facultyId", facultyId)
+            .setParameter("subjectId", subjectId)
+            .setParameter("divisionId", divisionId)
+            .getResultList();
+    }
+
+
 }

@@ -1,14 +1,13 @@
-package com.manage.faculty.dao;
+package com.manage.faculty.service;
 
 import java.util.List;
-
 import com.manage.student.entities.Student;
 
-public interface Faculty_StudentDAO {
-    Student getStudentById(Long studentId);
-//    Student getStudentByUsername(String username);
-//    Student getStudentByEmail(String email);
+public interface Faculty_StudentService {
+
     List<Student> getStudentsByDivision(Long divisionId);
+
+    Student getStudentById(Long studentId);
 
     void saveStudent(Student student);
 

@@ -1,5 +1,6 @@
 package com.manage.faculty.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.manage.home.entities.Subject;
 
 @Service
 @Transactional("facultyTransactionManager")
+@Qualifier("facultySubjectServiceImpl")
 public class FacultySubjectServiceImpl implements FacultySubjectService {
 
     private final Faculty_SubjectDAO facultySubjectDAO;
@@ -16,6 +18,11 @@ public class FacultySubjectServiceImpl implements FacultySubjectService {
     @Autowired
     public FacultySubjectServiceImpl(@Qualifier("facultySubjectDAOImpl") Faculty_SubjectDAO facultySubjectDAO) {
         this.facultySubjectDAO = facultySubjectDAO;
+    }
+
+    @Override
+    public List<Subject> getSubjectsByFacultyId(Long facultyId) {
+        return facultySubjectDAO.getSubjectsByFacultyId(facultyId);
     }
 
     @Override

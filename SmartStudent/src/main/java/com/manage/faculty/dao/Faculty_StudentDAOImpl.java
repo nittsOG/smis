@@ -1,16 +1,11 @@
 package com.manage.faculty.dao;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
+import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.manage.student.entities.Student;
 
 @Repository
@@ -18,7 +13,7 @@ import com.manage.student.entities.Student;
 @Transactional("facultyTransactionManager")
 public class Faculty_StudentDAOImpl implements Faculty_StudentDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Faculty_StudentDAOImpl(@Qualifier("facultySessionFactory") SessionFactory sessionFactory) {
@@ -26,28 +21,33 @@ public class Faculty_StudentDAOImpl implements Faculty_StudentDAO {
     }
 
     @Override
-    public Student getStudentById(Long studentId) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(Student.class, studentId);
+    public List<Student> getStudentsByDivision(Long divisionId) {
+        String hql = "FROM Student WHERE division.divisionId = :divisionId";
+        return sessionFactory.getCurrentSession()
+            .createQuery(hql, Student.class)
+            .setParameter("divisionId", divisionId)
+            .getResultList();
     }
 
-//    @Override
-//    public Student getStudentByUsername(String username) {
-//        Session session = sessionFactory.getCurrentSession();
-//        CriteriaBuilder cb = session.getCriteriaBuilder();
-//        CriteriaQuery<Student> cq = cb.createQuery(Student.class);
-//        Root<Student> root = cq.from(Student.class);
-//        cq.select(root).where(cb.equal(root.get("username"), username));
-//        return session.createQuery(cq).uniqueResult();
-//    }
-//
-//    @Override
-//    public Student getStudentByEmail(String email) {
-//        Session session = sessionFactory.getCurrentSession();
-//        CriteriaBuilder cb = session.getCriteriaBuilder();
-//        CriteriaQuery<Student> cq = cb.createQuery(Student.class);
-//        Root<Student> root = cq.from(Student.class);
-//        cq.select(root).where(cb.equal(root.get("email"), email));
-//        return session.createQuery(cq).uniqueResult();
-//    }
+
+
+    @Override
+    public Student getStudentById(Long studentId) {
+        return sessionFactory.getCurrentSession().get(Student.class, studentId);
+    }
+
+    @Override
+    public void saveStudent(Student student) {
+        sessionFactory.getCurrentSession().save(student);
+    }
+
+    @Override
+    public void updateStudent(Student student) {
+        sessionFactory.getCurrentSession().update(student);
+    }
+
+    @Override
+    public void deleteStudent(Student student) {
+        sessionFactory.getCurrentSession().delete(student);
+    }
 }

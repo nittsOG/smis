@@ -1,7 +1,20 @@
 package com.manage.home.entities;
 
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.manage.faculty.entities.FacultySubject;
 import com.manage.student.entities.StudentSemesterSubject;
 
 @Entity
@@ -34,8 +47,20 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Session> sessions;
+    
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FacultySubject> facultySubjects;
+
 
 	// Getters and Setters
+    
+    public List<FacultySubject> getFacultySubjects() {
+        return facultySubjects;
+    }
+
+    public void setFacultySubjects(List<FacultySubject> facultySubjects) {
+        this.facultySubjects = facultySubjects;
+    }
 
 	public List<Session> getSessions() {
 		return sessions;
@@ -101,5 +126,5 @@ public class Subject {
 		this.studentSemesterSubjects = studentSemesterSubjects;
 	}
 
-	// Getters and Setters
+
 }
