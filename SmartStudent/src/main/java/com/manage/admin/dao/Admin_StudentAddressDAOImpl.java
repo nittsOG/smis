@@ -51,5 +51,11 @@ public class Admin_StudentAddressDAOImpl implements Admin_StudentAddressDAO {
 			return ;
 		}
 	}
+	
+	@Override
+	public void createStudentAddress(StudentAddress studentAddress) {
+	    sessionFactory.getCurrentSession().save(studentAddress);
+	}
+
     
 }

@@ -77,6 +77,8 @@
                 </c:forEach>
             </tbody>
         </table>
+        
+        <p><a href="${pageContext.request.contextPath}/admin/students/add"> Add New Student</a></p>
     </div>
 </body>
 </html>

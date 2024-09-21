@@ -79,4 +79,11 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
             }
         }
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public void createStudent(Student student) {
+        adminStudentDAO.createStudent(student);
+    }
+
 }

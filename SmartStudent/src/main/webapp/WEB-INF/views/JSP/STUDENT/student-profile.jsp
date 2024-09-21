@@ -53,12 +53,46 @@
                 <td>${student.email}</td>
             </tr>
             <tr>
+                <th>Date of Birth:</th>
+                <td>${student.dateOfBirth}</td>
+            </tr>
+            <tr>
+                <th>Contact Number:</th>
+                <td>${student.contactNumber}</td>
+            </tr>
+            <tr>
+                <th>Guardian Name:</th>
+                <td>${student.guardianName}</td>
+            </tr>
+            <tr>
+                <th>Guardian Contact:</th>
+                <td>${student.guardianContact}</td>
+            </tr>
+            <tr>
+                <th>Nationality:</th>
+                <td>${student.nationality}</td>
+            </tr>
+            <tr>
+                <th>Enrollment Date:</th>
+                <td>${student.enrollmentDate}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>${student.status}</td>
+            </tr>
+            <tr>
                 <th>Division:</th>
                 <td>${student.division.name}</td>
             </tr>
             <tr>
                 <th>Address:</th>
-                <td>${student.address.street}, ${student.address.city}, ${student.address.state}, ${student.address.country} - ${student.address.zipCode}</td>
+                <td>
+                    ${student.address.street}, 
+                    ${student.address.city}, 
+                    ${student.address.state}, 
+                    ${student.address.country} - 
+                    ${student.address.zipCode}
+                </td>
             </tr>
         </table>
         <a href="${pageContext.request.contextPath}/student/dashboard" class="back-link">Back to Dashboard</a>

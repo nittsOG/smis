@@ -53,6 +53,21 @@
             </select>
         </p>
 
+        <!-- Additional Student Details -->
+        <h2>Additional Student Information</h2>
+        <p>Date of Birth: <input type="date" name="dateOfBirth" value="${student.dateOfBirth}" required /></p>
+        <p>Contact Number: <input type="text" name="contactNumber" value="${student.contactNumber}" required /></p>
+        <p>Guardian Name: <input type="text" name="guardianName" value="${student.guardianName}" required /></p>
+        <p>Guardian Contact: <input type="text" name="guardianContact" value="${student.guardianContact}" required /></p>
+        <p>Nationality: <input type="text" name="nationality" value="${student.nationality}" required /></p>
+        <p>Enrollment Date: <input type="date" name="enrollmentDate" value="${student.enrollmentDate}" required /></p>
+        <p>Status: 
+            <select name="status" required>
+                <option value="Active" ${student.status == 'Active' ? 'selected' : ''}>Active</option>
+                <option value="Inactive" ${student.status == 'Inactive' ? 'selected' : ''}>Inactive</option>
+            </select>
+        </p>
+
         <!-- File input for image, not using multipart -->
         <h2>Photo</h2>
         <p>Photo: <input type="file" id="photo" onchange="encodeImageFileAsBase64()" accept="image/*" /></p>

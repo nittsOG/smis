@@ -10,4 +10,6 @@ public interface Admin_StudentAddressService {
     void updateStudentAddress(StudentAddress studentAddress);
 
     void deleteStudentAddress(Long studentAddressId);
+
+	void createStudentAddress(StudentAddress studentAddress);
 }
