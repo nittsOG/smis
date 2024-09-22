@@ -15,10 +15,25 @@
             display: flex;
             gap: 8px;
         }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid red;
+            background-color: #ffe6e6;
+        }
     </style>
 </head>
 <body>
     <h1>Students</h1>
+
+    <!-- Error Notification -->
+    <c:if test="${not empty error}">
+        <div class="error-message">
+            ${error}
+        </div>
+    </c:if>
+
     <form method="GET" action="${pageContext.request.contextPath}/admin/students">
         <label for="studentId">Search by ID:</label>
         <input type="text" id="studentId" name="studentId" value="${param.studentId}" />
@@ -41,6 +56,7 @@
         
         <button type="submit">Search</button>
     </form>
+
     <div class="scrollable-table">
         <table border="1">
             <thead>
@@ -69,7 +85,7 @@
                                 <button type="submit">Edit</button>
                             </form>
                             <!-- Delete Button -->
-                            <form action="${pageContext.request.contextPath}/admin/students/delete/${student.studentId}" method="POST" style="display:inline;">
+                            <form action="${pageContext.request.contextPath}/admin/students/delete/${student.studentId}" method="post" style="display:inline;">
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
                             </form>
                         </td>

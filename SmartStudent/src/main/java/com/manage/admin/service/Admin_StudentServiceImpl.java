@@ -85,5 +85,18 @@ public class Admin_StudentServiceImpl implements Admin_StudentService {
     public void createStudent(Student student) {
         adminStudentDAO.createStudent(student);
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public void deleteStudentById(Long studentId) {
+        // First, fetch the student to make sure it exists
+        Student student = adminStudentDAO.getStudentById(studentId);
+        
+        if (student != null) {
+            // Delete the student
+            adminStudentDAO.deleteStudent(student);
+        }
+    }
+
 
 }

@@ -56,6 +56,10 @@
                 <th>Date of Birth:</th>
                 <td>${student.dateOfBirth}</td>
             </tr>
+                        <tr>
+                <th>Gender:</th>
+                <td>${student.gender}</td>
+            </tr>
             <tr>
                 <th>Contact Number:</th>
                 <td>${student.contactNumber}</td>

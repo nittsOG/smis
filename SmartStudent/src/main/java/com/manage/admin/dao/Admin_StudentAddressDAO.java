@@ -9,4 +9,5 @@ public interface Admin_StudentAddressDAO {
     void deleteStudentAddress(StudentAddress studentAddress);
     void deleteStudentAddressById(long studentAddressId);
 	void createStudentAddress(StudentAddress studentAddress);
+	StudentAddress getStudentAddressByStudentId(Long studentId);
 }

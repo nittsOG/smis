@@ -16,11 +16,13 @@
 </head>
 <body>
 	<h1>Student Details</h1>
+	<p>ID: ${student.studentId}</p>
 	<p>Username: ${student.username}</p>
 	<p>Email: ${student.email}</p>
 	<p>Division: ${student.division.name}</p>
 	<p>Email: ${student.email}</p>
 	<p>dateOfBirth: ${student.dateOfBirth}</p>
+	<p>gender: ${student.gender}</p>
 	<p>contactNumber: ${student.contactNumber}</p>
 	<p>guardianName: ${student.guardianName}</p>
 	<p>guardianContact: ${student.guardianContact}</p>
@@ -46,11 +48,11 @@
 	</c:choose>
 
 	<h1>Adress</h1>
-	<p>Street : ${studentAddress.street}</p>
-	<p>City : ${studentAddress.city }</p>
-	<p>State : ${studentAddress.state }</p>
-	<p>Country : ${studentAddress.country }</p>
-	<p>ZipCode : ${studentAddress.zipCode }</p>
+	<p>Street : ${student.address.street}</p>
+	<p>City : ${student.address.city }</p>
+	<p>State : ${student.address.state }</p>
+	<p>Country : ${student.address.country }</p>
+	<p>ZipCode : ${student.address.zipCode }</p>
 
 	<p>
 		<a href="${pageContext.request.contextPath}/admin/students">Back

@@ -12,4 +12,8 @@ public interface Admin_StudentAddressService {
     void deleteStudentAddress(Long studentAddressId);
 
 	void createStudentAddress(StudentAddress studentAddress);
+
+	StudentAddress getStudentAddressByStudentId(Long studentId);
+
+	void deleteStudentAddressByStudentId(Long studentId);
 }

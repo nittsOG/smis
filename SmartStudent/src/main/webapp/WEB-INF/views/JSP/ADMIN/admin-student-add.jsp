@@ -58,6 +58,14 @@
 				<label for="dateOfBirth">Date of Birth:</label> <input type="date"
 					id="dateOfBirth" name="dateOfBirth" />
 			</div>
+			<div>
+				<label for="gender">Gender:</label> <select id="gender"
+					name="gender" required>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Other">Other</option>
+				</select>
+			</div>
 
 			<!-- Division (Dropdown) -->
 			<div>

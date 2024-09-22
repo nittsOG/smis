@@ -13,4 +13,5 @@ public interface Admin_StudentService {
     List<Student> getStudentsByDivision(String divisionName);
     List<Student> getStudentsByDepartment(String departmentName); // New method
 	void createStudent(Student student);
+	void deleteStudentById(Long studentId);
 }

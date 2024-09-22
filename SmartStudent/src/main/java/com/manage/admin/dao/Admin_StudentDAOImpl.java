@@ -66,5 +66,10 @@ public class Admin_StudentDAOImpl implements Admin_StudentDAO {
     public void createStudent(Student student) {
         sessionFactory.getCurrentSession().save(student);
     }
-
+    
+//    public Student getDefaultStudent(Student student) {
+//    	this.saveStudent(student);
+//    	
+//    	return this.getStudentById(student.getStudentId());
+//    }
 }

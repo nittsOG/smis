@@ -1,6 +1,7 @@
 package com.manage.admin.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -40,21 +41,27 @@ public class Admin_StudentAddressDAOImpl implements Admin_StudentAddressDAO {
         sessionFactory.getCurrentSession().delete(studentAddress);
     }
 
-	@Override
-	public void deleteStudentAddressById(long studentAddressId) {
-		// TODO Auto-generated method stub
-		try {
-			StudentAddress studentAddress= this.getStudentAddressById(studentAddressId);
-			this.deleteStudentAddress(studentAddress);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return ;
-		}
-	}
+    @Override
+    public StudentAddress getStudentAddressByStudentId(Long studentId) {
+        String hql = "FROM StudentAddress sa WHERE sa.student.studentId = :studentId";
+        Query<StudentAddress> query = sessionFactory.getCurrentSession().createQuery(hql, StudentAddress.class);
+        query.setParameter("studentId", studentId);
+        
+        System.out.println("/n/n"+query.uniqueResult().getCity());      
+        return query.uniqueResult();
+    }
+
+
 	
 	@Override
 	public void createStudentAddress(StudentAddress studentAddress) {
 	    sessionFactory.getCurrentSession().save(studentAddress);
+	}
+
+	@Override
+	public void deleteStudentAddressById(long studentAddressId) {
+		this.deleteStudentAddress(this.getStudentAddressById(studentAddressId));
+		
 	}
 
     

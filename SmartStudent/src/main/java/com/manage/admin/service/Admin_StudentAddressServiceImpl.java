@@ -46,5 +46,24 @@ public class Admin_StudentAddressServiceImpl implements Admin_StudentAddressServ
     public void createStudentAddress(StudentAddress studentAddress) {
         adminStudentAddressDAO.createStudentAddress(studentAddress);
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public StudentAddress getStudentAddressByStudentId(Long studentId) {
+        return adminStudentAddressDAO.getStudentAddressByStudentId(studentId);
+    }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public void deleteStudentAddressByStudentId(Long studentId) {
+        // Fetch the address using the studentId
+        StudentAddress studentAddress = adminStudentAddressDAO.getStudentAddressByStudentId(studentId);
+
+        if (studentAddress != null) {
+            // Delete the associated address
+            adminStudentAddressDAO.deleteStudentAddress(studentAddress);
+        }
+    }
+
 
 }

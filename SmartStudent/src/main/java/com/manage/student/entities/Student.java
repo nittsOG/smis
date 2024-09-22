@@ -63,7 +63,10 @@ public class Student {
     @Column(name = "status")
     private String status;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false, orphanRemoval = true)
+    @Column(name = "gender")
+    private String gender;
+
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private StudentAddress address;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -172,6 +175,14 @@ public class Student {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public StudentAddress getAddress() {
