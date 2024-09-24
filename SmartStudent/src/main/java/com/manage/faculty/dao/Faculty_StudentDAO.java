@@ -15,4 +15,6 @@ public interface Faculty_StudentDAO {
     void updateStudent(Student student);
 
     void deleteStudent(Student student);
+	List<Student> getAllStudents();
+	List<Student> getStudentsByDivisionName(String divisionName);
 }

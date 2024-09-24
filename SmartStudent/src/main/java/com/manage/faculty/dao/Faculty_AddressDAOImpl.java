@@ -26,7 +26,7 @@ public class Faculty_AddressDAOImpl implements Faculty_AddressDAO {
 	}
 
 	@Override
-    public FacultyAddress getAddressById(int id) {
+    public FacultyAddress getFacultyAddressById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(FacultyAddress.class, id);
     }
@@ -38,7 +38,7 @@ public class Faculty_AddressDAOImpl implements Faculty_AddressDAO {
     }
 
     @Override
-    public void deleteAddress(int id) {
+    public void deleteFacultyAddress(Long id) {
         Session session = sessionFactory.getCurrentSession();
         FacultyAddress address = session.get(FacultyAddress.class, id);
         if (address != null) {

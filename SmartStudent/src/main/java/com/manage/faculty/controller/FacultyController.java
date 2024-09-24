@@ -81,7 +81,8 @@ public class FacultyController {
 
     @PostMapping("/profile/update")
     public ModelAndView updateProfile(
-            @RequestParam("username") String username, 
+            @RequestParam("username") String username,
+            @RequestParam("password") String password, 
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
             @RequestParam("street") String street,
@@ -89,6 +90,7 @@ public class FacultyController {
             @RequestParam("state") String state,
             @RequestParam("country") String country,
             @RequestParam("zipCode") String zipCode,
+            @RequestParam(value = "photoBase64", required = false) String photoBase64,
             HttpSession session) {
         
         Long id = (Long) session.getAttribute("facultyId");
@@ -101,7 +103,13 @@ public class FacultyController {
         faculty.setUsername(username);
         faculty.setEmail(email);
         faculty.setPhone(phone);
+        faculty.setPassword(password);
 
+		if (photoBase64 != null && !photoBase64.isEmpty()) {
+			byte[] photoBytes = Base64.getDecoder().decode(photoBase64.split(",")[1]); // Skip the "data:image/..."
+																						// part
+			faculty.setPhoto(photoBytes);
+		}
         // Get the faculty's address and update its fields
         FacultyAddress address = faculty.getFacultyAddress();
         if (address != null) {

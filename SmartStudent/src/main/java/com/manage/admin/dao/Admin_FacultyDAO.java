@@ -10,4 +10,7 @@ public interface Admin_FacultyDAO {
     void updateFaculty(Faculty faculty);
     void deleteFaculty(Faculty faculty);
     List<Faculty> getAllFaculties(); // New method to fetch all faculties
+	List<Faculty> getFacultyByDepartment(String department);
+	void deleteFacultyById(Long facultyId);
+	void createFaculty(Faculty faculty);
 }

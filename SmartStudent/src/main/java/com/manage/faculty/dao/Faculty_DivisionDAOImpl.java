@@ -22,8 +22,9 @@ public class Faculty_DivisionDAOImpl implements Faculty_DivisionDAO {
 
     @Override
     public List<Division> getDivisionsByFacultyId(Long facultyId) {
+        String hql = "SELECT fd.division FROM FacultyDivision fd WHERE fd.faculty.facultyId = :facultyId";
         return sessionFactory.getCurrentSession()
-                .createQuery("SELECT d FROM Division d JOIN d.facultyDivisions fd WHERE fd.faculty.id = :facultyId", Division.class)
+                .createQuery(hql, Division.class)
                 .setParameter("facultyId", facultyId)
                 .getResultList();
     }

@@ -1,13 +1,15 @@
 package com.manage.faculty.dao;
 
-import com.manage.faculty.entities.FacultyDivision;
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.manage.faculty.entities.FacultyDivision;
+import com.manage.home.entities.Division;
 
 @Repository
 @Qualifier("facultyFacultyDivisionDAOImpl")
@@ -34,5 +36,14 @@ public class Faculty_FacultyDivisionDAOImpl implements Faculty_FacultyDivisionDA
     @Override
     public void updateFacultyDivision(FacultyDivision facultyDivision) {
         sessionFactory.getCurrentSession().update(facultyDivision);
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Division> getAllFacultyDivisions(Long facultyId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT fd.division FROM FacultyDivision fd WHERE fd.faculty.id = :facultyId")
+                .setParameter("facultyId", facultyId)
+                .getResultList();
     }
 }

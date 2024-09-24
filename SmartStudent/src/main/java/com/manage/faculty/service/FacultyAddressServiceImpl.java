@@ -24,8 +24,8 @@ public class FacultyAddressServiceImpl implements FacultyAddressService {
 	}
 
 	@Override
-    public FacultyAddress getAddressById(int id) {
-        return facultyAddressDAO.getAddressById(id);
+    public FacultyAddress getAddressById(Long id) {
+        return facultyAddressDAO.getFacultyAddressById(id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class FacultyAddressServiceImpl implements FacultyAddressService {
     }
 
     @Override
-    public void deleteAddress(int id) {
-        facultyAddressDAO.deleteAddress(id);
+    public void deleteAddress(Long id) {
+        facultyAddressDAO.deleteFacultyAddress(id);
     }
 }

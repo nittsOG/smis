@@ -14,4 +14,8 @@ public interface Faculty_StudentService {
     void updateStudent(Student student);
 
     void deleteStudent(Student student);
+
+	List<Student> getAllStudents();
+
+	List<Student> getStudentsByDivisionName(String divisionName);
 }

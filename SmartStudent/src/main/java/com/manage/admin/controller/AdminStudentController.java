@@ -82,14 +82,14 @@ public class AdminStudentController {
 		mav.addObject("divisions", divisions);
 		mav.addObject("departments", departments);
 
-		// ****************
-		Student s = adminStudentService.getStudentById((long) 49);
-		System.out.println("/n/n" + s.getAddress().getCity());
-		s.getAddress().setCity("notDefaault");
-		adminStudentService.updateStudent(s);
-		StudentAddress a = adminStudentAddressService.getStudentAddressByStudentId((long) 49);
-		System.out.println("/n/n" + a.getCity());
-		// ***********
+//		// ****************
+//		Student s = adminStudentService.getStudentById((long) 49);
+//		System.out.println("/n/n" + s.getAddress().getCity());
+//		s.getAddress().setCity("notDefaault");
+//		adminStudentService.updateStudent(s);
+//		StudentAddress a = adminStudentAddressService.getStudentAddressByStudentId((long) 49);
+//		System.out.println("/n/n" + a.getCity());
+//		// ***********
 
 		return mav;
 	}
@@ -226,20 +226,6 @@ public class AdminStudentController {
 			adminStudentService.updateStudent(student);
 			System.out.println("\n\n : " + student.getAddress().getCity());
 
-			// Save the updated student and address
-//			
-//			if (address.getStudent() != student) {
-//				address.setStudent(student);
-//				
-//			}
-////			adminStudentService.updateStudent(student);
-//			
-//			if (student.getAddress() != address) {
-//				student.setAddress(address);
-//				adminStudentService.updateStudent(student);
-//			}
-//			adminStudentAddressService.updateStudentAddress(address);
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -259,16 +245,12 @@ public class AdminStudentController {
 			return new ModelAndView("redirect:/admin/login");
 		}
 
-//		Student student = adminStudentService.getStudentById(studentId);
 		try {
 			Student student = new Student();
 			student.setUsername("default");
 			student.setEmail("default");
 			student.setPassword("default");
-
-//			System.out.println("\n\n"+ student.getStudentId());
 			adminStudentService.saveStudent(student);
-//			System.out.println("\n\n"+ student.getStudentId());
 
 			StudentAddress address = new StudentAddress();
 			address.setCity("default");
@@ -281,8 +263,6 @@ public class AdminStudentController {
 			student.setAddress(address);
 			adminStudentService.updateStudent(student);
 
-//			System.out.println("\n\n"+ student.getAddress().getCity());
-//			System.out.println("\n\n"+ address.getCity());
 
 			ModelAndView mav = new ModelAndView("redirect:/admin/students");
 			return mav;
@@ -293,98 +273,6 @@ public class AdminStudentController {
 		}
 	}
 
-//***************************************
-
-//	@GetMapping("/students/add")
-//	public ModelAndView showAddStudentForm(HttpSession session) {
-//		Long adminId = (Long) session.getAttribute("adminId");
-//		if (adminId == null) {
-//			return new ModelAndView("redirect:/admin/login");
-//		}
-//
-//		List<Division> divisions = adminDivisionService.getAllDivisions();
-//		List<Department> departments = adminDepartmentService.getAllDepartments();
-//
-//		ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-student-add");
-//		mav.addObject("divisions", divisions);
-//		mav.addObject("departments", departments);
-//		return mav;
-//	}
-//
-//	@PostMapping("/students/add")
-//	public String AddStudent(@RequestParam(value = "username") String username,
-//			@RequestParam(value = "password") String password, @RequestParam(value = "email") String email,
-//			@RequestParam(value = "street") String street, @RequestParam(value = "city") String city,
-//			@RequestParam(value = "state") String state, @RequestParam(value = "country") String country,
-//			@RequestParam(value = "zipCode") String zipcode, @RequestParam(value = "divisionId") long divisionId,
-//			@RequestParam(value = "dateOfBirth") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfBirth,
-//			@RequestParam(value = "gender") String gender, @RequestParam(value = "contactNumber") String contactNumber,
-//			@RequestParam(value = "guardianName") String guardianName,
-//			@RequestParam(value = "guardianContact") String guardianContact,
-//			@RequestParam(value = "nationality") String nationality,
-//			@RequestParam(value = "enrollmentDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date enrollmentDate,
-//			@RequestParam(value = "status") String status,
-//			@RequestParam(value = "photoBase64", required = false) String photoBase64, HttpSession session)
-//			throws IOException {
-//
-//		if (session.getAttribute("adminId") == null) {
-//			return "redirect:/admin/login";
-//		}
-//
-//		// Fetch the existing student and address to ensure no data loss
-//		Student student = new Student();
-//		StudentAddress address = new StudentAddress();
-//
-//		// Update student details
-//		student.setUsername(username);
-//		student.setPassword(password);
-//		student.setEmail(email);
-//		student.setDateOfBirth(dateOfBirth);
-//		student.setContactNumber(contactNumber);
-//		student.setGuardianName(guardianName);
-//		student.setGuardianContact(guardianContact);
-//		student.setNationality(nationality);
-//		student.setEnrollmentDate(enrollmentDate);
-//		student.setStatus(status);
-//		student.setGender(gender); 
-//
-//		// Update student address
-//		address.setStreet(street);
-//		address.setCity(city);
-//		address.setState(state);
-//		address.setCountry(country);
-//		address.setZipCode(zipcode);
-//
-//		// If a Base64-encoded photo is provided, decode it and set it to the student
-//		if (photoBase64 != null && !photoBase64.isEmpty()) {
-//			byte[] photoBytes = Base64.getDecoder().decode(photoBase64.split(",")[1]); // Skip the "data:image/..." part
-//			student.setPhoto(photoBytes);
-//		}
-//
-//		// Update division
-//		Division division = adminDivisionService.getDivisionById(divisionId);
-//		student.setDivision(division);
-//
-//		// Save the updated student and address
-//		adminStudentService.updateStudent(student);
-//		adminStudentAddressService.updateStudentAddress(address);
-//
-//		try {
-//			adminStudentService.createStudent(student);
-//			adminStudentAddressService.createStudentAddress(address);
-//			student.setAddress(adminStudentAddressService.getStudentAddressByStudentId(student.getStudentId()));
-//			adminStudentAddressService.saveStudentAddress(address);
-//			adminStudentService.saveStudent(student);
-//
-//		} catch (Exception e) {
-//			System.out.println("\n\n Fail to create student..\n\n");
-//			e.printStackTrace();
-//		}
-//
-//		return "redirect:/admin/students/";
-//	}
-
-//*********************************
 	@PostMapping("/students/delete/{studentId}")
 	public String deleteStudent(@PathVariable Long studentId, HttpSession session) {
 		Long adminId = (Long) session.getAttribute("adminId");

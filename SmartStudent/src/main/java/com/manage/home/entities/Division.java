@@ -14,7 +14,7 @@ public class Division {
     @Column(name = "division_id")
     private Long divisionId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false , unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -47,4 +47,30 @@ public class Admin_FacultyDAOImpl implements Admin_FacultyDAO {
     public List<Faculty> getAllFaculties() {
         return sessionFactory.getCurrentSession().createQuery("FROM Faculty").list();
     }
+    
+    //***********
+    
+    @Override
+    public List<Faculty> getFacultyByDepartment(String department) {
+        return sessionFactory.getCurrentSession()
+            .createQuery("FROM Faculty  WHERE department.name = :departmentName" , Faculty.class)
+            .setParameter("departmentName", department)
+            .getResultList();
+    }
+    
+    @Override
+    public void deleteFacultyById(Long facultyId) {
+        Faculty faculty = getFacultyById(facultyId);
+        if (faculty != null) {
+            sessionFactory.getCurrentSession().delete(faculty);
+        }
+    }
+
+	@Override
+	public void createFaculty(Faculty faculty) {
+		sessionFactory.getCurrentSession().save(faculty);
+		
+	}
+
+
 }

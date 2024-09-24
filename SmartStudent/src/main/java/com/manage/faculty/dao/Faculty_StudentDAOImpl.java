@@ -13,41 +13,50 @@ import com.manage.student.entities.Student;
 @Transactional("facultyTransactionManager")
 public class Faculty_StudentDAOImpl implements Faculty_StudentDAO {
 
-    private final SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
-    @Autowired
-    public Faculty_StudentDAOImpl(@Qualifier("facultySessionFactory") SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	@Autowired
+	public Faculty_StudentDAOImpl(@Qualifier("facultySessionFactory") SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
-    @Override
-    public List<Student> getStudentsByDivision(Long divisionId) {
-        String hql = "FROM Student WHERE division.divisionId = :divisionId";
-        return sessionFactory.getCurrentSession()
-            .createQuery(hql, Student.class)
-            .setParameter("divisionId", divisionId)
-            .getResultList();
-    }
+	@Override
+	public List<Student> getStudentsByDivision(Long divisionId) {
+		String hql = "FROM Student WHERE division.divisionId = :divisionId";
+		return sessionFactory.getCurrentSession().createQuery(hql, Student.class).setParameter("divisionId", divisionId)
+				.getResultList();
+	}
 
+	@Override
+	public Student getStudentById(Long studentId) {
+		return sessionFactory.getCurrentSession().get(Student.class, studentId);
+	}
 
+	@Override
+	public void saveStudent(Student student) {
+		sessionFactory.getCurrentSession().save(student);
+	}
 
-    @Override
-    public Student getStudentById(Long studentId) {
-        return sessionFactory.getCurrentSession().get(Student.class, studentId);
-    }
+	@Override
+	public void updateStudent(Student student) {
+		sessionFactory.getCurrentSession().update(student);
+	}
 
-    @Override
-    public void saveStudent(Student student) {
-        sessionFactory.getCurrentSession().save(student);
-    }
+	@Override
+	public void deleteStudent(Student student) {
+		sessionFactory.getCurrentSession().delete(student);
+	}
 
-    @Override
-    public void updateStudent(Student student) {
-        sessionFactory.getCurrentSession().update(student);
-    }
+	@Override
+	public List<Student> getAllStudents() {
+		return sessionFactory.getCurrentSession().createQuery("FROM Student", Student.class).getResultList();
+	}
 
-    @Override
-    public void deleteStudent(Student student) {
-        sessionFactory.getCurrentSession().delete(student);
-    }
+	@Override
+	public List<Student> getStudentsByDivisionName(String divisionName) {
+		String hql = "FROM Student WHERE division.name = :divisionName";
+		return sessionFactory.getCurrentSession().createQuery(hql, Student.class)
+				.setParameter("divisionName", divisionName).getResultList();
+	}
+
 }

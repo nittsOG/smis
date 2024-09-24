@@ -66,7 +66,7 @@
         <div class="section">
             <h2>Faculty Management</h2>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/admin/faculty/list">Faculty List</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/faculty">Faculty List</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/facultyDivisions">Faculty Divisions</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/facultySubjects">Faculty Subjects</a></li>
             </ul>
