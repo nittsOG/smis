@@ -14,7 +14,7 @@ public class Fee {
     @Column(name = "fee_id")
     private Long feeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student;
 

@@ -13,6 +13,7 @@
         <a href="${pageContext.request.contextPath}/student/attendance">Attendance</a>
         <a href="${pageContext.request.contextPath}/student/results">Results</a>
         <a href="${pageContext.request.contextPath}/student/timetable">Timetable</a>
+        <a href="${pageContext.request.contextPath}/student/fees">Fees</a>
         <a href="${pageContext.request.contextPath}/student/logout">Logout</a>
     </div>
 

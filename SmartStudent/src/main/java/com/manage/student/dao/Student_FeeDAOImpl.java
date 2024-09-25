@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,20 +15,33 @@ import java.util.List;
 @Transactional("studentTransactionManager")
 public class Student_FeeDAOImpl implements Student_FeeDAO {
 
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-    @Autowired
-    public Student_FeeDAOImpl(@Qualifier("studentSessionFactory") SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	@Autowired
+	public Student_FeeDAOImpl(@Qualifier("studentSessionFactory") SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
-    @Override
-    public Fee getFeeById(Long feeId) {
-        return sessionFactory.getCurrentSession().get(Fee.class, feeId);
-    }
+	@Override
+	public Fee getFeeById(Long feeId) {
+		return sessionFactory.getCurrentSession().get(Fee.class, feeId);
+	}
 
-    @Override
-    public List<Fee> getAllFees() {
-        return sessionFactory.getCurrentSession().createQuery("from Fee", Fee.class).list();
-    }
+	@Override
+	public List<Fee> getAllFees() {
+		return sessionFactory.getCurrentSession().createQuery("from Fee", Fee.class).list();
+	}
+
+	@Override
+	public List<Fee> getAllFeesOfStudent(Long studentId) {
+	    List<Fee> fees = sessionFactory.getCurrentSession()
+	            .createQuery("from Fee f where f.student.studentId = :studentId", Fee.class)
+	            .setParameter("studentId", studentId)
+	            .list();
+	    
+	  //  System.out.println("Fees fetched: " + (fees != null ? fees.size() : "null"));
+	    return fees != null ? fees : new ArrayList<>();
+	}
+
+
 }

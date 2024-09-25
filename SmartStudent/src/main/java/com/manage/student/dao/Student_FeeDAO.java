@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface Student_FeeDAO {
     Fee getFeeById(Long feeId);
+    List<Fee> getAllFeesOfStudent(Long StudentId);
     List<Fee> getAllFees();
 }
