@@ -32,7 +32,7 @@
             <tr>
                 <th>Course</th>
                 <td>
-                    <form:select path="course.id">
+                    <form:select path="course.courseId">
                         <c:forEach var="course" items="${courses}">
                             <form:option value="${course.courseId}" label="${course.name}"/>
                         </c:forEach>

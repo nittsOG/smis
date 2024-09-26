@@ -1,13 +1,18 @@
 package com.manage.admin.dao;
 
-import com.manage.home.entities.Course;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.manage.home.entities.Course;
+import com.manage.home.entities.Semester;
 
 @Repository
 @Qualifier("adminCourseDAOImpl")
@@ -28,8 +33,33 @@ public class Admin_CourseDAOImpl implements Admin_CourseDAO {
 
     @Override
     public void updateCourse(Course course) {
-        sessionFactory.getCurrentSession().update(course);
+        Course oldcourse = this.getCourseById(course.getCourseId());
+
+        // Manually initialize the lazy-loaded collection
+        Hibernate.initialize(oldcourse.getSemesters());
+        
+        Set<Semester> existingSemesters = oldcourse.getSemesters();
+        
+        if (existingSemesters == null) {
+            existingSemesters = new HashSet<>();
+            oldcourse.setSemesters(existingSemesters);
+        }
+
+        Set<Semester> newSemesters = course.getSemesters();
+        if (newSemesters != null) {
+            existingSemesters.clear();
+            existingSemesters.addAll(newSemesters);
+        }
+        
+        oldcourse.setDepartment(course.getDepartment());
+        oldcourse.setName(course.getName());
+        oldcourse.setDescription(course.getDescription());
+
+        sessionFactory.getCurrentSession().merge(oldcourse);
     }
+
+
+
 
     @Override
     public void deleteCourse(Long courseId) {
@@ -46,4 +76,15 @@ public class Admin_CourseDAOImpl implements Admin_CourseDAO {
     public List<Course> getAllCourses() {
         return sessionFactory.getCurrentSession().createQuery("from Course", Course.class).list();
     }
+    
+    @Override
+    public List<Course> getCoursesByDepartment(Long departmentId) {
+        return sessionFactory.getCurrentSession()
+            .createQuery("from Course where department.id = :departmentId", Course.class)
+            .setParameter("departmentId", departmentId)
+            .list();
+    }
+    
+    
+
 }

@@ -10,4 +10,5 @@ public interface Admin_CourseDAO {
     void deleteCourse(Long courseId);
     Course getCourseById(Long courseId);
     List<Course> getAllCourses();
+	List<Course> getCoursesByDepartment(Long departmentId);
 }

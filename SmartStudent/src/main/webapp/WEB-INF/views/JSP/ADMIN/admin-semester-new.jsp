@@ -35,7 +35,7 @@
                     </form:select>
                 </td>
             </tr>
-        </table>
+        </table>z
         <input type="submit" value="Create"/>
     </form:form>
     <a href="${pageContext.request.contextPath}/admin/semesters">Back to List</a>

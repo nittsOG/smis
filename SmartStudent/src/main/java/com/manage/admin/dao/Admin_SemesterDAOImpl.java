@@ -46,4 +46,12 @@ public class Admin_SemesterDAOImpl implements Admin_SemesterDAO {
     public List<Semester> getAllSemesters() {
         return sessionFactory.getCurrentSession().createQuery("from Semester", Semester.class).list();
     }
+    
+    @Override
+    public List<Semester> getSemestersByCourseId(Long courseId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Semester where course.courseId = :courseId", Semester.class)
+                .setParameter("courseId", courseId)
+                .list();
+    }
 }

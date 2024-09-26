@@ -29,7 +29,10 @@ public class Admin_CourseServiceImpl implements Admin_CourseService {
     @Override
     @Transactional(transactionManager = "adminTransactionManager")
     public void updateCourse(Course course) {
-        adminCourseDAO.updateCourse(course);
+    	Course existingCourse = this.getCourseById(course.getCourseId());
+    	if(existingCourse != null) {
+            adminCourseDAO.updateCourse(course);
+    	}
     }
 
     @Override
@@ -49,4 +52,11 @@ public class Admin_CourseServiceImpl implements Admin_CourseService {
     public List<Course> getAllCourses() {
         return adminCourseDAO.getAllCourses();
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Course> getCoursesByDepartment(Long departmentId) {
+        return adminCourseDAO.getCoursesByDepartment(departmentId);
+    }
+
 }

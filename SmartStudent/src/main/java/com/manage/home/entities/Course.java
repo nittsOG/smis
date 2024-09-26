@@ -12,7 +12,7 @@ public class Course {
 	    @Column(name = "course_id")
 	    private Long courseId;
 
-	    @ManyToOne(fetch = FetchType.LAZY)
+	    @ManyToOne(fetch = FetchType.EAGER)
 	    @JoinColumn(name = "department_id")
 	    private Department department;
 

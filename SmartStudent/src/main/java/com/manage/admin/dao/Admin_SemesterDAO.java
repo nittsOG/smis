@@ -10,4 +10,5 @@ public interface Admin_SemesterDAO {
     void deleteSemester(Long semesterId);
     Semester getSemesterById(Long semesterId);
     List<Semester> getAllSemesters();
+	List<Semester> getSemestersByCourseId(Long courseId);
 }
