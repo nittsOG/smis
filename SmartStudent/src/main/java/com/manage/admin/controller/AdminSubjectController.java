@@ -3,6 +3,7 @@ package com.manage.admin.controller;
 import com.manage.admin.service.Admin_SubjectService;
 import com.manage.home.entities.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class AdminSubjectController {
     private final Admin_SubjectService subjectService;
 
     @Autowired
-    public AdminSubjectController(Admin_SubjectService subjectService) {
+    public AdminSubjectController(@Qualifier("adminSubjectServiceImpl")Admin_SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
