@@ -36,7 +36,7 @@ public class Admin_BacklogController {
     }
 
     @GetMapping("/{studentId}/{subjectCode}/{semester}")
-    public ModelAndView showBacklogDetails(@PathVariable Integer studentId,
+    public ModelAndView showBacklogDetails(@PathVariable Long studentId,
                                            @PathVariable String subjectCode,
                                            @PathVariable Integer semester,
                                            HttpSession session) {
@@ -52,7 +52,7 @@ public class Admin_BacklogController {
     }
 
     @GetMapping("/{studentId}/{subjectCode}/{semester}/edit")
-    public ModelAndView showEditBacklogForm(@PathVariable Integer studentId,
+    public ModelAndView showEditBacklogForm(@PathVariable Long studentId,
                                             @PathVariable String subjectCode,
                                             @PathVariable Integer semester,
                                             HttpSession session) {
@@ -68,7 +68,7 @@ public class Admin_BacklogController {
     }
 
     @PostMapping("/{studentId}/{subjectCode}/{semester}/edit")
-    public String updateBacklog(@PathVariable Integer studentId,
+    public String updateBacklog(@PathVariable Long studentId,
                                 @PathVariable String subjectCode,
                                 @PathVariable Integer semester,
                                 @ModelAttribute("backlog") Backlog backlog,
@@ -83,7 +83,7 @@ public class Admin_BacklogController {
     }
 
     @GetMapping("/{studentId}/{subjectCode}/{semester}/delete")
-    public String deleteBacklog(@PathVariable Integer studentId,
+    public String deleteBacklog(@PathVariable Long studentId,
                                 @PathVariable String subjectCode,
                                 @PathVariable Integer semester,
                                 HttpSession session) {

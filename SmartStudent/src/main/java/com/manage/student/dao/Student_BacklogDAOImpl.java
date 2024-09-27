@@ -22,7 +22,7 @@ public class Student_BacklogDAOImpl implements Student_BacklogDAO {
     }
 
     @Override
-    public Backlog getBacklogById(Integer studentId, String subjectCode, Integer semester) {
+    public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
         Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
         return sessionFactory.getCurrentSession().get(Backlog.class, id);
     }

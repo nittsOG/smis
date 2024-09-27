@@ -45,6 +45,23 @@ public class Admin_FacultyDivisionDAOImpl implements Admin_FacultyDivisionDAO {
 
     @Override
     public List<FacultyDivision> getAllFacultyDivisions() {
-        return sessionFactory.getCurrentSession().createQuery("from FacultyDivision", FacultyDivision.class).list();
+        return sessionFactory.getCurrentSession()
+                .createQuery("from FacultyDivision fd "
+                           + "join fetch fd.faculty f "
+                           + "join fetch fd.division d", FacultyDivision.class)
+                .list();
     }
+
+    
+    @Override
+    public List<FacultyDivision> getFacultyDivisionsByFacultyId(Long facultyId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from FacultyDivision fd "
+                           + "join fetch fd.faculty f "
+                           + "join fetch fd.division d "
+                           + "where f.facultyId = :facultyId", FacultyDivision.class)
+                .setParameter("facultyId", facultyId)
+                .list();
+    }
+
 }

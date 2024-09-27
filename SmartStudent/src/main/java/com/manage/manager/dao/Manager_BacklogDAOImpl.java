@@ -32,14 +32,14 @@ public class Manager_BacklogDAOImpl implements Manager_BacklogDAO {
     }
 
     @Override
-    public void deleteBacklog(Integer studentId, String subjectCode, Integer semester) {
+    public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
         Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
         Backlog backlog = sessionFactory.getCurrentSession().get(Backlog.class, id);
         sessionFactory.getCurrentSession().delete(backlog);
     }
 
     @Override
-    public Backlog getBacklogById(Integer studentId, String subjectCode, Integer semester) {
+    public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
         Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
         return sessionFactory.getCurrentSession().get(Backlog.class, id);
     }

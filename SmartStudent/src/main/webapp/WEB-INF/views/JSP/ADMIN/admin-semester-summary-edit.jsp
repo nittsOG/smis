@@ -7,15 +7,15 @@
 </head>
 <body>
     <h1>Edit Semester Summary</h1>
-    <form:form method="post" action="${pageContext.request.contextPath}/admin/semester-summaries/${semesterSummary.id.studentId}/${semesterSummary.id.semester}/edit" modelAttribute="semesterSummary">
+    <form:form method="post" action="${pageContext.request.contextPath}/admin/semester-summaries/${semesterSummary.studentId}/${semesterSummary.semester}/edit" modelAttribute="semesterSummary">
         <table>
             <tr>
-                <td><form:label path="id.studentId">Student ID:</form:label></td>
-                <td><form:input path="id.studentId" readonly="true"/></td>
+                <td><form:label path="studentId">Student ID:</form:label></td>
+                <td><form:input path="studentId" readonly="true"/></td>
             </tr>
             <tr>
-                <td><form:label path="id.semester">Semester:</form:label></td>
-                <td><form:input path="id.semester" readonly="true"/></td>
+                <td><form:label path="semester">Semester:</form:label></td>
+                <td><form:input path="semester" readonly="true"/></td>
             </tr>
             <tr>
                 <td><form:label path="totalCredits">Total Credits:</form:label></td>
@@ -38,7 +38,7 @@
             </tr>
         </table>
     </form:form>
-    <a href="${pageContext.request.contextPath}/admin/semester-summaries/${semesterSummary.id.studentId}/${semesterSummary.id.semester}">Back to Details</a>
+    <a href="${pageContext.request.contextPath}/admin/semester-summaries/${semesterSummary.studentId}/${semesterSummary.semester}">Back to Details</a>
     <a href="${pageContext.request.contextPath}/admin/semester-summaries">Back to List</a>
     <a href="${pageContext.request.contextPath}/admin/dashboard">Back to Dashboard</a>
 </body>

@@ -21,11 +21,11 @@ public class FacultyDivision {
     @Column(name = "faculty_division_id")
     private Long facultyDivisionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "division_id")
     private Division division;
 

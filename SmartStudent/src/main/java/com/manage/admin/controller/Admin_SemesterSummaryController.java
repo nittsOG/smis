@@ -1,15 +1,23 @@
 package com.manage.admin.controller;
 
-import com.manage.admin.service.Admin_SemesterSummaryService;
-import com.manage.student.entities.SemesterSummary;
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import com.manage.admin.service.Admin_SemesterSummaryService;
+import com.manage.student.entities.SemesterSummary;
 
 @Controller
 @RequestMapping("/admin/semester-summaries")
@@ -83,26 +91,47 @@ public class Admin_SemesterSummaryController {
         return "redirect:/admin/semester-summaries";
     }
 
-    @GetMapping("/new")
-    public ModelAndView showNewSemesterSummaryForm(HttpSession session) {
-        Long adminId = (Long) session.getAttribute("adminId");
-        if (adminId == null) {
-            return new ModelAndView("redirect:/admin/login");
-        }
+//    @GetMapping("/new")
+//    public ModelAndView showNewSemesterSummaryForm(HttpSession session) {
+//        Long adminId = (Long) session.getAttribute("adminId");
+//        if (adminId == null) {
+//            return new ModelAndView("redirect:/admin/login");
+//        }
+//
+//        ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-semester-summary-new");
+//        mav.addObject("semesterSummary", new SemesterSummary());
+//        return mav;
+//    }
+//    @PostMapping("/new")
+//    public String saveSemesterSummary(
+//            @RequestParam("studentId") Long studentId,
+//            @RequestParam("semester") Integer semester,
+//            @RequestParam("totalCredits") BigDecimal totalCredits,
+//            @RequestParam("totalCreditPoints") BigDecimal totalCreditPoints,
+//            @RequestParam("sgpa") BigDecimal sgpa,
+//            @RequestParam("cgpa") BigDecimal cgpa,
+//            HttpSession session) {
+//        
+//        Long adminId = (Long) session.getAttribute("adminId");
+//        if (adminId == null) {
+//            return "redirect:/admin/login";
+//        }
+//
+//        // Create a new SemesterSummary object manually
+//        SemesterSummary semesterSummary = new SemesterSummary();
+//        semesterSummary.setStudentId(studentId);
+//        semesterSummary.setSemester(semester);
+//        semesterSummary.setTotalCredits(totalCredits);
+//        semesterSummary.setTotalCreditPoints(totalCreditPoints);
+//        semesterSummary.setSgpa(sgpa);
+//        semesterSummary.setCgpa(cgpa);
+//
+//        // Log to check if data is bound correctly
+//        System.out.println("SemesterSummary: " + semesterSummary.getStudentId());
+//
+//        adminSemesterSummaryService.saveSemesterSummary(semesterSummary);
+//        return "redirect:/admin/semester-summaries";
+//    }
 
-        ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-semester-summary-new");
-        mav.addObject("semesterSummary", new SemesterSummary());
-        return mav;
-    }
 
-    @PostMapping("/new")
-    public String saveSemesterSummary(@ModelAttribute("semesterSummary") SemesterSummary semesterSummary, HttpSession session) {
-        Long adminId = (Long) session.getAttribute("adminId");
-        if (adminId == null) {
-            return "redirect:/admin/login";
-        }
-
-        adminSemesterSummaryService.saveSemesterSummary(semesterSummary);
-        return "redirect:/admin/semester-summaries";
-    }
 }

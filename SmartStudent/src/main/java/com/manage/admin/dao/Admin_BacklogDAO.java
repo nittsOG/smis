@@ -14,8 +14,8 @@ public interface Admin_BacklogDAO {
 
 	void updateBacklog(Backlog backlog);
 
-	void deleteBacklog(Integer studentId, String subjectCode, Integer semester);
+	void deleteBacklog(Long studentId, String subjectCode, Integer semester);
 
-	Backlog getBacklogById(Integer studentId, String subjectCode, Integer semester);
+	Backlog getBacklogById(Long studentId, String subjectCode, Integer semester);
 
 }

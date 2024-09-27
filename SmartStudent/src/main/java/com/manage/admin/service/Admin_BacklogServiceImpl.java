@@ -34,13 +34,13 @@ public class Admin_BacklogServiceImpl implements Admin_BacklogService {
 
     @Override
     @Transactional("adminTransactionManager")
-    public void deleteBacklog(Integer studentId, String subjectCode, Integer semester) {
+    public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
         adminBacklogDAO.deleteBacklog(studentId, subjectCode, semester);
     }
 
     @Override
     @Transactional("adminTransactionManager")
-    public Backlog getBacklogById(Integer studentId, String subjectCode, Integer semester) {
+    public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
         return adminBacklogDAO.getBacklogById(studentId, subjectCode, semester);
     }
 
