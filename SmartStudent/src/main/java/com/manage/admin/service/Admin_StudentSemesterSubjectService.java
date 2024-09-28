@@ -14,4 +14,6 @@ public interface Admin_StudentSemesterSubjectService {
     void deleteStudentSemesterSubject(Long studentSemesterSubjectId);
 
 	List<StudentSemesterSubject> getAllStudentSemesterSubjects();
+
+	List<StudentSemesterSubject> getStudentSemesterSubjectsByStudentId(Long studentId);
 }

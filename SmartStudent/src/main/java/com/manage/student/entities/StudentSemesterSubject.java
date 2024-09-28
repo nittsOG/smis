@@ -12,11 +12,11 @@ public class StudentSemesterSubject {
     @Column(name = "student_semester_subject_id")
     private Long studentSemesterSubjectId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_semester_id", nullable = false)
     private StudentSemester studentSemester;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
     private Subject subject;
 

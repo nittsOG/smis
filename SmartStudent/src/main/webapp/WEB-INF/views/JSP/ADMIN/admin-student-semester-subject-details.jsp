@@ -1,16 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <title>Student Semester Subject Details</title>
 </head>
 <body>
     <h1>Student Semester Subject Details</h1>
-    <p>ID: ${studentSemesterSubject.id}</p>
-    <p>Student Semester ID: ${studentSemesterSubject.studentSemesterId}</p>
-    <p>Subject ID: ${studentSemesterSubject.subjectId}</p>
-    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects">Back to List</a>
-    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects/${studentSemesterSubject.id}/edit">Edit</a>
-    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects/${studentSemesterSubject.id}/delete">Delete</a>
+
+    <p><strong>Student ID:</strong> ${studentSemesterSubject.studentSemester.student.studentId}</p>
+    <p><strong>Semester:</strong> ${studentSemesterSubject.studentSemester.semester.name}</p>
+    <p><strong>Subject:</strong> ${studentSemesterSubject.subject.name}</p>
+
+    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects/${studentSemesterSubject.studentSemesterSubjectId}/edit">Edit</a> |
+    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects">Back to list</a>
 </body>
 </html>

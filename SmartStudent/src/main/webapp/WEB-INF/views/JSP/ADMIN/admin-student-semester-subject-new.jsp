@@ -1,18 +1,30 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
-    <title>Add New Student Semester Subject</title>
+    <title>Create New Student Semester Subject</title>
 </head>
 <body>
     <h1>Add New Student Semester Subject</h1>
-    <form action="${pageContext.request.contextPath}/admin/student-semester-subjects/new" method="post">
-        <label for="studentSemesterId">Student Semester ID:</label>
-        <input type="text" id="studentSemesterId" name="studentSemesterId" required /><br>
-        <label for="subjectId">Subject ID:</label>
-        <input type="text" id="subjectId" name="subjectId" required /><br>
-        <button type="submit">Add Semester Subject</button>
+
+    <form method="post" action="${pageContext.request.contextPath}/admin/student-semester-subjects/new">
+        <label for="studentSemester">Select Student Semester:</label>
+        <select name="studentSemester.studentSemesterId" id="studentSemester">
+            <c:forEach var="studentSemester" items="${studentSemesters}">
+                <option value="${studentSemester.studentSemesterId}">${studentSemester.student.studentId} - ${studentSemester.semester.name}</option>
+            </c:forEach>
+        </select><br>
+
+        <label for="subject">Select Subject:</label>
+        <select name="subject.subjectId" id="subject">
+            <c:forEach var="subject" items="${subjects}">
+                <option value="${subject.subjectId}">${subject.name}</option>
+            </c:forEach>
+        </select><br>
+
+        <input type="submit" value="Save">
     </form>
-    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects">Back to List</a>
+
+    <a href="${pageContext.request.contextPath}/admin/student-semester-subjects">Back to list</a>
 </body>
 </html>
