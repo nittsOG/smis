@@ -10,4 +10,5 @@ public interface Admin_SubjectDAO {
     void deleteSubject(Long subjectId);
     Subject getSubjectById(Long subjectId);
     List<Subject> getAllSubjects();
+	List<Subject> getSubjectsByCourse(Long courseId);
 }
