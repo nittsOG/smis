@@ -49,4 +49,9 @@ public class Admin_SemesterSubjectServiceImpl implements Admin_SemesterSubjectSe
     public List<SemesterSubject> getAllSemesterSubjects() {
         return adminSemesterSubjectDAO.getAllSemesterSubjects();
     }
+
+	@Override
+	public List<SemesterSubject> getSemesterSubjectsBySubjectId(Long subjectId) {
+		return adminSemesterSubjectDAO.getSemesterSubjectsBySubjectId(subjectId);
+	}
 }

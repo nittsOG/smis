@@ -1,40 +1,56 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Semester Subjects List</title>
-    <script>
-        <c:if test="${not empty alert}">
-            alert("${alert}");
-        </c:if>
-    </script>
+    <meta charset="UTF-8">
+    <title>Semester Subjects</title>
 </head>
 <body>
-    <h1>Semester Subjects List</h1>
+    <h2>Semester Subjects List</h2>
+
+    <!-- Filter Form -->
+    <form action="${pageContext.request.contextPath}/admin/semester-subjects" method="get">
+        <label for="subjectFilter">Filter by Subject:</label>
+        <select id="subjectFilter" name="subjectId">
+            <option value="">All Subjects</option>
+            <c:forEach items="${subjects}" var="subject">
+                <option value="${subject.subjectId}" ${param.subjectId == subject.subjectId ? 'selected' : ''}>
+                    ${subject.name}
+                </option>
+            </c:forEach>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Semester Subjects List -->
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>SemesterID</th>
                 <th>Semester</th>
+                <th>Subject</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="semesterSubject" items="${semesterSubjects}">
+            <c:forEach items="${semesterSubjects}" var="semesterSubject">
                 <tr>
-                    <td>${semesterSubject.id}</td>
-                    <td>${semesterSubject.name}</td>
+                    <td>${semesterSubject.semesterSubjectId}</td>
+                    <td>${semesterSubject.semester.semesterId}</td>
                     <td>${semesterSubject.semester.name}</td>
+                    <td>${semesterSubject.subject.name}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.id}">View</a>
-                        <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.id}/edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.id}/delete">Delete</a>
+                    <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.semesterSubjectId}">View</a>
+                        <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.semesterSubjectId}/edit">Edit</a>
+                        <a href="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.semesterSubjectId}/delete" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <a href="${pageContext.request.contextPath}/admin/semester-subjects/new">Add New Semester Subject</a>
+    
+     <a href="${pageContext.request.contextPath}/admin/semester-subjects/new">Add New</a>
 </body>
 </html>
