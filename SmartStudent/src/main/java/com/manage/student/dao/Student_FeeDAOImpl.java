@@ -35,13 +35,13 @@ public class Student_FeeDAOImpl implements Student_FeeDAO {
 	@Override
 	public List<Fee> getAllFeesOfStudent(Long studentId) {
 	    List<Fee> fees = sessionFactory.getCurrentSession()
-	            .createQuery("from Fee f where f.student.studentId = :studentId", Fee.class)
+	            .createQuery("from Fee f where f.studentSemester.student.studentId = :studentId", Fee.class)
 	            .setParameter("studentId", studentId)
 	            .list();
 	    
-	  //  System.out.println("Fees fetched: " + (fees != null ? fees.size() : "null"));
 	    return fees != null ? fees : new ArrayList<>();
 	}
+
 
 
 }

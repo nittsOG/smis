@@ -1,7 +1,6 @@
 package com.manage.student.entities;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -73,8 +71,8 @@ public class Student {
     @JoinColumn(name = "division_id")
     private Division division;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Fee> fees;
+//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//    private Set<Fee> fees;
 
     @Transient
     private String photoBase64;
@@ -201,13 +199,13 @@ public class Student {
         this.division = division;
     }
 
-    public Set<Fee> getFees() {
-        return fees;
-    }
-
-    public void setFees(Set<Fee> fees) {
-        this.fees = fees;
-    }
+//    public Set<Fee> getFees() {
+//        return fees;
+//    }
+//
+//    public void setFees(Set<Fee> fees) {
+//        this.fees = fees;
+//    }
 
     public String getPhotoBase64() {
         return photoBase64;

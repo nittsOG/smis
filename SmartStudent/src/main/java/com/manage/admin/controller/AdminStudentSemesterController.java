@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.manage.admin.service.Admin_FeeService;
 import com.manage.admin.service.Admin_SemesterService;
 import com.manage.admin.service.Admin_StudentSemesterService;
 import com.manage.admin.service.Admin_StudentService;
 import com.manage.home.entities.Semester;
+import com.manage.student.entities.Fee;
 import com.manage.student.entities.Student;
 import com.manage.student.entities.StudentSemester;
 
@@ -29,15 +31,18 @@ public class AdminStudentSemesterController {
 	private final Admin_StudentSemesterService adminStudentSemesterService;
 	private final Admin_StudentService admin_StudentService;
 	private final Admin_SemesterService admin_SemesterService;
+	private final Admin_FeeService admin_FeeService;
 
 	@Autowired
 	public AdminStudentSemesterController(
 			@Qualifier("adminStudentSemesterServiceImpl") Admin_StudentSemesterService adminStudentSemesterService,
 			@Qualifier("adminStudentServiceImpl") Admin_StudentService admin_StudentService,
-			@Qualifier("adminSemesterServiceImpl") Admin_SemesterService admin_SemesterService) {
+			@Qualifier("adminSemesterServiceImpl") Admin_SemesterService admin_SemesterService,
+			@Qualifier("adminFeeServiceImpl") Admin_FeeService admin_FeeService) {
 		this.adminStudentSemesterService = adminStudentSemesterService;
 		this.admin_StudentService = admin_StudentService;
 		this.admin_SemesterService = admin_SemesterService;
+		this.admin_FeeService = admin_FeeService;
 	}
 
 	@GetMapping
@@ -159,7 +164,21 @@ public class AdminStudentSemesterController {
 		Semester semester = admin_SemesterService.getSemesterById(semesterId);
 		studentSemester.setSemester(semester); // Set the fully loaded semester object
 
+		// Save the StudentSemester first to persist it in the database
 		adminStudentSemesterService.saveStudentSemester(studentSemester);
+
+		// Now, create the new Fee object and set the StudentSemester
+		Fee fee = new Fee();
+		fee.setStudentSemester(studentSemester); // Now the studentSemester is saved, so this is safe
+
+		// Save the Fee object and link it with the StudentSemester
+		Long feeId = admin_FeeService.saveFeeAndReturnId(fee);
+		studentSemester.setFee(admin_FeeService.getFeeById(feeId));
+
+		// Update the StudentSemester to reflect the new fee relationship
+		adminStudentSemesterService.updateStudentSemester(studentSemester);
+
 		return "redirect:/admin/student-semesters";
 	}
+
 }

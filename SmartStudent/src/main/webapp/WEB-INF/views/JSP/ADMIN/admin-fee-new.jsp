@@ -1,25 +1,28 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Fee</title>
-    <script>
-        <c:if test="${not empty alert}">
-            alert("${alert}");
-        </c:if>
-    </script>
+    <title>Create New Fee</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-    <h1>New Fee</h1>
+    <h2>Create New Fee</h2>
+
     <form action="${pageContext.request.contextPath}/admin/fees/new" method="post">
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" required /><br>
+    
+        <label for="totalAmount">StudentSemesterID:</label>
+        <input type="text" id="studentSemesterId" name="studentSemesterId" required><br>
+        
+        <label for="totalAmount">Total Amount:</label>
+        <input type="text" id="totalAmount" name="totalAmount" required><br>
+
+        <label for="paidAmount">Paid Amount:</label>
+        <input type="text" id="paidAmount" name="paidAmount" required><br>
+
         <label for="dueDate">Due Date:</label>
-        <input type="date" id="dueDate" name="dueDate" required /><br>
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status" required /><br>
-        <button type="submit">Save</button>
+        <input type="date" id="dueDate" name="dueDate" required><br>
+
+        <button type="submit">Create</button>
+        <a href="${pageContext.request.contextPath}/admin/fees">Cancel</a>
     </form>
-    <a href="${pageContext.request.contextPath}/admin/fees">Back to List</a>
 </body>
 </html>

@@ -9,4 +9,6 @@ public interface Admin_FeeService {
     void updateFee(Fee fee);
     void deleteFee(Long feeId);
     List<Fee> getAllFees();
+	List<Fee> getFeesByStudentId(Long studentId);
+	Long saveFeeAndReturnId(Fee fee);
 }

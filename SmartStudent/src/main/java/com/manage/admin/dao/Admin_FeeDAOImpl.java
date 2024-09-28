@@ -46,4 +46,17 @@ public class Admin_FeeDAOImpl implements Admin_FeeDAO {
     public List<Fee> getAllFees() {
         return sessionFactory.getCurrentSession().createQuery("from Fee", Fee.class).list();
     }
+
+    @Override
+    public List<Fee> getFeesByStudentId(Long studentId) {
+        String hql = "select f from Fee f " +
+                     "join f.studentSemester ss " +
+                     "join ss.student s " +
+                     "where s.studentId = :studentId";
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, Fee.class)
+                .setParameter("studentId", studentId)
+                .getResultList();
+    }
+
 }

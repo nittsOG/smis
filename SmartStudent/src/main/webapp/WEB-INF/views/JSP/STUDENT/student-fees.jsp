@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/STUDENT/dashboard.css">
 </head>
-<body>	
+<body>
 	<!-- Sidebar Section -->
 	<div id="sidebar" class="sidebar">
 		<button id="close-btn" class="close-btn" onclick="toggleSidebar()"><</button>
@@ -14,15 +14,16 @@
 		<a href="${pageContext.request.contextPath}/student/attendance">Attendance</a>
 		<a href="${pageContext.request.contextPath}/student/results">Results</a>
 		<a href="${pageContext.request.contextPath}/student/timetable">Timetable</a>
-		<a href="${pageContext.request.contextPath}/student/fees">Fees</a> 
-		<a href="${pageContext.request.contextPath}/student/logout">Logout</a>
+		<a href="${pageContext.request.contextPath}/student/fees">Fees</a> <a
+			href="${pageContext.request.contextPath}/student/logout">Logout</a>
 	</div>
 
 	<!-- Main Content -->
 	<div id="main-content" class="main-content">
-	<button class="open-btn" onclick="toggleSidebar()">></button> <!-- Open Button -->
-	
-	<h2>Attendance Summary</h2>
+		<button class="open-btn" onclick="toggleSidebar()">></button>
+		<!-- Open Button -->
+
+		<h2>Attendance Summary</h2>
 		<c:choose>
 			<c:when test="${not empty fees}">
 				<table class="fees-table">
@@ -37,12 +38,14 @@
 					<tbody>
 						<c:forEach var="fee" items="${fees}">
 							<tr>
-								<td>${fee.semester}</td>
+								<td>${fee.studentSemester.semester.name}</td>
+								<!-- Accessing semester name via studentSemester -->
 								<td>${fee.totalAmount}</td>
 								<td>${fee.paidAmount}</td>
 								<td>${fee.dueDate}</td>
 							</tr>
 						</c:forEach>
+
 					</tbody>
 				</table>
 			</c:when>
