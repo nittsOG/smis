@@ -16,4 +16,6 @@ public interface Admin_BacklogService {
 
 	List<Backlog> getAllBacklogs();
 
+	List<Backlog> getBacklogsByStudentId(Long studentId);
+
 }

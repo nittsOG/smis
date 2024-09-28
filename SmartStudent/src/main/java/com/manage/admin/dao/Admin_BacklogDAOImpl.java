@@ -14,40 +14,48 @@ import java.util.List;
 @Transactional("adminTransactionManager")
 public class Admin_BacklogDAOImpl implements Admin_BacklogDAO {
 
-    private final SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
-    @Autowired
-    public Admin_BacklogDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	@Autowired
+	public Admin_BacklogDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
-    @Override
-    public void saveBacklog(Backlog backlog) {
-        sessionFactory.getCurrentSession().saveOrUpdate(backlog);
-    }
+	@Override
+	public void saveBacklog(Backlog backlog) {
+		sessionFactory.getCurrentSession().saveOrUpdate(backlog);
+	}
 
-    @Override
-    public void updateBacklog(Backlog backlog) {
-        sessionFactory.getCurrentSession().update(backlog);
-    }
+	@Override
+	public void updateBacklog(Backlog backlog) {
+		sessionFactory.getCurrentSession().update(backlog);
+	}
 
-    @Override
-    public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
-        Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
-        Backlog backlog = sessionFactory.getCurrentSession().get(Backlog.class, id);
-        if (backlog != null) {
-            sessionFactory.getCurrentSession().delete(backlog);
-        }
-    }
+	@Override
+	public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
+		Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
+		Backlog backlog = sessionFactory.getCurrentSession().get(Backlog.class, id);
+		if (backlog != null) {
+			sessionFactory.getCurrentSession().delete(backlog);
+		}
+	}
 
-    @Override
-    public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
-        Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
-        return sessionFactory.getCurrentSession().get(Backlog.class, id);
-    }
+	@Override
+	public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
+		Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
+		return sessionFactory.getCurrentSession().get(Backlog.class, id);
+	}
 
-    @Override
-    public List<Backlog> getAllBacklogs() {
-        return sessionFactory.getCurrentSession().createQuery("from Backlog", Backlog.class).list();
-    }
+	@Override
+	public List<Backlog> getAllBacklogs() {
+		return sessionFactory.getCurrentSession().createQuery("from Backlog", Backlog.class).list();
+	}
+
+	@Override
+	public List<Backlog> getBacklogsByStudentId(Long studentId) {
+		return sessionFactory.getCurrentSession()
+				.createQuery("FROM Backlog WHERE studentId = :studentId", Backlog.class)
+				.setParameter("studentId", studentId).list();
+	}
+
 }

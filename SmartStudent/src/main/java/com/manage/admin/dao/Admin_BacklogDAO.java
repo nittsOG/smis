@@ -18,4 +18,6 @@ public interface Admin_BacklogDAO {
 
 	Backlog getBacklogById(Long studentId, String subjectCode, Integer semester);
 
+	List<Backlog> getBacklogsByStudentId(Long studentId);
+
 }

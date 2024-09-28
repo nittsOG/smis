@@ -1,30 +1,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html>
 <html>
 <head>
     <title>Edit Backlog</title>
 </head>
 <body>
     <h1>Edit Backlog</h1>
-    <form:form action="${pageContext.request.contextPath}/admin/backlogs/${backlog.id.studentId}/${backlog.id.subjectCode}/${backlog.id.semester}/edit" method="post" modelAttribute="backlog">
+
+    <form action="${pageContext.request.contextPath}/admin/backlogs/${backlog.studentId}/${backlog.subjectCode}/${backlog.semester}/edit" method="post">
         <label for="studentId">Student ID:</label>
-        <form:input path="id.studentId" id="studentId" readonly="true"/><br/>
-        
+        <input type="text" id="studentId" name="studentId" value="${backlog.studentId}" readonly /><br/>
+
         <label for="subjectCode">Subject Code:</label>
-        <form:input path="id.subjectCode" id="subjectCode" readonly="true"/><br/>
+        <input type="text" id="subjectCode" name="subjectCode" value="${backlog.subjectCode}" readonly /><br/>
 
         <label for="semester">Semester:</label>
-        <form:input path="id.semester" id="semester" readonly="true"/><br/>
+        <input type="number" id="semester" name="semester" value="${backlog.semester}" readonly /><br/>
 
-        <label for="backlogStatus">Status:</label>
-        <form:input path="backlogStatus" id="backlogStatus"/><br/>
+        <label for="backlogStatus">Backlog Status:</label>
+        <input type="text" id="backlogStatus" name="backlogStatus" value="${backlog.backlogStatus}" required /><br/>
 
-        <input type="submit" value="Update Backlog"/>
-    </form:form>
-
-    <a href="${pageContext.request.contextPath}/admin/backlogs/${backlog.id.studentId}/${backlog.id.subjectCode}/${backlog.id.semester}">Back to Details</a>
-    <a href="${pageContext.request.contextPath}/admin/backlogs">Back to List</a>
-    <a href="${pageContext.request.contextPath}/admin/dashboard">Back to Dashboard</a>
+        <button type="submit">Update</button>
+        <a href="${pageContext.request.contextPath}/admin/backlogs">Cancel</a>
+    </form>
 </body>
 </html>
