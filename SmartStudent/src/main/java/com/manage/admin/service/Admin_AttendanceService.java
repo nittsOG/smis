@@ -2,6 +2,7 @@ package com.manage.admin.service;
 
 import com.manage.home.entities.Attendance;
 
+import java.util.Date;
 import java.util.List;
 
 public interface Admin_AttendanceService {
@@ -14,4 +15,6 @@ public interface Admin_AttendanceService {
     Attendance getAttendanceById(Long attendanceId);
 
     List<Attendance> getAllAttendances();
+
+	List<Attendance> getFilteredAttendances(Long studentId, Long divisionId, Long subjectId, Date date);
 }

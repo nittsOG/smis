@@ -1,16 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Attendance Details</title>
+    <title>Attendance Details</title>
 </head>
 <body>
-    <h1>Attendance Details</h1>
-    <p>ID: ${attendance.attendanceId}</p>
-    <p>Session: ${attendance.session.sessionId}</p>
-    <p>Student: ${attendance.student.name}</p>
-    <p>Status: ${attendance.status}</p>
-    <a href="${pageContext.request.contextPath}/admin/attendances/${attendance.attendanceId}/edit">Edit</a>
-    <a href="${pageContext.request.contextPath}/admin/attendances">Back to List</a>
+    <h2>Attendance Details</h2>
+
+    <p><strong>Attendance ID:</strong> ${attendance.attendanceId}</p>
+    <p><strong>Student:</strong> ${attendance.student.username}</p>
+    <p><strong>Session Date:</strong> ${attendance.session.sessionDate}</p>
+    <p><strong>Subject:</strong> ${attendance.session.subject.name}</p>
+    <p><strong>Status:</strong> ${attendance.status}</p>
+
+    <a href="${pageContext.request.contextPath}/admin/attendances/${attendance.attendanceId}/edit">Edit</a> |
+    <a href="${pageContext.request.contextPath}/admin/attendances/${attendance.attendanceId}/delete">Delete</a>
 </body>
 </html>
