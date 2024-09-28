@@ -113,7 +113,7 @@
         <div class="section">
             <h2>Timetable and Sessions Management</h2>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/admin/timetable/list">Timetables</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/timetables">Timetables</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/sessions">Sessions</a></li>
             </ul>
         </div>
