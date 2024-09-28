@@ -14,4 +14,6 @@ public interface Admin_SessionService {
     Session getSessionById(Long sessionId);
 
     List<Session> getAllSessions();
+
+	List<Session> getSessionsBySubject(Long subjectId);
 }

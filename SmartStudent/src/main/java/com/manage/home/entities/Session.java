@@ -33,7 +33,7 @@ public class Session {
     @Column(name = "session_type", nullable = false)
     private String sessionType;  // Could be "Lecture", "Lab", etc.
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
