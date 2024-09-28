@@ -13,11 +13,11 @@ public class StudentSemester {
     @Column(name = "student_semester_id")
     private Long studentSemesterId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "semester_id", nullable = false)
     private Semester semester;
 

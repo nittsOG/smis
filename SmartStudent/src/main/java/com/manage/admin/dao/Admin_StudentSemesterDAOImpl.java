@@ -48,4 +48,14 @@ public class Admin_StudentSemesterDAOImpl implements Admin_StudentSemesterDAO {
                 .createQuery("FROM StudentSemester")
                 .list();
     }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<StudentSemester> getStudentSemestersByStudentId(Long studentId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM StudentSemester ss WHERE ss.student.studentId = :studentId")
+                .setParameter("studentId", studentId)
+                .list();
+    }
+
 }

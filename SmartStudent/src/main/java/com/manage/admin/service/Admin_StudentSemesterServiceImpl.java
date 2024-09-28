@@ -69,4 +69,9 @@ public class Admin_StudentSemesterServiceImpl implements Admin_StudentSemesterSe
             }
         }
     }
+
+	@Override
+	public List<StudentSemester> getStudentSemestersByStudentId(Long studentId) {
+		return adminStudentSemesterDAO.getStudentSemestersByStudentId(studentId);
+	}
 }

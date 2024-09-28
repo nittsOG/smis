@@ -1,36 +1,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Student Semesters</title>
 </head>
 <body>
-    <h1>Student Semesters</h1>
-    <a href="<c:url value='/admin/student-semesters/new' />">Add New Student Semester</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Student</th>
-                <th>Semester</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${studentSemesters}" var="studentSemester">
-                <tr>
-                    <td>${studentSemester.studentSemesterId}</td>
-                    <td>${studentSemester.student.username}</td>
-                    <td>${studentSemester.semester.name}</td>
-                    <td>
-                        <a href="<c:url value='/admin/student-semesters/${studentSemester.studentSemesterId}' />">Details</a>
-                        <a href="<c:url value='/admin/student-semesters/${studentSemester.studentSemesterId}/edit' />">Edit</a>
-                        <a href="<c:url value='/admin/student-semesters/${studentSemester.studentSemesterId}/delete' />" onclick="return confirm('Are you sure you want to delete this semester?');">Delete</a>
-                    </td>
-                </tr>
+    <h2>Student Semesters</h2>
+
+    <!-- Filter by Student -->
+    <form action="${pageContext.request.contextPath}/admin/student-semesters" method="get">
+        <label for="studentId">Filter by Student:</label>
+        <select name="studentId" id="studentId">
+            <option value="">All Students</option>
+            <c:forEach var="student" items="${students}">
+                <option value="${student.studentId}" ${student.studentId == selectedStudentId ? 'selected' : ''}>
+                    ${student.studentId} : ${student.username}
+                </option>
             </c:forEach>
-        </tbody>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>Student</th>
+            <th>Semester</th>
+            <th>Actions</th>
+        </tr>
+        <c:forEach var="studentSemester" items="${studentSemesters}">
+            <tr>
+                <td>${studentSemester.student.username}</td>
+                <td>${studentSemester.semester.name}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.studentSemesterId}">View</a> |
+                    <a href="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.studentSemesterId}/edit">Edit</a> |
+                    <a href="${pageContext.request.contextPath}/admin/student-semesters/${studentSemester.studentSemesterId}/delete">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
+
+    <a href="${pageContext.request.contextPath}/admin/student-semesters/new">Add New Student Semester</a>
 </body>
 </html>
