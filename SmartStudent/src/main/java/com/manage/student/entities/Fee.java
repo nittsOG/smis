@@ -2,9 +2,7 @@ package com.manage.student.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,8 +35,6 @@ public class Fee {
 	@Column(name = "due_date")
 	private Date dueDate;
 
-	@OneToMany(mappedBy = "fee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	private Set<Payment> payments;
 
 	// Getters and Setters
 
@@ -84,11 +79,4 @@ public class Fee {
 		this.dueDate = date;
 	}
 
-	public Set<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
-	}
 }

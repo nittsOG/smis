@@ -95,7 +95,6 @@
             <h2>Manager and Payment Management</h2>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/admin/managers">Manager List</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/payments">Payments</a></li>
             </ul>
         </div>
 
