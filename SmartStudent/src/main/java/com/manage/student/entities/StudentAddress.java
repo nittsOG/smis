@@ -26,7 +26,7 @@ public class StudentAddress {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id" , unique = true, nullable = false)
     private Student student;
 

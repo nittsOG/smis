@@ -1,7 +1,17 @@
 package com.manage.manager.entities;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.manage.home.entities.Department;
 
 @Entity
@@ -22,11 +32,11 @@ public class Manager {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false, orphanRemoval = true)
+    @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private ManagerAddress address;
 
 
@@ -78,12 +88,6 @@ public class Manager {
 
 	public void setAddress(ManagerAddress address) {
 		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "Manager [managerId=" + managerId + ", username=" + username + ", password=" + password + ", email="
-				+ email + ", department=" + department + ", address=" + address + "]";
 	}
 
 }

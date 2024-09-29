@@ -9,4 +9,5 @@ public interface Admin_ManagerAddressService {
     void updateManagerAddress(ManagerAddress managerAddress);
     void deleteManagerAddress(ManagerAddress managerAddress);
     List<ManagerAddress> getAllManagerAddresses();
+	void deleteManagerAddressByManagerId(Long managerId);
 }

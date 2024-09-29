@@ -16,4 +16,6 @@ public interface Admin_ManagerService {
     void deleteManager(Long managerId);
 
 	List<Manager> getAllManagers();
+
+	List<Manager> getManagersByDepartment(Long departmentId);
 }

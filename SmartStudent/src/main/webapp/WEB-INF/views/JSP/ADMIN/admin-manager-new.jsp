@@ -1,34 +1,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Add New Manager</title>
+    <title>Add Manager</title>
 </head>
 <body>
-    <h1>Add New Manager</h1>
-    <form action="${pageContext.request.contextPath}/admin/managers/new" method="post">
-        <p>Username: <input type="text" name="username" required /></p>
-        <p>Password: <input type="password" name="password" required /></p>
-        <p>Email: <input type="email" name="email" required /></p>
+    <h2>Add New Manager</h2>
 
-        <h2>Address Information</h2>
-        <p>Street: <input type="text" name="address.street" required /></p>
-        <p>City: <input type="text" name="address.city" required /></p>
-        <p>State: <input type="text" name="address.state" required /></p>
-        <p>Country: <input type="text" name="address.country" required /></p>
-        <p>Zip Code: <input type="text" name="address.zipCode" required /></p>
+    <form method="post" action="${pageContext.request.contextPath}/admin/managers/add">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
 
-        <h2>Department Information</h2>
-        <p>Department: 
-            <select name="department.departmentId" required>
-                <c:forEach var="department" items="${departments}">
-                    <option value="${department.departmentId}">${department.name}</option>
-                </c:forEach>
-            </select>
-        </p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
 
-        <button type="submit">Save</button>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="department">Department:</label>
+        <select name="department.departmentId" id="department">
+            <option value="">Select Department</option>
+            <c:forEach var="dept" items="${departments}">
+                <option value="${dept.departmentId}">${dept.name}</option>
+            </c:forEach>
+        </select>
+
+        <h3>Address</h3>
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" />
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" />
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" />
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" />
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" />
+
+        <button type="submit">Add</button>
     </form>
+
+    <a href="${pageContext.request.contextPath}/admin/managers">Back to list</a>
 </body>
 </html>

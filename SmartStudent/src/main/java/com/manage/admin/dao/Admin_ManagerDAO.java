@@ -10,4 +10,5 @@ public interface Admin_ManagerDAO {
     void updateManager(Manager manager);
     void deleteManager(Manager manager);
     List<Manager> getAllManagers(); // New method to fetch all managers
+	List<Manager> getManagersByDepartment(Long departmentId);
 }
