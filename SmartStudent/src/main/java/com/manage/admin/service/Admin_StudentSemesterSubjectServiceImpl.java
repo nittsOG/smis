@@ -60,4 +60,13 @@ public class Admin_StudentSemesterSubjectServiceImpl implements Admin_StudentSem
             studentSemesterSubject.getSubject().getName();
         }
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<StudentSemesterSubject> getStudentSemesterSubjectsByStudentId(Long studentId) {
+        List<StudentSemesterSubject> studentSemesterSubjects = adminStudentSemesterSubjectDAO.getStudentSemesterSubjectsByStudentId(studentId);
+        studentSemesterSubjects.forEach(this::initializeStudentSemesterSubject);
+        return studentSemesterSubjects;
+    }
+
 }

@@ -14,13 +14,13 @@ public class Division {
     @Column(name = "division_id")
     private Long divisionId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false , unique = true)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id" , nullable = false)
     private Department department;
-
+    
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Student> students;
 

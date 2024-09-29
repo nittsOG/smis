@@ -10,4 +10,5 @@ public interface Admin_SessionDAO {
     void deleteSession(Long sessionId);
     Session getSessionById(Long sessionId);
     List<Session> getAllSessions();
+	List<Session> getSessionsBySubject(Long subjectId);
 }

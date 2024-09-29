@@ -46,4 +46,13 @@ public class Admin_SemesterSubjectDAOImpl implements Admin_SemesterSubjectDAO {
     public List<SemesterSubject> getAllSemesterSubjects() {
         return sessionFactory.getCurrentSession().createQuery("from SemesterSubject", SemesterSubject.class).list();
     }
+    
+    @Override
+    public List<SemesterSubject> getSemesterSubjectsBySubjectId(Long subjectId) {
+        return sessionFactory.getCurrentSession()
+            .createQuery("from SemesterSubject where subject.subjectId = :subjectId", SemesterSubject.class)
+            .setParameter("subjectId", subjectId)
+            .list();
+    }
+
 }

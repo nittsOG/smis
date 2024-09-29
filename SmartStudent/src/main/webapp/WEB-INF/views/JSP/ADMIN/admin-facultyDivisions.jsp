@@ -11,30 +11,44 @@
 </head>
 <body>
     <h1>Faculty Divisions List</h1>
+
+    <!-- Filter Form by Faculty ID -->
+    <form action="${pageContext.request.contextPath}/admin/facultyDivisions" method="get">
+        <label for="facultyId">Filter by Faculty ID:</label>
+        <input type="text" id="facultyId" name="facultyId" value="${param.facultyId}" />
+        <button type="submit">Filter</button>
+        <a href="${pageContext.request.contextPath}/admin/facultyDivisions">Clear Filter</a>
+    </form>
+    <br/>
+
     <table border="1">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Faculty Division ID</th>
+                <th>Faculty Id</th>
+                <th>Faculty Name</th>
+                <th>Division Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="facultyDivision" items="${facultyDivisions}">
                 <tr>
-                    <td>${facultyDivision.id}</td>
-                    <td>${facultyDivision.name}</td>
-                    <td>${facultyDivision.description}</td>
+                    <td>${facultyDivision.facultyDivisionId}</td>
+                    <td>${facultyDivision.faculty.facultyId}</td>
+                    <td>${facultyDivision.faculty.username}</td>
+                    <td>${facultyDivision.division.name}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.id}">Details</a>
-                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.id}/edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.id}/delete">Delete</a>
+                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.facultyDivisionId}">Details</a>
+                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.facultyDivisionId}/edit">Edit</a>
+                        <a href="${pageContext.request.contextPath}/admin/facultyDivisions/${facultyDivision.facultyDivisionId}/delete">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
+
+    <!-- Add New Faculty Division Link -->
     <a href="${pageContext.request.contextPath}/admin/facultyDivisions/new">Add New Faculty Division</a>
 </body>
 </html>

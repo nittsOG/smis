@@ -1,20 +1,37 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>New Session</title>
+<meta charset="UTF-8">
+<title>Create New Session</title>
 </head>
 <body>
-    <h1>New Session</h1>
-    <form action="${pageContext.request.contextPath}/admin/sessions/new" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required /><br>
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" name="startDate" required /><br>
-        <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" name="endDate" required /><br>
-        <button type="submit">Save Session</button>
-    </form>
-    <a href="${pageContext.request.contextPath}/admin/sessions">Back to List</a>
+	<h1>Create New Session</h1>
+
+	<form method="POST"
+		action="${pageContext.request.contextPath}/admin/sessions/new">
+		<label for="sessionDate">Session Date:</label> <input type="date"
+			id="sessionDate" name="sessionDate" required><br> <label
+			for="sessionType">Session Type:</label> <input type="text"
+			id="sessionType" name="sessionType" required><br> <label
+			for="startTime">Start Time:</label> <input type="time" id="startTime"
+			name="startTime" required><br> <label for="endTime">End
+			Time:</label> <input type="time" id="endTime" name="endTime" required><br>
+
+		<label for="subjectId">Subject:</label> <select name="subjectId"
+			id="subjectId" required>
+			<c:forEach var="subject" items="${subjects}">
+				<option value="${subject.subjectId}">${subject.name}</option>
+			</c:forEach>
+		</select><br> <label for="divisionId">Division:</label> <select
+			name="divisionId" id="divisionId" required>
+			<c:forEach var="division" items="${divisions}">
+				<option value="${division.divisionId}">${division.name}</option>
+			</c:forEach>
+		</select><br> <label for="facultyId">Faculty ID:</label> <input
+			type="number" id="facultyId" name="facultyId" required><br>
+
+		<input type="submit" value="Create Session">
+	</form>
 </body>
 </html>

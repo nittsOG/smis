@@ -1,23 +1,39 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Semester Subject</title>
 </head>
 <body>
-    <h1>Edit Semester Subject</h1>
-    <form action="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.id}/edit" method="post">
-        <input type="hidden" name="id" value="${semesterSubject.id}" />
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="${semesterSubject.name}" required /><br>
+    <h2>Edit Semester Subject</h2>
+
+    <form:form action="${pageContext.request.contextPath}/admin/semester-subjects/${semesterSubject.semesterSubjectId}/edit" method="post" modelAttribute="semesterSubject">
+        <!-- Hidden field to preserve ID -->
+        <form:hidden path="semesterSubjectId" />
+
+        <!-- Dropdown for Semester -->
         <label for="semester">Semester:</label>
-        <select id="semester" name="semester.id" required>
-            <c:forEach var="semester" items="${semesters}">
-                <option value="${semester.id}" ${semesterSubject.semester.id == semester.id ? 'selected' : ''}>${semester.name}</option>
-            </c:forEach>
-        </select><br>
-        <button type="submit">Update Semester Subject</button>
-    </form>
+        <form:select path="semester.semesterId">
+            <form:options items="${semesters}" itemValue="semesterId" itemLabel="name" />
+        </form:select>
+        <br>
+
+        <!-- Dropdown for Subject -->
+        <label for="subject">Subject:</label>
+        <form:select path="subject.subjectId">
+            <form:options items="${subjects}" itemValue="subjectId" itemLabel="name" />
+        </form:select>
+        <br>
+
+        <!-- Submit button -->
+        <button type="submit">Update</button>
+    </form:form>
+
+    <br>
     <a href="${pageContext.request.contextPath}/admin/semester-subjects">Back to List</a>
 </body>
 </html>

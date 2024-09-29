@@ -9,4 +9,5 @@ public interface Admin_FacultyDivisionService {
     void deleteFacultyDivision(Long facultyDivisionId);
     FacultyDivision getFacultyDivisionById(Long facultyDivisionId);
     List<FacultyDivision> getAllFacultyDivisions();
+	List<FacultyDivision> getFacultyDivisionsByFacultyId(Long facultyId);
 }

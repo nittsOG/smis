@@ -46,4 +46,14 @@ public class Admin_TimetableServiceImpl implements Admin_TimetableService {
     public List<Timetable> getAllTimetables() {
         return timetableDao.findAll();
     }
+    
+    @Override
+    public List<Timetable> getFilteredTimetables(Long subjectId, Long facultyId, Long divisionId) {
+        return timetableDao.findTimetablesByFilters(subjectId, facultyId, divisionId);
+    }
+
+	@Override
+	public void deleteTimetable(Long id) {
+		timetableDao.delete(this.getTimetableById(id));
+	}
 }

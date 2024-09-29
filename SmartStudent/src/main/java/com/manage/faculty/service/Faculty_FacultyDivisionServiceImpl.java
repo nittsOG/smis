@@ -1,13 +1,15 @@
 package com.manage.faculty.service;
 
-import com.manage.faculty.dao.Faculty_FacultyDivisionDAO;
-import com.manage.faculty.entities.FacultyDivision;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.manage.faculty.dao.Faculty_FacultyDivisionDAO;
+import com.manage.faculty.entities.FacultyDivision;
+import com.manage.home.entities.Division;
 
 @Service
 @Qualifier("facultyFacultyDivisionServiceImpl")
@@ -36,5 +38,11 @@ public class Faculty_FacultyDivisionServiceImpl implements Faculty_FacultyDivisi
     @Transactional(transactionManager = "facultyTransactionManager")
     public List<FacultyDivision> getAllFacultyDivisions() {
         return facultyFacultyDivisionDAO.getAllFacultyDivisions();
+    }
+    
+    @Override
+    @Transactional(transactionManager = "facultyTransactionManager")
+    public List<Division> getAllFacultyDivisionsbyAcultyId(Long facultyId) {
+        return facultyFacultyDivisionDAO.getAllFacultyDivisions(facultyId);
     }
 }

@@ -13,54 +13,60 @@ import java.util.List;
 @Qualifier("adminManagerAddressServiceImpl")
 public class Admin_ManagerAddressServiceImpl implements Admin_ManagerAddressService {
 
-    private final Admin_ManagerAddressDAO adminManagerAddressDAO;
+	private final Admin_ManagerAddressDAO adminManagerAddressDAO;
 
-    @Autowired
-    public Admin_ManagerAddressServiceImpl(@Qualifier("adminManagerAddressDAOImpl") Admin_ManagerAddressDAO adminManagerAddressDAO) {
-        this.adminManagerAddressDAO = adminManagerAddressDAO;
-    }
+	@Autowired
+	public Admin_ManagerAddressServiceImpl(
+			@Qualifier("adminManagerAddressDAOImpl") Admin_ManagerAddressDAO adminManagerAddressDAO) {
+		this.adminManagerAddressDAO = adminManagerAddressDAO;
+	}
 
-    @Override
-    @Transactional(transactionManager = "adminTransactionManager")
-    public ManagerAddress getManagerAddressById(Long managerAddressId) {
-        ManagerAddress managerAddress = adminManagerAddressDAO.getManagerAddressById(managerAddressId);
-        if (managerAddress != null) {
-            if (managerAddress.getManager() != null) {
-                managerAddress.getManager().getUsername(); // Initialize manager
-            }
-        }
-        return managerAddress;
-    }
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public ManagerAddress getManagerAddressById(Long managerAddressId) {
+		ManagerAddress managerAddress = adminManagerAddressDAO.getManagerAddressById(managerAddressId);
+		if (managerAddress != null) {
+			if (managerAddress.getManager() != null) {
+				managerAddress.getManager().getUsername(); // Initialize manager
+			}
+		}
+		return managerAddress;
+	}
 
-    @Override
-    @Transactional(transactionManager = "adminTransactionManager")
-    public void saveManagerAddress(ManagerAddress managerAddress) {
-        adminManagerAddressDAO.saveManagerAddress(managerAddress);
-    }
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public void saveManagerAddress(ManagerAddress managerAddress) {
+		adminManagerAddressDAO.saveManagerAddress(managerAddress);
+	}
 
-    @Override
-    @Transactional(transactionManager = "adminTransactionManager")
-    public void updateManagerAddress(ManagerAddress managerAddress) {
-        adminManagerAddressDAO.updateManagerAddress(managerAddress);
-    }
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public void updateManagerAddress(ManagerAddress managerAddress) {
+		adminManagerAddressDAO.updateManagerAddress(managerAddress);
+	}
 
-    @Override
-    @Transactional(transactionManager = "adminTransactionManager")
-    public void deleteManagerAddress(ManagerAddress managerAddress) {
-        adminManagerAddressDAO.deleteManagerAddress(managerAddress);
-    }
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public void deleteManagerAddress(ManagerAddress managerAddress) {
+		adminManagerAddressDAO.deleteManagerAddress(managerAddress);
+	}
 
-    @Override
-    @Transactional(transactionManager = "adminTransactionManager")
-    public List<ManagerAddress> getAllManagerAddresses() {
-        List<ManagerAddress> addresses = adminManagerAddressDAO.getAllManagerAddresses();
-        for (ManagerAddress address : addresses) {
-            if (address.getManager() != null) {
-                address.getManager().getUsername(); // Initialize manager
-            }
-        }
-        return addresses;
-    }
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public List<ManagerAddress> getAllManagerAddresses() {
+		List<ManagerAddress> addresses = adminManagerAddressDAO.getAllManagerAddresses();
+		for (ManagerAddress address : addresses) {
+			if (address.getManager() != null) {
+				address.getManager().getUsername(); // Initialize manager
+			}
+		}
+		return addresses;
+	}
 
+	@Override
+	@Transactional(transactionManager = "adminTransactionManager")
+	public void deleteManagerAddressByManagerId(Long managerId) {
+		adminManagerAddressDAO.deleteManagerAddressByManagerId(managerId);
+	}
 
 }

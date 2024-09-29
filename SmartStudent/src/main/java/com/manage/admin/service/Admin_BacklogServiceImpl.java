@@ -13,40 +13,46 @@ import java.util.List;
 @Qualifier("adminBacklogServiceImpl")
 public class Admin_BacklogServiceImpl implements Admin_BacklogService {
 
-    private final Admin_BacklogDAO adminBacklogDAO;
+	private final Admin_BacklogDAO adminBacklogDAO;
 
-    @Autowired
-    public Admin_BacklogServiceImpl(@Qualifier("adminBacklogDAOImpl") Admin_BacklogDAO adminBacklogDAO) {
-        this.adminBacklogDAO = adminBacklogDAO;
-    }
+	@Autowired
+	public Admin_BacklogServiceImpl(@Qualifier("adminBacklogDAOImpl") Admin_BacklogDAO adminBacklogDAO) {
+		this.adminBacklogDAO = adminBacklogDAO;
+	}
 
-    @Override
-    @Transactional("adminTransactionManager")
-    public void saveBacklog(Backlog backlog) {
-        adminBacklogDAO.saveBacklog(backlog);
-    }
+	@Override
+	@Transactional("adminTransactionManager")
+	public void saveBacklog(Backlog backlog) {
+		adminBacklogDAO.saveBacklog(backlog);
+	}
 
-    @Override
-    @Transactional("adminTransactionManager")
-    public void updateBacklog(Backlog backlog) {
-        adminBacklogDAO.updateBacklog(backlog);
-    }
+	@Override
+	@Transactional("adminTransactionManager")
+	public void updateBacklog(Backlog backlog) {
+		adminBacklogDAO.updateBacklog(backlog);
+	}
 
-    @Override
-    @Transactional("adminTransactionManager")
-    public void deleteBacklog(Integer studentId, String subjectCode, Integer semester) {
-        adminBacklogDAO.deleteBacklog(studentId, subjectCode, semester);
-    }
+	@Override
+	@Transactional("adminTransactionManager")
+	public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
+		adminBacklogDAO.deleteBacklog(studentId, subjectCode, semester);
+	}
 
-    @Override
-    @Transactional("adminTransactionManager")
-    public Backlog getBacklogById(Integer studentId, String subjectCode, Integer semester) {
-        return adminBacklogDAO.getBacklogById(studentId, subjectCode, semester);
-    }
+	@Override
+	@Transactional("adminTransactionManager")
+	public Backlog getBacklogById(Long studentId, String subjectCode, Integer semester) {
+		return adminBacklogDAO.getBacklogById(studentId, subjectCode, semester);
+	}
 
-    @Override
-    @Transactional("adminTransactionManager")
-    public List<Backlog> getAllBacklogs() {
-        return adminBacklogDAO.getAllBacklogs();
-    }
+	@Override
+	@Transactional("adminTransactionManager")
+	public List<Backlog> getAllBacklogs() {
+		return adminBacklogDAO.getAllBacklogs();
+	}
+
+	@Override
+	public List<Backlog> getBacklogsByStudentId(Long studentId) {
+		return adminBacklogDAO.getBacklogsByStudentId(studentId);
+	}
+
 }

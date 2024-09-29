@@ -2,6 +2,8 @@ package com.manage.admin.service;
 
 import com.manage.admin.dao.Admin_ManagerDAO;
 import com.manage.manager.entities.Manager;
+import com.manage.student.entities.Student;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,12 +27,11 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     public Manager getManagerById(Long managerId) {
         Manager manager = adminManagerDAO.getManagerById(managerId);
         if (manager != null) {
-            // Access to initialize lazy properties
             if (manager.getDepartment() != null) {
                 manager.getDepartment().getName();
             }
             if (manager.getAddress() != null) {
-                manager.getAddress(); // Forces initialization
+                manager.getAddress(); 
             }
         }
         return manager;
@@ -52,7 +53,6 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     @Transactional(transactionManager = "adminTransactionManager")
     public void deleteManager(Manager manager) {
         if (manager != null) {
-            // Access department to avoid LazyInitializationException
             if (manager.getDepartment() != null) {
                 manager.getDepartment().getName();
             }
@@ -65,11 +65,10 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
     public List<Manager> getAllManagers() {
         List<Manager> managers = adminManagerDAO.getAllManagers();
         for (Manager manager : managers) {
-            // Initialize lazy properties
             if (manager.getDepartment() != null) {
-                manager.getDepartment().getName(); // Initialize department
+                manager.getDepartment().getName();
             }
-            manager.getAddress(); // Initialize addresses collection
+            manager.getAddress(); 
         }
         return managers;
     }
@@ -82,4 +81,12 @@ public class Admin_ManagerServiceImpl implements Admin_ManagerService {
             deleteManager(manager);
         }
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Manager> getManagersByDepartment(Long departmentId) {
+        return adminManagerDAO.getManagersByDepartment(departmentId);
+    }
+    
+    
 }

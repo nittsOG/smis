@@ -1,24 +1,35 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <html>
 <head>
-    <title>Edit Faculty Subject</title>
-    <script>
-        <c:if test="${not empty alert}">
-            alert("${alert}");
-        </c:if>
-    </script>
+<title>Edit Faculty Subject</title>
 </head>
 <body>
-    <h1>Edit Faculty Subject</h1>
-    <form action="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.id}/edit" method="post">
-        <input type="hidden" name="id" value="${facultySubject.id}" />
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="${facultySubject.name}" required /><br>
-        <label for="code">Code:</label>
-        <input type="text" id="code" name="code" value="${facultySubject.code}" required /><br>
-        <button type="submit">Save</button>
-    </form>
-    <a href="${pageContext.request.contextPath}/admin/facultySubjects">Back to List</a>
+	<h2>Edit Faculty Subject</h2>
+
+	<form
+		action="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.facultySubjectId}/edit"
+		method="post">
+		<div>
+			<label for="faculty">Faculty:</label> <input type="text"
+				name="facultyId" value="${facultySubject.faculty.facultyId}"
+				disabled="true" />
+		</div>
+
+		<div>
+			<label for="subject">Subject:</label> <select name="subjectId">
+				<c:forEach var="subject" items="${subjects}">
+					<option value="${subject.subjectId}"
+						${subject.subjectId == facultySubject.subject.subjectId ? 'selected' : ''}>${subject.name}</option>
+				</c:forEach>
+			</select>
+		</div>
+
+		<div>
+			<button type="submit">Save</button>
+		</div>
+	</form>
+
 </body>
 </html>

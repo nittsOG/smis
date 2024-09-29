@@ -46,4 +46,14 @@ public class Admin_SubjectDAOImpl implements Admin_SubjectDAO {
     public List<Subject> getAllSubjects() {
         return sessionFactory.getCurrentSession().createQuery("from Subject", Subject.class).list();
     }
+    
+    @Override
+    public List<Subject> getSubjectsByCourse(Long courseId) {
+        String hql = "FROM Subject s WHERE s.course.courseId = :courseId";
+        return sessionFactory.getCurrentSession()
+                             .createQuery(hql, Subject.class)
+                             .setParameter("courseId", courseId)
+                             .list();
+    }
+
 }

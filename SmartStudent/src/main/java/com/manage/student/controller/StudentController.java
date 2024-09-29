@@ -25,22 +25,6 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 
-//	@GetMapping("/login")
-//    public String showLoginForm() {
-//        return "JSP/STUDENT/student-login";
-//    }
-//
-//    @PostMapping("/login")
-//    public ModelAndView login( @RequestParam Long id, @RequestParam String password, HttpSession session) {
-//        if (studentService.validateStudent(id, password)) {
-//            session.setAttribute("studentId", id);
-//            return new ModelAndView("redirect:/student/dashboard");
-//        } else {
-//            ModelAndView mav = new ModelAndView("JSP/STUDENT/student-login");
-//            mav.addObject("error", "Invalid id or password");
-//            return mav;
-//        }
-//    }
 
     @GetMapping("/dashboard")
     public ModelAndView showDashboard(HttpSession session) {

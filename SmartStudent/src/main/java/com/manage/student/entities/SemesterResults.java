@@ -10,31 +10,31 @@ import java.util.Objects;
 @IdClass(SemesterResults.IdClass.class)
 public class SemesterResults {
 
-	@Id
-	@Column(name = "student_id")
-	private Long studentId;
+    @Id
+    @Column(name = "student_id")
+    private Long studentId;
 
     @Id
     @Column(name = "semester")
     private Integer semester;
 
     @Id
-    @Column(name = "subject_code")
+    @Column(name = "subject_code", length = 20)
     private String subjectCode;
 
-    @Column(name = "subject_name")
+    @Column(name = "subject_name", length = 100)
     private String subjectName;
 
-    @Column(name = "credit")
+    @Column(name = "credit", precision = 5, scale = 2)
     private BigDecimal credit;
 
-    @Column(name = "grade")
+    @Column(name = "grade", length = 2)
     private String grade;
 
-    @Column(name = "grade_point")
+    @Column(name = "grade_point", precision = 3, scale = 2)
     private BigDecimal gradePoint;
 
-    @Column(name = "credit_point")
+    @Column(name = "credit_point", precision = 5, scale = 2)
     private BigDecimal creditPoint;
 
     // Getters and Setters
@@ -109,12 +109,11 @@ public class SemesterResults {
         private String subjectCode;
 
         // Default constructor
-        public IdClass() {
-        }
+        public IdClass() {}
 
         // Parameterized constructor
-        public IdClass(Long studentId2, Integer semester, String subjectCode) {
-            this.studentId = studentId2;
+        public IdClass(Long studentId, Integer semester, String subjectCode) {
+            this.studentId = studentId;
             this.semester = semester;
             this.subjectCode = subjectCode;
         }
@@ -151,8 +150,8 @@ public class SemesterResults {
             if (o == null || getClass() != o.getClass()) return false;
             IdClass idClass = (IdClass) o;
             return Objects.equals(studentId, idClass.studentId) &&
-                    Objects.equals(semester, idClass.semester) &&
-                    Objects.equals(subjectCode, idClass.subjectCode);
+                   Objects.equals(semester, idClass.semester) &&
+                   Objects.equals(subjectCode, idClass.subjectCode);
         }
 
         @Override

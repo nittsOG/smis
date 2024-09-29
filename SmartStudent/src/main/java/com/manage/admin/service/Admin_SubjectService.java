@@ -15,4 +15,6 @@ public interface Admin_SubjectService {
     Subject getSubjectById(Long subjectId);
 
     List<Subject> getAllSubjects();
+
+	List<Subject> getSubjectsByCourse(Long courseId);
 }

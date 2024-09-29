@@ -1,29 +1,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>New Backlog</title>
+    <title>Add New Backlog</title>
 </head>
 <body>
-    <h1>New Backlog</h1>
-    <form:form action="${pageContext.request.contextPath}/admin/backlogs/new" method="post" modelAttribute="backlog">
+    <h1>Add New Backlog</h1>
+
+    <form action="${pageContext.request.contextPath}/admin/backlogs/new" method="post">
         <label for="studentId">Student ID:</label>
-        <form:input path="id.studentId" id="studentId"/><br/>
-        
+        <input type="text" id="studentId" name="studentId" required /><br/>
+
         <label for="subjectCode">Subject Code:</label>
-        <form:input path="id.subjectCode" id="subjectCode"/><br/>
+        <input type="text" id="subjectCode" name="subjectCode" required /><br/>
 
         <label for="semester">Semester:</label>
-        <form:input path="id.semester" id="semester"/><br/>
+        <input type="number" id="semester" name="semester" required /><br/>
 
-        <label for="backlogStatus">Status:</label>
-        <form:input path="backlogStatus" id="backlogStatus"/><br/>
+        <label for="backlogStatus">Backlog Status:</label>
+        <input type="text" id="backlogStatus" name="backlogStatus" required /><br/>
 
-        <input type="submit" value="Save Backlog"/>
-    </form:form>
-
-    <a href="${pageContext.request.contextPath}/admin/backlogs">Back to List</a>
-    <a href="${pageContext.request.contextPath}/admin/dashboard">Back to Dashboard</a>
+        <button type="submit">Save</button>
+        <a href="${pageContext.request.contextPath}/admin/backlogs">Cancel</a>
+    </form>
 </body>
 </html>

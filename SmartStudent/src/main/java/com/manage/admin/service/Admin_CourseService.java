@@ -14,4 +14,6 @@ public interface Admin_CourseService {
     Course getCourseById(Long courseId);
 
     List<Course> getAllCourses();
+
+	List<Course> getCoursesByDepartment(Long departmentId);
 }

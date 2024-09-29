@@ -11,4 +11,5 @@ public interface Admin_TimetableDAO {
     public void delete(Timetable timetable);
     public Timetable findById(Long id);
     public List<Timetable> findAll();
+	List<Timetable> findTimetablesByFilters(Long subjectId, Long facultyId, Long divisionId);
 }

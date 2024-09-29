@@ -25,7 +25,7 @@ public class Semester {
     @Column(name = "end_date") // Added endDate
     private java.sql.Date endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     private Course course;
 

@@ -12,4 +12,5 @@ public interface Admin_StudentDAO {
     List<Student> getAllStudents();
     List<Student> getStudentsByDivision(String divisionName);
     List<Student> getStudentsByDepartment(String departmentName); // New method
+	void createStudent(Student student);
 }

@@ -1,34 +1,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Edit Manager</title>
+    <title>Edit Manager</title>
 </head>
 <body>
-    <h1>Edit Manager</h1>
-    <form action="${pageContext.request.contextPath}/admin/managers/${manager.managerId}/edit" method="post">
-        <p>Username: <input type="text" name="username" value="${manager.username}" required /></p>
-        <p>Password: <input type="password" name="password" value="${manager.password}" required /></p>
-        <p>Email: <input type="email" name="email" value="${manager.email}" required /></p>
+    <h2>Edit Manager</h2>
 
-        <h2>Address Information</h2>
-        <p>Street: <input type="text" name="address.street" value="${manager.address.street}" required /></p>
-        <p>City: <input type="text" name="address.city" value="${manager.address.city}" required /></p>
-        <p>State: <input type="text" name="address.state" value="${manager.address.state}" required /></p>
-        <p>Country: <input type="text" name="address.country" value="${manager.address.country}" required /></p>
-        <p>Zip Code: <input type="text" name="address.zipCode" value="${manager.address.zipCode}" required /></p>
+    <form method="post" action="${pageContext.request.contextPath}/admin/managers/${manager.managerId}/edit">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="${manager.username}" required />
 
-        <h2>Department Information</h2>
-        <p>Department: 
-            <select name="department.departmentId" required>
-                <c:forEach var="department" items="${departments}">
-                    <option value="${department.departmentId}" ${department.departmentId == manager.department.departmentId ? 'selected' : ''}>${department.name}</option>
-                </c:forEach>
-            </select>
-        </p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" value="${manager.password}" required />
 
-        <button type="submit">Update</button>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="${manager.email}" required />
+
+        <label for="department">Department:</label>
+        <select name="department.departmentId" id="department">
+            <c:forEach var="dept" items="${departments}">
+                <option value="${dept.departmentId}" <c:if test="${dept.departmentId == manager.department.departmentId}">selected</c:if>>${dept.name}</option>
+            </c:forEach>
+        </select>
+
+        <h3>Address</h3>
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" value="${manager.address.street}" />
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value="${manager.address.city}" />
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" value="${manager.address.state}" />
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" value="${manager.address.country}" />
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" value="${manager.address.zipCode}" />
+
+        <button type="submit">Save</button>
     </form>
+
+    <a href="${pageContext.request.contextPath}/admin/managers">Back to list</a>
 </body>
 </html>

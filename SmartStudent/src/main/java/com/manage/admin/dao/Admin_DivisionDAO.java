@@ -10,4 +10,5 @@ public interface Admin_DivisionDAO {
 	    public void delete(Division division);
 	    public Division findById(Long id);
 	    public List<Division> findAll();
+		public List<Division> findByDepartmentId(Long departmentId);
 }

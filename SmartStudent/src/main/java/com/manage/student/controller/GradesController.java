@@ -1,26 +1,31 @@
 package com.manage.student.controller;
 
-import com.manage.student.entities.SemesterResults;
-import com.manage.student.entities.SemesterSummary;
-import com.manage.student.service.GradesService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.manage.student.entities.SemesterResults;
+import com.manage.student.entities.SemesterSummary;
+import com.manage.student.service.GradesService;
+
 @Controller
 public class GradesController {
-
-    @Autowired
+    
     private GradesService gradesService;
+    
+    @Autowired
+    public GradesController(@Qualifier("studentGradesServiceImpl")GradesService gradesService) {
+		this.gradesService = gradesService;
+	}
 
-    @GetMapping("/student/results")
+
+	@GetMapping("/student/results")
     public ModelAndView getGradesResults(HttpSession session) {
     	
     	Long studentId = (Long) session.getAttribute("studentId");

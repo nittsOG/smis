@@ -46,4 +46,12 @@ public class Admin_SessionDAOImpl implements Admin_SessionDAO {
     public List<Session> getAllSessions() {
         return sessionFactory.getCurrentSession().createQuery("from Session", Session.class).list();
     }
+    
+    @Override
+    public List<Session> getSessionsBySubject(Long subjectId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("from Session where subject.subjectId = :subjectId", Session.class)
+                .setParameter("subjectId", subjectId)
+                .list();
+    }
 }

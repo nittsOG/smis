@@ -10,4 +10,5 @@ public interface Admin_StudentSemesterDAO {
     void updateStudentSemester(StudentSemester studentSemester);
     void deleteStudentSemester(StudentSemester studentSemester);
 	List<StudentSemester> getAllStudentSemesters();
+	List<StudentSemester> getStudentSemestersByStudentId(Long studentId);
 }

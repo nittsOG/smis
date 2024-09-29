@@ -1,26 +1,32 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>New Student Semester</title>
+    <title>Add Student Semester</title>
 </head>
 <body>
-	<h1>New Student Semester</h1>
-	<form:form method="post" modelAttribute="studentSemester">
-		<table>
-			<tr>
-				<td>Student:</td>
-				<td><form:input path="student.username" /></td>
-			</tr>
-			<tr>
-				<td>Semester:</td>
-				<td><form:input path="semester.name" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Save" /></td>
-			</tr>
-		</table>
-	</form:form>
-	<a href="<c:url value='/admin/student-semesters' />">Back to List</a>
+    <h2>Add Student Semester</h2>
+
+    <form action="${pageContext.request.contextPath}/admin/student-semesters/new" method="post">
+        <label for="student">Student:</label>
+        <select name="student.studentId" id="student">
+            <c:forEach var="student" items="${students}">
+                <option value="${student.studentId}">${student.username}</option>
+            </c:forEach>
+        </select>
+        <br/>
+
+        <label for="semester">Semester:</label>
+        <select name="semesterId" id="semester"> <!-- Changed this line -->
+            <c:forEach var="semester" items="${semesters}">
+                <option value="${semester.semesterId}">${semester.name}</option>
+            </c:forEach>
+        </select>
+        <br/>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="${pageContext.request.contextPath}/admin/student-semesters">Back to List</a>
 </body>
 </html>

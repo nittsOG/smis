@@ -1,40 +1,57 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Faculty Subjects List</title>
-    <script>
-        <c:if test="${not empty alert}">
-            alert("${alert}");
-        </c:if>
-    </script>
+<meta charset="UTF-8">
+<title>Faculty Subjects</title>
 </head>
 <body>
-    <h1>Faculty Subjects List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="facultySubject" items="${facultySubjects}">
-                <tr>
-                    <td>${facultySubject.id}</td>
-                    <td>${facultySubject.name}</td>
-                    <td>${facultySubject.code}</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.id}">Details</a>
-                        <a href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.id}/edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.id}/delete">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <a href="${pageContext.request.contextPath}/admin/facultySubjects/new">Add New Faculty Subject</a>
+
+	<h2>Faculty Subjects</h2>
+
+	<!-- Filter Form -->
+	<form action="${pageContext.request.contextPath}/admin/facultySubjects"
+		method="get">
+		<label for="facultyId">Filter by Faculty ID:</label> <input
+			type="text" id="facultyId" name="facultyId"
+			value="${param.facultyId}">
+		<button type="submit">Filter</button>
+		<a href="${pageContext.request.contextPath}/admin/facultySubjects">Clear
+			Filter</a>
+	</form>
+
+	<!-- Display Table -->
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Faculty Subject ID</th>
+				<th>Faculty ID</th>
+				<th>Faculty Name</th>
+				<th>Subject Name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="facultySubject" items="${facultySubjects}">
+				<tr>
+					<td>${facultySubject.facultySubjectId}</td>
+					<td>${facultySubject.faculty.facultyId}</td>
+					<td>${facultySubject.faculty.username}</td>
+					<td>${facultySubject.subject.name}</td>
+					<td><a
+						href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.facultySubjectId}">Details</a>
+						<a
+						href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.facultySubjectId}/edit">Edit</a>
+						<a
+						href="${pageContext.request.contextPath}/admin/facultySubjects/${facultySubject.facultySubjectId}/delete">Delete</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+	<a href="${pageContext.request.contextPath}/admin/facultySubjects/new">Add
+		New Faculty Division</a>
 </body>
 </html>

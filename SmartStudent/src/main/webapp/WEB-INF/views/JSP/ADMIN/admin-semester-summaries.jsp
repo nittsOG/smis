@@ -21,22 +21,22 @@
         <tbody>
             <c:forEach var="summary" items="${semesterSummaries}">
                 <tr>
-                    <td>${summary.id.studentId}</td>
-                    <td>${summary.id.semester}</td>
+                    <td>${summary.studentId}</td> <!-- Corrected -->
+                    <td>${summary.semester}</td>   <!-- Corrected -->
                     <td>${summary.totalCredits}</td>
                     <td>${summary.totalCreditPoints}</td>
                     <td>${summary.sgpa}</td>
                     <td>${summary.cgpa}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.id.studentId}/${summary.id.semester}">Details</a>
-                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.id.studentId}/${summary.id.semester}/edit">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.id.studentId}/${summary.id.semester}/delete">Delete</a>
+                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.studentId}/${summary.semester}">Details</a>
+                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.studentId}/${summary.semester}/edit">Edit</a>
+                        <a href="${pageContext.request.contextPath}/admin/semester-summaries/${summary.studentId}/${summary.semester}/delete">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <a href="${pageContext.request.contextPath}/admin/semester-summaries/new">Add New Semester Summary</a>
+<%--     <a href="${pageContext.request.contextPath}/admin/semester-summaries/new">Add New Semester Summary</a> --%>
     <a href="${pageContext.request.contextPath}/admin/dashboard">Back to Dashboard</a>
 </body>
 </html>

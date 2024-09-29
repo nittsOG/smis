@@ -1,13 +1,14 @@
 package com.manage.admin.service;
 
-import com.manage.admin.dao.Admin_SubjectDAO;
-import com.manage.home.entities.Subject;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.manage.admin.dao.Admin_SubjectDAO;
+import com.manage.home.entities.Subject;
 
 @Service
 @Qualifier("adminSubjectServiceImpl")
@@ -49,6 +50,14 @@ public class Admin_SubjectServiceImpl implements Admin_SubjectService {
         subjects.forEach(this::initializeSubject);
         return subjects;
     }
+    
+    @Override
+    public List<Subject> getSubjectsByCourse(Long courseId) {
+        List<Subject> subjects = adminSubjectDAO.getSubjectsByCourse(courseId);
+        subjects.forEach(this::initializeSubject);  // Ensure lazy loading is handled
+        return subjects;
+    }
+
 
     private void initializeSubject(Subject subject) {
         if (subject != null && subject.getCourse() != null) {

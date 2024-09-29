@@ -9,6 +9,7 @@ import com.manage.home.entities.Department;
 
 @Service
 @Transactional("facultyTransactionManager")
+@Qualifier("facultyDepartmentServiceImpl")
 public class FacultyDepartmentServiceImpl implements FacultyDepartmentService {
 
     private final Faculty_DepartmentDAO facultyDepartmentDAO;

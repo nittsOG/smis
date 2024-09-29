@@ -66,7 +66,7 @@
         <div class="section">
             <h2>Faculty Management</h2>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/admin/faculty/list">Faculty List</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/faculty">Faculty List</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/facultyDivisions">Faculty Divisions</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/facultySubjects">Faculty Subjects</a></li>
             </ul>
@@ -95,7 +95,6 @@
             <h2>Manager and Payment Management</h2>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/admin/managers">Manager List</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/payments">Payments</a></li>
             </ul>
         </div>
 
@@ -113,7 +112,7 @@
         <div class="section">
             <h2>Timetable and Sessions Management</h2>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/admin/timetable/list">Timetables</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/timetables">Timetables</a></li>
                 <li><a href="${pageContext.request.contextPath}/admin/sessions">Sessions</a></li>
             </ul>
         </div>

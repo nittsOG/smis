@@ -10,4 +10,5 @@ public interface Admin_SemesterSubjectDAO {
     void deleteSemesterSubject(Long semesterSubjectId);
     SemesterSubject getSemesterSubjectById(Long semesterSubjectId);
     List<SemesterSubject> getAllSemesterSubjects();
+	List<SemesterSubject> getSemesterSubjectsBySubjectId(Long subjectId);
 }

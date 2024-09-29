@@ -14,4 +14,6 @@ public interface Admin_SemesterService {
     Semester getSemesterById(Long semesterId);
 
     List<Semester> getAllSemesters();
+
+	List<Semester> getSemestersByCourseId(Long courseId);
 }

@@ -23,20 +23,28 @@ public class Admin_BacklogController {
     }
 
     @GetMapping
-    public ModelAndView listBacklogs(HttpSession session) {
+    public ModelAndView listBacklogs(@RequestParam(value = "studentId", required = false) Long studentId, HttpSession session) {
         Long adminId = (Long) session.getAttribute("adminId");
         if (adminId == null) {
             return new ModelAndView("redirect:/admin/login");
         }
 
-        List<Backlog> backlogs = adminBacklogService.getAllBacklogs();
+        List<Backlog> backlogs;
+        if (studentId != null) {
+            backlogs = adminBacklogService.getBacklogsByStudentId(studentId);
+        } else {
+            backlogs = adminBacklogService.getAllBacklogs();
+        }
+
         ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-backlogs");
         mav.addObject("backlogs", backlogs);
+        mav.addObject("studentId", studentId);  // Pass the filter parameter back to the view
         return mav;
     }
 
+
     @GetMapping("/{studentId}/{subjectCode}/{semester}")
-    public ModelAndView showBacklogDetails(@PathVariable Integer studentId,
+    public ModelAndView showBacklogDetails(@PathVariable Long studentId,
                                            @PathVariable String subjectCode,
                                            @PathVariable Integer semester,
                                            HttpSession session) {
@@ -52,7 +60,7 @@ public class Admin_BacklogController {
     }
 
     @GetMapping("/{studentId}/{subjectCode}/{semester}/edit")
-    public ModelAndView showEditBacklogForm(@PathVariable Integer studentId,
+    public ModelAndView showEditBacklogForm(@PathVariable Long studentId,
                                             @PathVariable String subjectCode,
                                             @PathVariable Integer semester,
                                             HttpSession session) {
@@ -68,7 +76,7 @@ public class Admin_BacklogController {
     }
 
     @PostMapping("/{studentId}/{subjectCode}/{semester}/edit")
-    public String updateBacklog(@PathVariable Integer studentId,
+    public String updateBacklog(@PathVariable Long studentId,
                                 @PathVariable String subjectCode,
                                 @PathVariable Integer semester,
                                 @ModelAttribute("backlog") Backlog backlog,
@@ -83,7 +91,7 @@ public class Admin_BacklogController {
     }
 
     @GetMapping("/{studentId}/{subjectCode}/{semester}/delete")
-    public String deleteBacklog(@PathVariable Integer studentId,
+    public String deleteBacklog(@PathVariable Long studentId,
                                 @PathVariable String subjectCode,
                                 @PathVariable Integer semester,
                                 HttpSession session) {

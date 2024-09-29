@@ -13,32 +13,47 @@ import com.manage.home.entities.Division;
 @Repository
 @Qualifier("adminDivisionDAOImpl")
 @Transactional("adminTransactionManager")
-public class Admin_DivisionDAOImpl implements Admin_DivisionDAO{
+public class Admin_DivisionDAOImpl implements Admin_DivisionDAO {
 
-    private SessionFactory sessionFactory;
-    
-    @Autowired
-    public Admin_DivisionDAOImpl(@Qualifier("adminSessionFactory")SessionFactory sessionFactory) {
+	private SessionFactory sessionFactory;
+
+	@Autowired
+	public Admin_DivisionDAOImpl(@Qualifier("adminSessionFactory") SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Override
 	public void save(Division division) {
-        sessionFactory.getCurrentSession().save(division);
-    }
+		sessionFactory.getCurrentSession().save(division);
+	}
 
-    public void update(Division division) {
-        sessionFactory.getCurrentSession().update(division);
-    }
+	@Override
+	public void update(Division division) {
+		sessionFactory.getCurrentSession().merge(division);
+	}
 
-    public void delete(Division division) {
-        sessionFactory.getCurrentSession().delete(division);
-    }
+	@Override
+	public void delete(Division division) {
+		sessionFactory.getCurrentSession().delete(division);
+	}
 
-    public Division findById(Long id) {
-        return sessionFactory.getCurrentSession().get(Division.class, id);
-    }
+	@Override
+	public Division findById(Long id) {
+		return sessionFactory.getCurrentSession().get(Division.class, id);
+	}
 
-    public List<Division> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Division", Division.class).list();
-    }
+	@Override
+	public List<Division> findAll() {
+		return sessionFactory.getCurrentSession().createQuery("from Division", Division.class).list();
+	}
+
+	@Override
+	public List<Division> findByDepartmentId(Long departmentId) {
+	    String hql = "FROM Division d WHERE d.department.departmentId = :departmentId";
+	    return sessionFactory.getCurrentSession()
+	            .createQuery(hql, Division.class)
+	            .setParameter("departmentId", departmentId)
+	            .list();
+	}
+
 }

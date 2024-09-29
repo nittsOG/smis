@@ -24,7 +24,7 @@ public class Admin_FeeServiceImpl implements Admin_FeeService {
     @Transactional(transactionManager = "adminTransactionManager")
     public Fee getFeeById(Long feeId) {
         Fee fee = adminFeeDAO.getFeeById(feeId);
-        initializeFee(fee);
+//        initializeFee(fee);
         return fee;
     }
 
@@ -53,13 +53,27 @@ public class Admin_FeeServiceImpl implements Admin_FeeService {
     @Transactional(transactionManager = "adminTransactionManager")
     public List<Fee> getAllFees() {
         List<Fee> fees = adminFeeDAO.getAllFees();
-        fees.forEach(this::initializeFee);
+//        fees.forEach(this::initializeFee);
         return fees;
     }
 
-    private void initializeFee(Fee fee) {
-        if (fee != null && fee.getStudent() != null) {
-            fee.getStudent().getUsername();
-        }
+//    private void initializeFee(Fee fee) {
+//        if (fee != null && fee.getStudent() != null) {
+//            fee.getStudent().getUsername();
+//        }
+//    }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public List<Fee> getFeesByStudentId(Long studentId) {
+        return adminFeeDAO.getFeesByStudentId(studentId);
     }
+    
+    @Override
+    @Transactional(transactionManager = "adminTransactionManager")
+    public Long saveFeeAndReturnId(Fee fee) {
+        adminFeeDAO.saveFee(fee);
+        return fee.getFeeId();
+    }
+
 }

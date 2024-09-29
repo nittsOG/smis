@@ -1,11 +1,11 @@
 package com.manage.faculty.dao;
 
+import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.manage.home.entities.Subject;
 
 @Repository
@@ -13,12 +13,21 @@ import com.manage.home.entities.Subject;
 @Transactional("facultyTransactionManager")
 public class Faculty_SubjectDAOImpl implements Faculty_SubjectDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Faculty_SubjectDAOImpl(@Qualifier("facultySessionFactory") SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
+    @Override
+    public List<Subject> getSubjectsByFacultyId(Long facultyId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT s FROM Subject s JOIN s.facultySubjects fs WHERE fs.faculty.id = :facultyId", Subject.class)
+                .setParameter("facultyId", facultyId)
+                .getResultList();
+    }
+
 
     @Override
     public Subject getSubjectById(Long subjectId) {

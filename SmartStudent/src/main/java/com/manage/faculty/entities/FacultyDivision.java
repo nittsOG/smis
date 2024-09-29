@@ -1,8 +1,15 @@
 package com.manage.faculty.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import com.manage.faculty.entities.Faculty;
 import com.manage.home.entities.Division;
 
 @Entity
@@ -14,13 +21,16 @@ public class FacultyDivision {
     @Column(name = "faculty_division_id")
     private Long facultyDivisionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "division_id")
     private Division division;
+
+    @Column(name = "is_fr", nullable = false)
+    private boolean isFr;
 
     // Getters and Setters
 
@@ -46,5 +56,13 @@ public class FacultyDivision {
 
     public void setDivision(Division division) {
         this.division = division;
+    }
+
+    public boolean isFr() {
+        return isFr;
+    }
+
+    public void setFr(boolean isFr) {
+        this.isFr = isFr;
     }
 }

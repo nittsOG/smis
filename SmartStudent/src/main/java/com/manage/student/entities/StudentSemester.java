@@ -13,13 +13,16 @@ public class StudentSemester {
     @Column(name = "student_semester_id")
     private Long studentSemesterId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "semester_id", nullable = false)
     private Semester semester;
+    
+    @OneToOne(mappedBy = "studentSemester", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Fee fee;
 
     @OneToMany(mappedBy = "studentSemester", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<StudentSemesterSubject> studentSemesterSubjects;
@@ -33,7 +36,15 @@ public class StudentSemester {
         this.studentSemesterId = studentSemesterId;
     }
 
-    public Student getStudent() {
+    public Fee getFee() {
+		return fee;
+	}
+
+	public void setFee(Fee fee) {
+		this.fee = fee;
+	}
+
+	public Student getStudent() {
         return student;
     }
 

@@ -12,15 +12,15 @@ public class Timetable {
 	@Column(name = "timetable_id")
 	private Long timetableId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", nullable = false)
 	private Subject subject;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "faculty_id", nullable = false)
 	private Faculty faculty;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "division_id", nullable = false)
 	private Division division;
 

@@ -1,93 +1,82 @@
 package com.manage.student.entities;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Set;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "fee")
 public class Fee {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fee_id")
-    private Long feeId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "fee_id")
+	private Long feeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private Student student;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "studentsemester_id" , nullable = false)
+	private StudentSemester studentSemester;
 
-    @Column(name = "semester", nullable = false)
-    private String semester;
+	@Column(name = "total_amount")
+	private BigDecimal totalAmount;
 
-    @Column(name = "total_amount", nullable = false)
-    private BigDecimal totalAmount;
+	@Column(name = "paid_amount")
+	private BigDecimal paidAmount;
 
-    @Column(name = "paid_amount", nullable = false)
-    private BigDecimal paidAmount;
+	@Column(name = "due_date")
+	private Date dueDate;
 
-    @Column(name = "due_date", nullable = false)
-    private LocalDate dueDate;
 
-    @OneToMany(mappedBy = "fee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Payment> payments;
+	// Getters and Setters
 
-    // Getters and Setters
+	public Long getFeeId() {
+		return feeId;
+	}
 
-    public Long getFeeId() {
-        return feeId;
-    }
+	public void setFeeId(Long feeId) {
+		this.feeId = feeId;
+	}
 
-    public void setFeeId(Long feeId) {
-        this.feeId = feeId;
-    }
 
-    public Student getStudent() {
-        return student;
-    }
+	public StudentSemester getStudentSemester() {
+		return studentSemester;
+	}
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+	public void setStudentSemester(StudentSemester studentSemester) {
+		this.studentSemester = studentSemester;
+	}
 
-    public String getSemester() {
-        return semester;
-    }
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
 
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
+	public BigDecimal getPaidAmount() {
+		return paidAmount;
+	}
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public void setPaidAmount(BigDecimal paidAmount) {
+		this.paidAmount = paidAmount;
+	}
 
-    public BigDecimal getPaidAmount() {
-        return paidAmount;
-    }
+	public Date getDueDate() {
+		return dueDate;
+	}
 
-    public void setPaidAmount(BigDecimal paidAmount) {
-        this.paidAmount = paidAmount;
-    }
+	public void setDueDate(Date date) {
+		this.dueDate = date;
+	}
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public Set<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
-    }
 }

@@ -26,8 +26,8 @@ public class ManagerAddress {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "manager_id",unique = true, nullable = false)
     private Manager manager;
 
     // Getters and Setters
@@ -88,9 +88,4 @@ public class ManagerAddress {
         this.manager = manager;
     }
 
-	@Override
-	public String toString() {
-		return "ManagerAddress [managerAddressId=" + managerAddressId + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + ", manager=" + manager + "]";
-	}
 }
