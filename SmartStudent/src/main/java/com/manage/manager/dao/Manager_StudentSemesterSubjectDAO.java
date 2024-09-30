@@ -1,5 +1,7 @@
 package com.manage.manager.dao;
 
+import java.util.List;
+
 import com.manage.student.entities.StudentSemesterSubject;
 
 public interface Manager_StudentSemesterSubjectDAO {
@@ -7,4 +9,6 @@ public interface Manager_StudentSemesterSubjectDAO {
     void saveStudentSemesterSubject(StudentSemesterSubject studentSemesterSubject);
     void updateStudentSemesterSubject(StudentSemesterSubject studentSemesterSubject);
     void deleteStudentSemesterSubject(StudentSemesterSubject studentSemesterSubject);
+	List<StudentSemesterSubject> getAllStudentSemesterSubjects();
+	List<StudentSemesterSubject> getStudentSemesterSubjectsByStudentId(Long studentId);
 }

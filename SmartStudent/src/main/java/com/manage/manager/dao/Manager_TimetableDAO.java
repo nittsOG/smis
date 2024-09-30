@@ -9,4 +9,5 @@ public interface Manager_TimetableDAO {
     void delete(Timetable timetable);
     Timetable findById(Long id);
     List<Timetable> findAll();
+	List<Timetable> findTimetablesByFilters(Long subjectId, Long facultyId, Long divisionId);
 }

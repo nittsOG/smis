@@ -9,4 +9,6 @@ public interface Manager_TimetableService {
     void deleteTimetable(Timetable timetable);
     Timetable getTimetableById(Long timetableId);
     List<Timetable> getAllTimetables();
+	void deleteTimetable(Long id);
+	List<Timetable> getFilteredTimetables(Long subjectId, Long facultyId, Long divisionId);
 }

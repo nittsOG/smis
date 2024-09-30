@@ -10,4 +10,5 @@ public interface Manager_FacultyDivisionDAO {
     void deleteFacultyDivision(Long facultyDivisionId);
     FacultyDivision getFacultyDivisionById(Long facultyDivisionId);
     List<FacultyDivision> getAllFacultyDivisions();
+	List<FacultyDivision> getFacultyDivisionsByFacultyId(Long facultyId);
 }

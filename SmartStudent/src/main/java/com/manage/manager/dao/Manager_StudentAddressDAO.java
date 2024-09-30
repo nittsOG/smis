@@ -7,4 +7,5 @@ public interface Manager_StudentAddressDAO {
     void saveStudentAddress(StudentAddress studentAddress);
     void updateStudentAddress(StudentAddress studentAddress);
     void deleteStudentAddress(StudentAddress studentAddress);
+	StudentAddress getStudentAddressByStudentId(Long studentId);
 }

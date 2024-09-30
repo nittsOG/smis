@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional("managerTransactionManager")
 public class Manager_SemesterResultsDAOImpl implements Manager_SemesterResultsDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Manager_SemesterResultsDAOImpl(@Qualifier("managerSessionFactory") SessionFactory sessionFactory) {
@@ -34,7 +34,9 @@ public class Manager_SemesterResultsDAOImpl implements Manager_SemesterResultsDA
     @Override
     public void deleteSemesterResults(SemesterResults.IdClass id) {
         SemesterResults semesterResults = sessionFactory.getCurrentSession().get(SemesterResults.class, id);
-        sessionFactory.getCurrentSession().delete(semesterResults);
+        if (semesterResults != null) {
+            sessionFactory.getCurrentSession().delete(semesterResults);
+        }
     }
 
     @Override

@@ -9,4 +9,5 @@ public interface Manager_FacultySubjectDAO {
     void deleteFacultySubject(Long facultySubjectId);
     FacultySubject getFacultySubjectById(Long facultySubjectId);
     List<FacultySubject> getAllFacultySubjects();
+	List<FacultySubject> getFacultySubjectsByFacultyId(Long facultyId);
 }

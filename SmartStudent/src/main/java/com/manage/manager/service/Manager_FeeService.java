@@ -9,4 +9,6 @@ public interface Manager_FeeService {
     void deleteFee(Long feeId);
     Fee getFeeById(Long feeId);
     List<Fee> getAllFees();
+	List<Fee> getFeesByStudentId(Long studentId);
+	Long saveFeeAndReturnId(Fee fee);
 }

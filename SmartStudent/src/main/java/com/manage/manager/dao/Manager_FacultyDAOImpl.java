@@ -8,11 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.manage.faculty.entities.Faculty;
 
+import java.util.List;
+
 @Repository
+@Qualifier("managerFacultyDAOImpl")
 @Transactional("managerTransactionManager")
 public class Manager_FacultyDAOImpl implements Manager_FacultyDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Manager_FacultyDAOImpl(@Qualifier("managerSessionFactory") SessionFactory sessionFactory) {
@@ -37,5 +40,32 @@ public class Manager_FacultyDAOImpl implements Manager_FacultyDAO {
     @Override
     public void deleteFaculty(Faculty faculty) {
         sessionFactory.getCurrentSession().delete(faculty);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Faculty> getAllFaculties() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Faculty").list();
+    }
+    
+    @Override
+    public List<Faculty> getFacultyByDepartment(String department) {
+        return sessionFactory.getCurrentSession()
+            .createQuery("FROM Faculty WHERE department.name = :departmentName", Faculty.class)
+            .setParameter("departmentName", department)
+            .getResultList();
+    }
+
+    @Override
+    public void deleteFacultyById(Long facultyId) {
+        Faculty faculty = getFacultyById(facultyId);
+        if (faculty != null) {
+            sessionFactory.getCurrentSession().delete(faculty);
+        }
+    }
+
+    @Override
+    public void createFaculty(Faculty faculty) {
+        sessionFactory.getCurrentSession().save(faculty);
     }
 }

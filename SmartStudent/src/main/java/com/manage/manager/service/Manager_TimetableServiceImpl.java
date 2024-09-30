@@ -1,46 +1,59 @@
 package com.manage.manager.service;
 
-import com.manage.home.entities.Timetable;
-import com.manage.manager.dao.Manager_TimetableDAO;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.manage.manager.dao.Manager_TimetableDAO;
+import com.manage.home.entities.Timetable;
 
 @Service
-@Transactional("managerTransactionManager")
+@Qualifier("managerTimetableServiceImpl")
+@Transactional(transactionManager = "managerTransactionManager")
 public class Manager_TimetableServiceImpl implements Manager_TimetableService {
 
-    private final Manager_TimetableDAO managerTimetableDAO;
+    private final Manager_TimetableDAO timetableDao;
 
     @Autowired
-    public Manager_TimetableServiceImpl(Manager_TimetableDAO managerTimetableDAO) {
-        this.managerTimetableDAO = managerTimetableDAO;
+    public Manager_TimetableServiceImpl(@Qualifier("managerTimetableDAOImpl") Manager_TimetableDAO timetableDao) {
+        this.timetableDao = timetableDao;
+    }
+
+    @Override
+    public Timetable getTimetableById(Long id) {
+        return timetableDao.findById(id);
     }
 
     @Override
     public void saveTimetable(Timetable timetable) {
-        managerTimetableDAO.save(timetable);
+        timetableDao.save(timetable);
     }
 
     @Override
     public void updateTimetable(Timetable timetable) {
-        managerTimetableDAO.update(timetable);
+        timetableDao.update(timetable);
     }
 
     @Override
     public void deleteTimetable(Timetable timetable) {
-        managerTimetableDAO.delete(timetable);
-    }
-
-    @Override
-    public Timetable getTimetableById(Long timetableId) {
-        return managerTimetableDAO.findById(timetableId);
+        timetableDao.delete(timetable);
     }
 
     @Override
     public List<Timetable> getAllTimetables() {
-        return managerTimetableDAO.findAll();
+        return timetableDao.findAll();
+    }
+
+    @Override
+    public List<Timetable> getFilteredTimetables(Long subjectId, Long facultyId, Long divisionId) {
+        return timetableDao.findTimetablesByFilters(subjectId, facultyId, divisionId);
+    }
+
+    @Override
+    public void deleteTimetable(Long id) {
+        timetableDao.delete(this.getTimetableById(id));
     }
 }

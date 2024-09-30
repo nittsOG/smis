@@ -23,7 +23,7 @@ public class Fee {
 	private Long feeId;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "studentsemester_id" , nullable = false)
+	@JoinColumn(name = "studentsemester_id" , nullable = false , unique = true)
 	private StudentSemester studentSemester;
 
 	@Column(name = "total_amount")
