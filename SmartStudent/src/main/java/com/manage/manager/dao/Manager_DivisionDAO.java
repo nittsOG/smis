@@ -9,4 +9,5 @@ public interface Manager_DivisionDAO {
     void delete(Division division);
     Division findById(Long id);
     List<Division> findAll();
+	List<Division> findByDepartmentId(Long departmentId);
 }

@@ -9,4 +9,6 @@ public interface Manager_DivisionService {
     void deleteDivision(Division division);
     Division getDivisionById(Long divisionId);
     List<Division> getAllDivisions();
+	List<Division> getDivisionsByDepartment(Long departmentId);
+	void deleteById(Long id);
 }

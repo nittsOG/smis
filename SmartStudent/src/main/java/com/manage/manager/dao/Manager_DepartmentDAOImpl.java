@@ -1,14 +1,16 @@
 package com.manage.manager.dao;
 
+import com.manage.home.entities.Department;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.manage.home.entities.Department;
+import java.util.List;
 
 @Repository
+@Qualifier("managerDepartmentDAOImpl")
 @Transactional("managerTransactionManager")
 public class Manager_DepartmentDAOImpl implements Manager_DepartmentDAO {
 
@@ -20,13 +22,8 @@ public class Manager_DepartmentDAOImpl implements Manager_DepartmentDAO {
     }
 
     @Override
-    public Department getDepartmentById(Long departmentId) {
-        return sessionFactory.getCurrentSession().get(Department.class, departmentId);
-    }
-
-    @Override
     public void saveDepartment(Department department) {
-        sessionFactory.getCurrentSession().save(department);
+        sessionFactory.getCurrentSession().saveOrUpdate(department);
     }
 
     @Override
@@ -35,7 +32,23 @@ public class Manager_DepartmentDAOImpl implements Manager_DepartmentDAO {
     }
 
     @Override
-    public void deleteDepartment(Department department) {
+    public void deleteDepartment(Long departmentId) {
+        Department department = sessionFactory.getCurrentSession().byId(Department.class).load(departmentId);
         sessionFactory.getCurrentSession().delete(department);
     }
+
+    @Override
+    public Department getDepartmentById(Long departmentId) {
+        return sessionFactory.getCurrentSession().get(Department.class, departmentId);
+    }
+
+    @Override
+    public List<Department> getAllDepartments() {
+        return sessionFactory.getCurrentSession().createQuery("from Department", Department.class).list();
+    }
+
+	@Override
+	public void deleteDepartment(Department department) {
+		this.deleteDepartment(department.getDepartmentId());
+	}
 }

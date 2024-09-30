@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional("managerTransactionManager")
 public class Manager_BacklogDAOImpl implements Manager_BacklogDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public Manager_BacklogDAOImpl(@Qualifier("managerSessionFactory") SessionFactory sessionFactory) {
@@ -35,7 +35,9 @@ public class Manager_BacklogDAOImpl implements Manager_BacklogDAO {
     public void deleteBacklog(Long studentId, String subjectCode, Integer semester) {
         Backlog.IdClass id = new Backlog.IdClass(studentId, subjectCode, semester);
         Backlog backlog = sessionFactory.getCurrentSession().get(Backlog.class, id);
-        sessionFactory.getCurrentSession().delete(backlog);
+        if (backlog != null) {
+            sessionFactory.getCurrentSession().delete(backlog);
+        }
     }
 
     @Override
@@ -47,5 +49,12 @@ public class Manager_BacklogDAOImpl implements Manager_BacklogDAO {
     @Override
     public List<Backlog> getAllBacklogs() {
         return sessionFactory.getCurrentSession().createQuery("from Backlog", Backlog.class).list();
+    }
+
+    @Override
+    public List<Backlog> getBacklogsByStudentId(Long studentId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Backlog WHERE studentId = :studentId", Backlog.class)
+                .setParameter("studentId", studentId).list();
     }
 }

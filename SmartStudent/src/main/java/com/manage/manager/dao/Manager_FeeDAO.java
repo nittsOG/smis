@@ -9,4 +9,5 @@ public interface Manager_FeeDAO {
     void deleteFee(Long feeId);
     Fee getFeeById(Long feeId);
     List<Fee> getAllFees();
+	List<Fee> getFeesByStudentId(Long studentId);
 }

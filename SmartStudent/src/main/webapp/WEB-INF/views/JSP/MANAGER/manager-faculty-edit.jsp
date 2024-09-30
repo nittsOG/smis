@@ -3,14 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin - Edit Faculty</title>
+<title>Edit Faculty</title>
 <style>
-/* Styling for the image preview */
 .photo-preview {
-	width: 150px; /* Set the width of the image */
-	height: auto; /* Maintain aspect ratio */
-	display: block; /* Make the image a block element */
-	margin: 10px auto; /* Center the image */
+	width: 150px;
+	height: auto;
+	display: block;
+	margin: 10px auto;
 }
 </style>
 <script type="text/javascript">
@@ -20,7 +19,6 @@
 
 		reader.onloadend = function() {
 			document.getElementById("photoBase64").value = reader.result;
-			// Display the preview image
 			document.getElementById("photoPreview").src = reader.result;
 		}
 
@@ -31,10 +29,10 @@
 </script>
 </head>
 <body>
-	<h1>Edit Faculty Member</h1>
+	<h1>Edit Faculty</h1>
 	<form
-		action="${pageContext.request.contextPath}/admin/faculty/${faculty.facultyId}/edit"
-		method="post" enctype="multipart/form-data">
+		action="${pageContext.request.contextPath}/manager/faculty/${faculty.facultyId}/edit"
+		method="post">
 		<p>ID: ${faculty.facultyId}</p>
 		<p>
 			Username: <input type="text" name="username"
@@ -49,40 +47,37 @@
 				required />
 		</p>
 		<p>
-			Phone: <input type="text" name="phone" value="${faculty.phone}"
-				required />
+			Department: <select name="department.departmentId" required>
+				<c:forEach var="department" items="${departments}">
+					<option value="${department.departmentId}"
+						${department.departmentId == faculty.department.departmentId ? 'selected' : ''}>${department.name}</option>
+				</c:forEach>
+			</select>
 		</p>
-
+		<p>
+			Positio: <input type="text" name="position"
+				value="${faculty.position}" required />
+		</p>
 		<h2>Address Information</h2>
 		<p>
-			Street: <input type="text" name="address.street"
+			Street: <input type="text" name="street"
 				value="${faculty.facultyAddress.street}" required />
 		</p>
 		<p>
-			City: <input type="text" name="address.city"
+			City: <input type="text" name="city"
 				value="${faculty.facultyAddress.city}" required />
 		</p>
 		<p>
-			State: <input type="text" name="address.state"
+			State: <input type="text" name="state"
 				value="${faculty.facultyAddress.state}" required />
 		</p>
 		<p>
-			Country: <input type="text" name="address.country"
+			Country: <input type="text" name="country"
 				value="${faculty.facultyAddress.country}" required />
 		</p>
 		<p>
-			Zip Code: <input type="text" name="address.zipCode"
+			Zip Code: <input type="text" name="zipCode"
 				value="${faculty.facultyAddress.zipCode}" required />
-		</p>
-
-		<h2>Department Information</h2>
-		<p>
-			Department: <select name="department.departmentId" required>
-				<c:forEach var="dept" items="${departments}">
-					<option value="${dept.departmentId}"
-						${dept.departmentId == faculty.department.departmentId ? 'selected' : ''}>${dept.name}</option>
-				</c:forEach>
-			</select>
 		</p>
 
 		<h2>Additional Faculty Information</h2>
@@ -100,12 +95,12 @@
 			</select>
 		</p>
 		<p>
-			Nationality: <input type="text" name="nationality"
-				value="${faculty.nationality}" required />
+			Contact Number: <input type="text" name="contactNumber"
+				value="${faculty.phone}" required />
 		</p>
 		<p>
-			Position: <input type="text" name="position"
-				value="${faculty.position}" required />
+			Nationality: <input type="text" name="nationality"
+				value="${faculty.nationality}" required />
 		</p>
 
 		<h2>Photo</h2>
@@ -117,8 +112,12 @@
 		<!-- Preview Image -->
 		<img id="photoPreview" src="#" alt="Photo Preview"
 			class="photo-preview" />
-			
-		<button type="submit">Update</button>
+
+		<button type="submit">Save Changes</button>
+		<p>
+			<a href="${pageContext.request.contextPath}/manager/faculty">Back
+				to Faculty List</a>
+		</p>
 	</form>
 </body>
 </html>

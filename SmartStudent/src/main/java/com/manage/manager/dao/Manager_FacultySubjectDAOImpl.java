@@ -23,6 +23,9 @@ public class Manager_FacultySubjectDAOImpl implements Manager_FacultySubjectDAO 
 
     @Override
     public void saveFacultySubject(FacultySubject facultySubject) {
+        if (facultySubject.getFaculty() != null && facultySubject.getFaculty().getFacultyId() == null) {
+            sessionFactory.getCurrentSession().save(facultySubject.getFaculty());
+        }
         sessionFactory.getCurrentSession().saveOrUpdate(facultySubject);
     }
 
@@ -45,5 +48,13 @@ public class Manager_FacultySubjectDAOImpl implements Manager_FacultySubjectDAO 
     @Override
     public List<FacultySubject> getAllFacultySubjects() {
         return sessionFactory.getCurrentSession().createQuery("from FacultySubject", FacultySubject.class).list();
+    }
+
+    @Override
+    public List<FacultySubject> getFacultySubjectsByFacultyId(Long facultyId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM FacultySubject WHERE faculty.facultyId = :facultyId", FacultySubject.class)
+                .setParameter("facultyId", facultyId)
+                .getResultList();
     }
 }

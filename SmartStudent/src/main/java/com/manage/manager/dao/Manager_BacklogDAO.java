@@ -16,4 +16,6 @@ public interface Manager_BacklogDAO {
 
 	List<Backlog> getAllBacklogs();
 
+	List<Backlog> getBacklogsByStudentId(Long studentId);
+
 }

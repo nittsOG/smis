@@ -16,7 +16,8 @@ public class Manager_FacultySubjectServiceImpl implements Manager_FacultySubject
     private final Manager_FacultySubjectDAO managerFacultySubjectDAO;
 
     @Autowired
-    public Manager_FacultySubjectServiceImpl(@Qualifier("managerFacultySubjectDAOImpl") Manager_FacultySubjectDAO managerFacultySubjectDAO) {
+    public Manager_FacultySubjectServiceImpl(
+            @Qualifier("managerFacultySubjectDAOImpl") Manager_FacultySubjectDAO managerFacultySubjectDAO) {
         this.managerFacultySubjectDAO = managerFacultySubjectDAO;
     }
 
@@ -48,5 +49,11 @@ public class Manager_FacultySubjectServiceImpl implements Manager_FacultySubject
     @Transactional(transactionManager = "managerTransactionManager")
     public List<FacultySubject> getAllFacultySubjects() {
         return managerFacultySubjectDAO.getAllFacultySubjects();
+    }
+
+    @Override
+    @Transactional(transactionManager = "managerTransactionManager")
+    public List<FacultySubject> getFacultySubjectsByFacultyId(Long facultyId) {
+        return managerFacultySubjectDAO.getFacultySubjectsByFacultyId(facultyId);
     }
 }
