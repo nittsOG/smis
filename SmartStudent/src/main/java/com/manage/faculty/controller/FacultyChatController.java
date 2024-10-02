@@ -93,6 +93,8 @@ public class FacultyChatController {
 
 		ModelAndView mav = new ModelAndView("JSP/FACULTY/faculty-conversation");
 		mav.addObject("messages", messages);
+		mav.addObject("studentId", studentId); // Add studentId to the model
 		return mav;
 	}
+
 }

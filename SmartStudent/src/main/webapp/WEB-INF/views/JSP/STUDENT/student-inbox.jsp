@@ -25,5 +25,6 @@
             </tr>
         </c:forEach>
     </table>
+    <p><a href="${pageContext.request.contextPath}/student/chat/new">New Chat</a></p>
 </body>
 </html>
