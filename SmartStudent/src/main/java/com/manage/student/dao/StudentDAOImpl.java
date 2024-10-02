@@ -1,12 +1,12 @@
 package com.manage.student.dao;
 
-import com.manage.student.entities.Student;
 import org.hibernate.SessionFactory;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.manage.student.entities.Student;
 
 @Repository
 @Qualifier("studentDAOImpl")

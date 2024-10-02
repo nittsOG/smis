@@ -96,7 +96,7 @@
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="facultyDataSource" />
 		<property name="packagesToScan"
-			value="com.manage.faculty.entities , com.manage.home.entities , com.manage.student.entities, com.manage.manager.entities" />
+			value="com.manage.faculty.entities , com.manage.home.entities , com.manage.student.entities, com.manage.manager.entities , com.manage.chat.entities" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
@@ -126,7 +126,7 @@
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="studentDataSource" />
 		<property name="packagesToScan"
-			value="com.manage.student.entities , com.manage.home.entities , com.manage.faculty.entities, com.manage.manager.entities" />
+			value="com.manage.student.entities , com.manage.home.entities , com.manage.faculty.entities, com.manage.manager.entities , com.manage.chat.entities" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
