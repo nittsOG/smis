@@ -1,5 +1,7 @@
 package com.manage.student.controller;
 
+import java.util.Base64;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +17,37 @@ import com.manage.student.service.StudentService;
 @RequestMapping("/student")
 public class StudentController {
 
-    private StudentService studentService;
+	private StudentService studentService;
 
-    @Autowired
-    public StudentController(StudentService studentService) {
+	@Autowired
+	public StudentController(StudentService studentService) {
 		super();
 		this.studentService = studentService;
 	}
 
-
-    @GetMapping("/dashboard")
-    public ModelAndView showDashboard(HttpSession session) {
-        Long id = (Long) session.getAttribute("studentId");
-        if (id == null) {
-            return new ModelAndView("redirect:/login");
-        }
-        ModelAndView mav = new ModelAndView("JSP/STUDENT/student-dashboard");
+	@GetMapping("/dashboard")
+	public ModelAndView showDashboard(HttpSession session) {
+		Long id = (Long) session.getAttribute("studentId");
+		if (id == null) {
+			return new ModelAndView("redirect:/login");
+		}
+		ModelAndView mav = new ModelAndView("JSP/STUDENT/student-dashboard");
 //        mav.addObject("studentUsername", studentUsername);
-        Student student = studentService.getStudentById(id);
-        mav.addObject("student", student);
-        return mav;
-    }
+		Student student = studentService.getStudentById(id);
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
-    }
+		String photoBase64 = null;
+		if (student.getPhoto() != null) {
+			photoBase64 = Base64.getEncoder().encodeToString(student.getPhoto());
+		}
+
+		mav.addObject("student", student);
+		mav.addObject("photoBase64", photoBase64);
+		return mav;
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
 }
