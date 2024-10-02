@@ -23,6 +23,7 @@
         <h1>Welcome, ${student}</h1>
         <hr>
         <p><a href="${pageContext.request.contextPath}/student/profile">Go to profile</a></p>
+        <p><a href="${pageContext.request.contextPath}/student/chat/inbox">Inbox</a></p>
     </div>
 
     <script src="${pageContext.request.contextPath}/resources/STUDENT/dashboard.js"></script>
