@@ -94,6 +94,7 @@ public class StudentChatController {
 		ModelAndView mav = new ModelAndView("JSP/STUDENT/student-conversation");
 		List<ChatMessage> messages = chatMessageService.getChatHistory(studentId, facultyId);
 		mav.addObject("messages", messages);
+		mav.addObject("facultyId", facultyId);
 		return mav;
 	}
 }
