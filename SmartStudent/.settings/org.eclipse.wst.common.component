@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                                                    
+                                                                            
+    
+    
     
     
     
@@ -16,7 +18,9 @@
     
     
     <wb-module deploy-name="SmartStudent">
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -33,7 +37,9 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -50,7 +56,9 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -67,7 +75,9 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -86,7 +96,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -103,7 +115,9 @@
         
         
         <property name="context-root" value="SmartStudent"/>
-                                                                                                                                        
+                                                                                                                                                        
+        
+        
         
         
         
@@ -120,7 +134,9 @@
         
         
         <property name="java-output-path" value="/SmartStudent/target/classes"/>
-                                                                                                                                    
+                                                                                                                                                    
+    
+    
     
     
     
@@ -137,7 +153,9 @@
     
     
     </wb-module>
-                                                                
+                                                                        
+
+
 
 
 
