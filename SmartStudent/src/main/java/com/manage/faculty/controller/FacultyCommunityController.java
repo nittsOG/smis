@@ -40,7 +40,7 @@ public class FacultyCommunityController {
 	public ModelAndView showCreateCommunityForm(HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return new ModelAndView("redirect:/faculty/login");
+			return new ModelAndView("redirect:/login");
 		}
 		return new ModelAndView("JSP/FACULTY/COMMUNITY/create-community");
 	}
@@ -51,7 +51,7 @@ public class FacultyCommunityController {
 			HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return "redirect:/faculty/login";
+			return "redirect:/login";
 		}
 
 		Faculty faculty = new Faculty();
@@ -71,7 +71,7 @@ public class FacultyCommunityController {
 	public ModelAndView listCommunities(HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return new ModelAndView("redirect:/faculty/login");
+			return new ModelAndView("redirect:/login");
 		}
 
 		Faculty faculty = new Faculty();
@@ -88,12 +88,11 @@ public class FacultyCommunityController {
 	}
 
 	// List all posts in a specific community
-	// List all posts in a specific community
 	@GetMapping("/posts/{communityId}")
 	public ModelAndView listPosts(@PathVariable("communityId") Long communityId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return new ModelAndView("redirect:/faculty/login");
+			return new ModelAndView("redirect:/login");
 		}
 
 		List<CommunityPost> posts = communityService.getPostsByCommunity(communityId);
@@ -118,7 +117,7 @@ public class FacultyCommunityController {
 
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return "redirect:/faculty/login";
+			return "redirect:/login";
 		}
 
 		Faculty faculty = new Faculty();
@@ -148,7 +147,7 @@ public class FacultyCommunityController {
 	public ModelAndView showCreatePostForm(@PathVariable("communityId") Long communityId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return new ModelAndView("redirect:/faculty/login");
+			return new ModelAndView("redirect:/login");
 		}
 
 		Community community = communityService.getCommunityById(communityId);
@@ -164,7 +163,7 @@ public class FacultyCommunityController {
 	public ModelAndView manageCommunity(@PathVariable("communityId") Long communityId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return new ModelAndView("redirect:/faculty/login");
+			return new ModelAndView("redirect:/login");
 		}
 
 		Community community = communityService.getCommunityById(communityId);
@@ -184,7 +183,7 @@ public class FacultyCommunityController {
 			@RequestParam("studentId") Long studentId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return "redirect:/faculty/login";
+			return "redirect:/login";
 		}
 
 		Student student = communityService.getStudentById(studentId);
@@ -198,7 +197,7 @@ public class FacultyCommunityController {
 			@RequestParam("studentId") Long studentId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return "redirect:/faculty/login";
+			return "redirect:/login";
 		}
 
 		Student student = communityService.getStudentById(studentId);
@@ -211,7 +210,7 @@ public class FacultyCommunityController {
 	public String deleteCommunity(@RequestParam("communityId") Long communityId, HttpSession session) {
 		Long facultyId = (Long) session.getAttribute("facultyId");
 		if (facultyId == null) {
-			return "redirect:/faculty/login";
+			return "redirect:/login";
 		}
 
 		communityService.deleteCommunity(communityId);

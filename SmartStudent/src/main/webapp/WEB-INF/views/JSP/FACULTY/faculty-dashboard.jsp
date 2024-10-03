@@ -14,5 +14,8 @@
 <p><a href="${pageContext.request.contextPath}/faculty/students">Student</a></p>
 
 <p><a href="${pageContext.request.contextPath}/faculty/chat/inbox">Inbox</a></p>
+
+<p><a href="${pageContext.request.contextPath}/faculty/community/list">Community</a></p>
+
 </body>
 </html>
