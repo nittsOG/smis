@@ -15,6 +15,7 @@
 	<p>Department: ${course.department.name}</p>
 	<p>Name: ${course.name}</p>
 	<p>Description: ${course.description}</p>
+	<p>Specialization: ${course.specialization}</p>
 	<a href="${pageContext.request.contextPath}/admin/courses">Back to
 		List</a>
 </body>

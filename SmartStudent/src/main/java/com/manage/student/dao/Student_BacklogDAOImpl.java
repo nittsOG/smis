@@ -33,7 +33,7 @@ public class Student_BacklogDAOImpl implements Student_BacklogDAO {
     }
 
     @Override
-    public List<Backlog> getBacklogsByStudentId(Integer studentId) {
+    public List<Backlog> getBacklogsByStudentId(Long studentId) {
         return sessionFactory.getCurrentSession().createQuery("from Backlog where studentId = :studentId", Backlog.class)
                 .setParameter("studentId", studentId).list();
     }

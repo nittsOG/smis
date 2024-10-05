@@ -15,6 +15,10 @@
         <!-- Course Description -->
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea><br>
+        
+         <!-- Course Name -->
+        <label for="specialization">Specialization:</label>
+        <input type="text" id="specialization" name="specialization" required /><br>
 
         <!-- Department Dropdown -->
         <label for="department">Department:</label>
