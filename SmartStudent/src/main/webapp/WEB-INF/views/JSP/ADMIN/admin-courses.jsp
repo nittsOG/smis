@@ -33,6 +33,7 @@
 				<th>Department</th>
 				<th>Name</th>
 				<th>Description</th>
+				<th>Specialization</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -43,6 +44,7 @@
 					<td>${course.department.getName()}</td>
 					<td>${course.name}</td>
 					<td>${course.description}</td>
+					<td>${course.specialization}</td>
 					<td><a
 						href="${pageContext.request.contextPath}/admin/courses/${course.courseId}">Details</a>
 						<a

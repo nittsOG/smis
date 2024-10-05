@@ -91,47 +91,47 @@ public class Admin_SemesterSummaryController {
         return "redirect:/admin/semester-summaries";
     }
 
-//    @GetMapping("/new")
-//    public ModelAndView showNewSemesterSummaryForm(HttpSession session) {
-//        Long adminId = (Long) session.getAttribute("adminId");
-//        if (adminId == null) {
-//            return new ModelAndView("redirect:/admin/login");
-//        }
-//
-//        ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-semester-summary-new");
-//        mav.addObject("semesterSummary", new SemesterSummary());
-//        return mav;
-//    }
-//    @PostMapping("/new")
-//    public String saveSemesterSummary(
-//            @RequestParam("studentId") Long studentId,
-//            @RequestParam("semester") Integer semester,
-//            @RequestParam("totalCredits") BigDecimal totalCredits,
-//            @RequestParam("totalCreditPoints") BigDecimal totalCreditPoints,
-//            @RequestParam("sgpa") BigDecimal sgpa,
-//            @RequestParam("cgpa") BigDecimal cgpa,
-//            HttpSession session) {
-//        
-//        Long adminId = (Long) session.getAttribute("adminId");
-//        if (adminId == null) {
-//            return "redirect:/admin/login";
-//        }
-//
-//        // Create a new SemesterSummary object manually
-//        SemesterSummary semesterSummary = new SemesterSummary();
-//        semesterSummary.setStudentId(studentId);
-//        semesterSummary.setSemester(semester);
-//        semesterSummary.setTotalCredits(totalCredits);
-//        semesterSummary.setTotalCreditPoints(totalCreditPoints);
-//        semesterSummary.setSgpa(sgpa);
-//        semesterSummary.setCgpa(cgpa);
-//
-//        // Log to check if data is bound correctly
-//        System.out.println("SemesterSummary: " + semesterSummary.getStudentId());
-//
-//        adminSemesterSummaryService.saveSemesterSummary(semesterSummary);
-//        return "redirect:/admin/semester-summaries";
-//    }
+    @GetMapping("/new")
+    public ModelAndView showNewSemesterSummaryForm(HttpSession session) {
+        Long adminId = (Long) session.getAttribute("adminId");
+        if (adminId == null) {
+            return new ModelAndView("redirect:/admin/login");
+        }
+
+        ModelAndView mav = new ModelAndView("JSP/ADMIN/admin-semester-summary-new");
+        mav.addObject("semesterSummary", new SemesterSummary());
+        return mav;
+    }
+    @PostMapping("/new")
+    public String saveSemesterSummary(
+            @RequestParam("studentId") Long studentId,
+            @RequestParam("semester") Integer semester,
+            @RequestParam("totalCredits") BigDecimal totalCredits,
+            @RequestParam("totalCreditPoints") BigDecimal totalCreditPoints,
+            @RequestParam("sgpa") BigDecimal sgpa,
+            @RequestParam("cgpa") BigDecimal cgpa,
+            HttpSession session) {
+        
+        Long adminId = (Long) session.getAttribute("adminId");
+        if (adminId == null) {
+            return "redirect:/admin/login";
+        }
+
+        // Create a new SemesterSummary object manually
+        SemesterSummary semesterSummary = new SemesterSummary();
+        semesterSummary.setStudentId(studentId);
+        semesterSummary.setSemester(semester);
+        semesterSummary.setTotalCredits(totalCredits);
+        semesterSummary.setTotalCreditPoints(totalCreditPoints);
+        semesterSummary.setSgpa(sgpa);
+        semesterSummary.setCgpa(cgpa);
+
+        // Log to check if data is bound correctly
+        System.out.println("SemesterSummary: " + semesterSummary.getStudentId());
+
+        adminSemesterSummaryService.saveSemesterSummary(semesterSummary);
+        return "redirect:/admin/semester-summaries";
+    }
 
 
 }

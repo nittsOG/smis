@@ -66,5 +66,7 @@
     <c:if test="${empty sessionAttendanceMap}">
         <p>No sessions available for the selected division and subject.</p>
     </c:if>
+    
+    <p><a href="${pageContext.request.contextPath}/faculty/attendance/sessions/new">New Session</a></p>
 </body>
 </html>

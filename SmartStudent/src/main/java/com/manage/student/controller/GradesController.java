@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.manage.student.entities.Backlog;
 import com.manage.student.entities.SemesterResults;
 import com.manage.student.entities.SemesterSummary;
 import com.manage.student.service.GradesService;
@@ -25,24 +26,28 @@ public class GradesController {
 	}
 
 
-	@GetMapping("/student/results")
+    @GetMapping("/student/results")
     public ModelAndView getGradesResults(HttpSession session) {
-    	
-    	Long studentId = (Long) session.getAttribute("studentId");
-         if (studentId == null) {
-             return new ModelAndView("redirect:/login");
-         }
-    	
-    	ModelAndView mav=new ModelAndView("JSP/STUDENT/grades-results");
+        Long studentId = (Long) session.getAttribute("studentId");
+        if (studentId == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        ModelAndView mav = new ModelAndView("JSP/STUDENT/grades-results");
+
         // Fetching semester-wise detailed grades
         List<SemesterResults> results = gradesService.getResultsByStudentId(studentId);
-        
+
         // Fetching GPA and summary for each semester
         List<SemesterSummary> summaries = gradesService.getSummariesByStudentId(studentId);
-        
-        mav.addObject("summaries", summaries);
+
+        // Fetching backlog status
+        List<Backlog> backlogs = gradesService.getBacklogsByStudentId(studentId);
+
         mav.addObject("results", results);
-        
-        return mav;  // Redirecting to grades-results.jsp
+        mav.addObject("summaries", summaries);
+        mav.addObject("backlog", backlogs);
+
+        return mav;
     }
 }

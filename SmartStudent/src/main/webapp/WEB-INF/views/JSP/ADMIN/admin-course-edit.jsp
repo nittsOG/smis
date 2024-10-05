@@ -13,6 +13,10 @@
         <!-- Course Name -->
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="${course.name}" required /><br>
+        
+        <!-- Course Name -->
+        <label for="specialization">Specialization:</label>
+        <input type="text" id="specialization" name="specialization" value="${course.specialization}" required /><br>
 
         <!-- Course Description -->
         <label for="description">Description:</label>

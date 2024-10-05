@@ -8,8 +8,8 @@ public interface Student_BacklogDAO {
 
 	List<Backlog> getAllBacklogs();
 
-	List<Backlog> getBacklogsByStudentId(Integer studentId);
-
 	Backlog getBacklogById(Long studentId, String subjectCode, Integer semester);
+
+	List<Backlog> getBacklogsByStudentId(Long studentId);
 
 }
