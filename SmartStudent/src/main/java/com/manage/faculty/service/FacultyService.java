@@ -8,4 +8,5 @@ public interface FacultyService {
     Faculty getFacultyById(Long id);
 //    Faculty getFacultyByEmail(String email);
 	void updateFaculty(Faculty faculty);
+	void changePassword(Long id, String newPassword);
 }

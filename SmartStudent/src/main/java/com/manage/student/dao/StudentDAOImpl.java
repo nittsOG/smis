@@ -25,4 +25,9 @@ public class StudentDAOImpl implements StudentDAO {
 		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().get(Student.class, id);
 	} 
+	
+	@Override
+	public void updateStudent(Student student) {
+		this.sessionFactory.getCurrentSession().saveOrUpdate(student);
+	}
 }

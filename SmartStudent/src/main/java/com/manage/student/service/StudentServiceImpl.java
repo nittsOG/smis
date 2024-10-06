@@ -34,6 +34,28 @@ public class StudentServiceImpl implements StudentService {
         return student;
         
     }
+    
+//	@Override
+//	public void changePassword(Long id, String password) {
+//		// TODO Auto-generated method stub
+//		Student s = studentDAO.getStudentById(id);
+//		try {
+//			s.setPassword(password);
+//			this.studentDAO.updateStudent(s);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//	}
+	
+	  @Override
+	    @Transactional(transactionManager = "studentTransactionManager")
+	    public void changePassword(Long id, String newPassword) {
+	        Student student = studentDAO.getStudentById(id);
+	        if (student != null) {
+	            student.setPassword(newPassword);  // Set the new password
+	            studentDAO.updateStudent(student);  // Update the student in the database
+	        }
+	    }
 
     private void initializeStudent(Student student) {
         if (student != null && student.getDivision() != null) {
@@ -43,6 +65,7 @@ public class StudentServiceImpl implements StudentService {
             }
         }
     }
+
 
 //    @Override
 //    @Transactional(transactionManager = "studentTransactionManager")

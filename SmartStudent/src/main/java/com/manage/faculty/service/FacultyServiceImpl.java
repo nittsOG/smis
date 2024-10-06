@@ -88,5 +88,14 @@ public class FacultyServiceImpl implements FacultyService {
         }
     }
 
+    @Override
+    @Transactional(transactionManager = "facultyTransactionManager")
+    public void changePassword(Long id, String newPassword) {
+        Faculty faculty = facultyDAO.getFacultyById(id);
+        if (faculty != null) {
+            faculty.setPassword(newPassword);  // Set the new password
+            facultyDAO.updateFaculty(faculty);  // Update the faculty in the database
+        }
+    }
 
 }

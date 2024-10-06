@@ -39,7 +39,7 @@
                         <input type="password" id="password" name="password" placeholder="Password" required>
                         <i class='bx bxs-show toggle-password'></i>
                     </div>
-                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <a href="${pageContext.request.contextPath}/forgot-password" class="forgot-password">Forgot password?</a>
                     <button type="submit">Login</button>
                 </form>
             </div>
