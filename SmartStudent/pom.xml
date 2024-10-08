@@ -1,13 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.examples.spring</groupId>
-  <artifactId>SmartStudent</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>SmartStudent Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.examples.spring</groupId>
+	<artifactId>SmartStudent</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SmartStudent Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -53,7 +54,7 @@
 		</dependency>
 
 		<!-- HikariCP for connection pooling -->
-<!--		<dependency>
+		<!--		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>4.0.3</version>
@@ -94,7 +95,19 @@
 			<version>2.2</version>
 		</dependency>
 	</dependencies>
-  <build>
-    <finalName>SmartStudent</finalName>
-  </build>
+	<build>
+		<finalName>SmartStudent</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version> <!-- You can adjust this version -->
+				<configuration>
+					<source>22</source>   <!-- Set source version to 22 -->
+					<target>22</target>   <!-- Set target version to 22 -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
