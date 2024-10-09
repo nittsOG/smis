@@ -97,17 +97,24 @@
 	</dependencies>
 	<build>
 		<finalName>SmartStudent</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version> <!-- You can adjust this version -->
+				<version>3.8.1</version> <!-- Adjust version if needed -->
 				<configuration>
-					<source>22</source>   <!-- Set source version to 22 -->
-					<target>22</target>   <!-- Set target version to 22 -->
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
 		</plugins>
+
 	</build>
 
 </project>
