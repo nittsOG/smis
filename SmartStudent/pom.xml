@@ -41,6 +41,26 @@
 			<version>5.3.30</version>
 		</dependency>
 
+		<!--****************************************-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.3.30</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
+		<!--************************************-->
+
 		<!-- Hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -95,19 +115,27 @@
 			<version>2.2</version>
 		</dependency>
 	</dependencies>
-	<build>
+<build>
 		<finalName>SmartStudent</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version> <!-- You can adjust this version -->
+				<version>3.8.1</version> <!-- Adjust version if needed -->
 				<configuration>
-					<source>22</source>   <!-- Set source version to 22 -->
-					<target>22</target>   <!-- Set target version to 22 -->
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
 		</plugins>
+
 	</build>
+
 
 </project>
