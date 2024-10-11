@@ -1,13 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.examples.spring</groupId>
-  <artifactId>SmartStudent</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>SmartStudent Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.examples.spring</groupId>
+	<artifactId>SmartStudent</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SmartStudent Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -40,6 +41,27 @@
 			<version>5.3.30</version>
 		</dependency>
 
+		<!--****************************************-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.3.30</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
+		<!--************************************-->
+
+
 		<!-- Hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -53,7 +75,7 @@
 		</dependency>
 
 		<!-- HikariCP for connection pooling -->
-<!--		<dependency>
+		<!--		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>4.0.3</version>
@@ -94,7 +116,7 @@
 			<version>2.2</version>
 		</dependency>
 	</dependencies>
-  <build>
-    <finalName>SmartStudent</finalName>
-  </build>
+	<build>
+		<finalName>SmartStudent</finalName>
+	</build>
 </project>
