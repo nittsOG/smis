@@ -78,13 +78,17 @@
                 color: #333;
             }
 
-            .value  {
-                width: 50%;
+            .value {
+                width: 70%;
                 /* Increased width of the select box */
                 padding: 8px;
                 border: 1px solid #e0e0e0;
                 border-radius: 5px;
                 font-size: 1rem;
+            }
+
+            .entry {
+                width: 100%;
             }
 
             button,
@@ -179,7 +183,7 @@
                         <i class="fas fa-id-badge"></i> Student ID:
                     </div>
                     <div class="value">
-                        <input type="text" id="studentId" name="studentId" value="${backlog.studentId}" readonly />
+                        <input class="entry" type="text" id="studentId" name="studentId" value="${backlog.studentId}" />
                     </div>
                 </div>
 
@@ -188,8 +192,8 @@
                         <i class="fas fa-book"></i> Subject Code:
                     </div>
                     <div class="value">
-                        <input type="text" id="subjectCode" name="subjectCode" value="${backlog.subjectCode}"
-                            readonly />
+                        <input class="entry" type="text" id="subjectCode" name="subjectCode"
+                            value="${backlog.subjectCode}" />
                     </div>
                 </div>
 
@@ -198,7 +202,7 @@
                         <i class="fas fa-star"></i> Semester:
                     </div>
                     <div class="value">
-                        <input type="number" id="semester" name="semester" value="${backlog.semester}" readonly />
+                        <input class="entry" type="number" id="semester" name="semester" value="${backlog.semester}" />
                     </div>
                 </div>
 
@@ -207,8 +211,8 @@
                         <i class="fas fa-file-alt"></i> Backlog Status:
                     </div>
                     <div class="value">
-                        <input type="text" id="backlogStatus" name="backlogStatus" value="${backlog.backlogStatus}"
-                            required />
+                        <input class="entry" type="text" id="backlogStatus" name="backlogStatus"
+                            value="${backlog.backlogStatus}" required />
                     </div>
                 </div>
 
