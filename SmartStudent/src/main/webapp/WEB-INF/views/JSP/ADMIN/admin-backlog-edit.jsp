@@ -45,7 +45,7 @@
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             }
 
-            /* Table-like layout */
+            /* Table-like layout for form fields */
             .row {
                 display: flex;
                 justify-content: space-between;
@@ -75,11 +75,17 @@
             .value {
                 width: 70%;
                 font-size: 1rem;
-                color: #333;
             }
 
-            .value {
-                width: 70%;
+            .value input {
+                width: 90%;
+                padding: 10px;
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+            }
+
+            .value select {
+                width: 50%;
                 /* Increased width of the select box */
                 padding: 8px;
                 border: 1px solid #e0e0e0;
@@ -87,12 +93,19 @@
                 font-size: 1rem;
             }
 
-            .entry {
-                width: 100%;
+            /* Button styling */
+            .status {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .select {
+                width: 70%;
+                font-size: 1rem;
             }
 
             button,
-            .back-link {
+            .link {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -109,23 +122,24 @@
             }
 
             button:hover,
-            .back-link:hover {
+            .link:hover {
                 background-color: #5a1fa7;
                 transform: translateY(-2px);
             }
 
             button i,
-            .back-link i {
+            .link i {
                 margin-right: 8px;
             }
 
-            .back-link {
+            .link {
                 background-color: #e17055;
             }
 
-            .back-link:hover {
+            .link:hover {
                 background-color: #d63031;
             }
+
 
             /* Responsive styling */
             @media (max-width: 768px) {
@@ -150,8 +164,7 @@
                     margin-bottom: 5px;
                 }
 
-                button,
-                .back-link {
+                button {
                     padding: 8px 15px;
                     font-size: 0.9rem;
                 }
@@ -162,8 +175,7 @@
                     font-size: 1.4rem;
                 }
 
-                button,
-                .back-link {
+                button {
                     padding: 6px 12px;
                     font-size: 0.85rem;
                 }
@@ -216,9 +228,9 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="status">
                     <button type="submit"><i class="fas fa-save"></i> Update</button>
-                    <a class="back-link" href="${pageContext.request.contextPath}/admin/backlogs">
+                    <a class="link" href="${pageContext.request.contextPath}/admin/backlogs">
                         <i class="fas fa-ban"></i> Cancel
                     </a>
                 </div>
